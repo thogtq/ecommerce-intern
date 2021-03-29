@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: local("Montserrat-Regular"),
+    url(./fonts/Montserrat/Montserrat-Regular.ttf) format("woff");
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: local("Montserrat-SemiBold"),
+    url(./fonts/Montserrat/Montserrat-SemiBold.ttf) format("woff");
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: "Domine-Bold";
+  src: local("Domine-Bold"), url(./fonts/Domine/Domine-Bold.ttf) format("woff");
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold"),
+    url(./fonts/Montserrat/Montserrat-Bold.ttf) format("woff");
+}
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: local("Montserrat-Medium"),
+    url(./fonts/Montserrat/Montserrat-Medium.ttf) format("woff");
+}
+.container {
+  margin-left: 130px;
+  margin-right: 130px;
+}
+.header {
+  margin-bottom: 27px;
+  box-shadow: 0 0 4px 0 #ececec;
+}
+.header-row {
+  margin-left: 130px;
+  margin-right: 130px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 21px;
+  margin-bottom: 13px;
+}
+.header-menu {
+  width: 256px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-logo {
+  width: 96px;
+  height: 20px;
+}
+.header-searchbar input {
+  box-sizing: border-box;
+  border: solid 1px #b7b7b7;
+  height: 35px;
+  width: 181px;
+  border-radius: 17px;
+  padding-left: 15px;
+  padding-right: 12px;
+}
+.header-searchbar input::placeholder {
+  display: none;
+  font-family: Montserrat-Regular;
+  color: #cccccc;
+  font-weight: 14px;
+}
+.header-searchbar > .search-icon {
+  float: right;
+  vertical-align: middle;
+}
+.header-menu a {
+  font-family: "Montserrat-Regular";
+  text-decoration: none;
+  color: #4d4d4d;
+  font-size: 14px;
+}
+.header-menu button {
+  font-family: "Montserrat-Bold";
+  background-color: #ffffff;
+  width: 120px;
+  height: 35px;
+  box-sizing: border-box;
+  border-radius: 100px;
+  border: solid 1px #ffa15f;
+  color: #ffa15f;
+  cursor: pointer;
+}
+.header-category {
+  margin-left: 130px;
+  margin-right: 130px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-category li {
+  margin: auto 7px;
+  display: inline-block;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-category a {
+  font-family: "Montserrat-Medium";
+  text-decoration: none;
+  color: #202124;
+  display: inline-block;
+}
+.header-category img {
+  vertical-align: middle;
+}
+.line {
+  margin: auto -130px;
+  border: none;
+  border-top: solid 1px #ececec;
+}
+/* .big-banner{
+  position: relative; FIX ME!
+} */
+.big-banner img {
+  width: 1030px;
+  height: auto;
+}
+.big-banner .btn-shop-now {
+  position: absolute;
+  border: none;
+  background-color: #ffa15f;
+  width: 180px;
+  height: 49px;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Montserrat-Bold";
+  left: 930px;
+  top: 515px;
+  cursor: pointer;
+}
+.big-banner .banner-slogan {
+  position: absolute;
+  font-family: "Domine-Bold";
+  font-size: 36px;
+  color: #ffffff;
+  top: 240px;
+  left: 54%;
+}
+.category-banners {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.category-banner {
+  position: relative;
+}
+.category-banner img {
+  max-width: 240px;
+}
+.category-banner .btn-shop-now {
+  position: absolute;
+  border: none;
+  background-color: #ffa15f;
+  width: 140px;
+  height: 40px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: "Montserrat-SemiBold";
+  cursor: pointer;
+}
+.category-banner .category-name {
+  display: block;
+  font-family: "Domine-Bold";
+  font-size: 24px;
+  color: #ffffff;
+}
+.category-line {
+  border: none;
+  border-top: solid 1px #ececec;
+  width: 80%;
+}
+.category-banner .attribute-group {
+  position: absolute;
+  top: 70%;
+  left: 20%;
+  width: 100%;
+}
+.footer{
+  margin-top: 37px;
+}
+.footer .footer-row{
+  min-height: 200px;
 }
