@@ -8,6 +8,9 @@ import menCategoryImg from "./images/homepage/men_category.jpg";
 import ladiesCategoryImg from "./images/homepage/ladies_category.jpg";
 import girlsCategoryImg from "./images/homepage/girls_category.jpg";
 import boysCategoryImg from "./images/homepage/boys_category.jpg";
+import twitterIcon from "./images/icons/twitter-icon.svg";
+import facebookIcon from "./images/icons/facebook-icon.svg";
+import instaIcon from "./images/icons/instagram-icon.svg";
 function Homepage() {
   return (
     <div>
@@ -23,14 +26,63 @@ function Homepage() {
 function Footer() {
   return (
     <div className="footer">
-      <hr className="line"></hr>
       <div className="footer-row">
-        <FooterRow1 />
+        <img src={logo} className="site-logo" alt="logo" />
+        <div className="footer-nav">
+          <FooterNav />
+        </div>
+        <div className="footer-social-icons">
+        <img src={twitterIcon} alt="twitter-logo" />
+        <img src={facebookIcon} alt="facebook-logo" />
+        <img src={instaIcon} alt="insta-logo" />
+        </div>
       </div>
+      <hr className="line"></hr>
       <div className="footer-row2">
-        <FooterRow2 />
+      <div className="footer-nav">
+          <FooterNav />
+        </div>
+        <div className="footer-nav">
+          <FooterPolicy />
+        </div>
       </div>
     </div>
+  );
+}
+function FooterPolicy() {
+  return (
+    <ul>
+      <li>
+        <a href="#">Privacy Policy</a>
+      </li>
+      <li>
+        <a href="#">Terms & Conditions</a>
+      </li>
+    </ul>
+  );
+}
+function FooterNav() {
+  return (
+    <ul>
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">Product</a>
+      </li>
+      <li>
+        <a href="#">Service</a>
+      </li>
+      <li>
+        <a href="#">About Us</a>
+      </li>
+      <li>
+        <a href="#">Help</a>
+      </li>
+      <li>
+        <a href="#">Contacts</a>
+      </li>
+    </ul>
   );
 }
 // function FooterRow
@@ -46,7 +98,6 @@ function Header() {
       <div className="header-category">
         <ListCategory />
       </div>
-      <hr className="line"></hr>
     </div>
   );
 }
@@ -125,7 +176,9 @@ function CategoryBanner(props) {
       <div className="attribute-group">
         <div className="category-name">{props.categoryName}</div>
         <hr className="category-line"></hr>
-        <button className="btn-shop-now">Shop now</button>
+        <div className="category-btn">
+          <button className="btn-shop-now">Shop now</button>
+        </div>
       </div>
     </div>
   );
