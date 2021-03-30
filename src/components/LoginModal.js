@@ -1,20 +1,24 @@
 import closeIcon from "../images/icons/cross.svg";
-
+import ModalInput from "./ModalInput";
 function LoginModal({ show, setShowModal }) {
-  //setShowModal(false);
+  const closeModal = ()=>{
+    setShowModal((prev) => !prev);
+  }
   return (
     <div className="modal login-modal">
-      <img className="modal-close" src={closeIcon} alt="close-icon"></img>
+      <img className="modal-close" src={closeIcon} alt="close-icon" onClick={closeModal}></img>
       <div className="modal-header">Log In</div>
       <div className="modal-content">
-        <div className="input-control">
-          <label>E-MAIL</label>
-          <input type="email" placeholder="Enter your email..."></input>
-        </div>
-        <div className="input-control">
-          <label>PASSWORD</label>
-          <input type="password" placeholder="Enter your password..."></input>
-        </div>
+        <ModalInput
+          type="email"
+          name="E-MAIL"
+          placeHolder="Enter your email..."
+        />
+         <ModalInput
+          type="password"
+          name="PASSWORD"
+          placeHolder="Enter your password..."
+        />
         <div className="space-row">
           <div className="checkbox-control">
             <input id="remember_pwd_box" type="checkbox"></input>
