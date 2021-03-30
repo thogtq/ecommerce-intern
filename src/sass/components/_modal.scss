@@ -1,0 +1,121 @@
+.modal {
+  position: fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);
+}
+.modal-content {
+  position: relative;
+  margin: 35px 80px 80px 80px;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);
+  background-color: #ffffff;
+}
+.modal-content .input-control{
+  margin-bottom: 24px;
+}
+.modal-content .checkbox-control input{
+  padding: 6px;
+  vertical-align: middle;
+}
+.modal-content .input-control input {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 12px 24px;
+  border-radius: unset;
+  border: none;
+  background-color:#f7f7f7;
+}
+.modal-content .input-control input::placeholder {
+  font-family: "Montserrat-Medium";
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 22px;
+}
+.modal-content .input-control label {
+  position: relative;
+  margin-bottom: 8px;
+  font-family: "Montserrat-Bold";
+  font-size: 12px;
+  line-height: 18px;
+  color: #202124;
+}
+.login-modal-login-btn button {
+  position: relative;
+  margin-top: 44px;
+  width: 395px;
+  height: 49px;
+  width: 100%;
+  border-radius: unset;
+  border: none;
+  background-color: #d4d3d3;
+  color: #ffffff;
+  font-family: "Montserrat-Bold";
+  font-size: 14px;
+}
+.modal-header {
+  position: relative;
+  margin-top: 45px;
+  text-align: center;
+  font-family: "Montserrat-Bold";
+  font-size: 32px;
+  line-height: 42px;
+  color: #202124;
+}
+.modal-footer {
+  position: relative;
+  border-top: 1px solid #ececec;
+}
+.modal-close {
+  margin-right: 15px;
+  margin-top: 15px;
+  float: right;
+  cursor: pointer;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 1040;
+}
+.space-row .checkbox-control label{
+  font-family: "Montserrat-Medium";
+  font-size: 14px;
+  line-height: 20px;
+  color :#202124;
+}
+.space-row .login-modal-forgot-password a{
+  text-decoration: none;
+  font-family: "Montserrat-SemiBold";
+  font-size: 14px;
+  line-height: 22px;
+  color :#4d4d4d;
+}
+.modal-footer{
+  text-align: center;
+  padding: 21px 0;
+}
+.modal-footer .login-modal-register{
+  font-family: "Montserrat-Medium";
+  font-size: 14px ;
+  line-height: 22px;
+  color: #4d4d4d;
+}
+.modal-footer .login-modal-register a{
+  text-underline-offset: 4px;
+  font-family: "Montserrat-Bold";
+  font-size: 14px ;
+  line-height: 22px;
+  color: #ff7413;
+}
