@@ -3,6 +3,7 @@ import searchIcon from "../images/icons/search.svg";
 import cartIcon from "../images/icons/cart.svg";
 import arrowIcon from "../images/icons/arrow.svg";
 import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
 import { useState, useEffect } from "react";
 
 function Header() {
@@ -21,19 +22,24 @@ function Header() {
   );
 }
 function Menu() {
-  const [show, setshowModal] = useState(false);
-  const toggleModal = () => {
-    setshowModal(!show);
+  const [showLoginModal, setshowLoginModal] = useState(false);
+  const toggleLoginModal = () => {
+    setshowLoginModal(!showLoginModal);
+  };
+  const [showRegisterModal, setshowRegisterModal] = useState(false);
+  const toggleRegisterModal = () => {
+    setshowRegisterModal(!showRegisterModal);
   };
   return (
     <div className="header-menu">
-      <a className="register-btn" href="#">
+      <a className="register-btn" href="#" onClick={toggleRegisterModal}>
         Register
       </a>
-      <button className="login-btn" onClick={toggleModal}>
+      <RegisterModal show={showRegisterModal} toggleModal={toggleRegisterModal} />
+      <button className="login-btn" onClick={toggleLoginModal}>
         Login
       </button>
-      <LoginModal show={show} toggleModal={toggleModal} />
+      <LoginModal show={showLoginModal} toggleModal={toggleLoginModal} />
       <a className="cart-btn" href="#">
         <img src={cartIcon}></img>
       </a>

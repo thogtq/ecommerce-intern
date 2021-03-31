@@ -2,7 +2,6 @@
   position: fixed;
   background: white;
   width: 80%;
-  height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -46,18 +45,22 @@
   line-height: 18px;
   color: #202124;
 }
-.login-modal-login-btn button {
+.modal .function-button {
   position: relative;
   margin-top: 44px;
-  width: 395px;
   height: 49px;
   width: 100%;
   border-radius: unset;
   border: none;
-  background-color: #d4d3d3;
   color: #ffffff;
   font-family: "Montserrat-Bold";
   font-size: 14px;
+  background-color: #ffa15f;
+  cursor:pointer;
+}
+.modal .btn-disabled{
+  background-color: #d4d3d3;
+  cursor:not-allowed;
 }
 .modal-header {
   position: relative;
@@ -112,10 +115,17 @@
   line-height: 22px;
   color: #4d4d4d;
 }
-.modal-footer .login-modal-register a{
+.modal .orange-underline{
   text-underline-offset: 4px;
   font-family: "Montserrat-Bold";
   font-size: 14px ;
   line-height: 22px;
   color: #ff7413;
+}
+.modal .policy-agree{
+  text-align: center;
+  font-family: "Montserrat-Regular";
+  font-size: 14px ;
+  line-height: 22px;
+  color: #202124;
 }
