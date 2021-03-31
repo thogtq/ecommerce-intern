@@ -22,24 +22,18 @@ function Header() {
 }
 function Menu() {
   const [show, setshowModal] = useState(false);
-  const openModal = () => {
-    setshowModal((prev) => !prev);
+  const toggleModal = () => {
+    setshowModal(!show);
   };
-  useEffect(() => {
-    if (show == true) {
-      let root = document.getElementById("root");
-      root.outerHTML += `<div class="modal-backdrop"></div>`;
-    }
-  });
   return (
     <div className="header-menu">
       <a className="register-btn" href="#">
         Register
       </a>
-      <button className="login-btn" onClick={openModal}>
+      <button className="login-btn" onClick={toggleModal}>
         Login
       </button>
-      <LoginModal show={show} setshowModal={setshowModal} />
+      <LoginModal show={show} toggleModal={toggleModal} />
       <a className="cart-btn" href="#">
         <img src={cartIcon}></img>
       </a>
