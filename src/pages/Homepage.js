@@ -1,10 +1,10 @@
-import bigBannerImg from "./images/homepage/big_banner.jpg";
-import menCategoryImg from "./images/homepage/men_category.jpg";
-import ladiesCategoryImg from "./images/homepage/ladies_category.jpg";
-import girlsCategoryImg from "./images/homepage/girls_category.jpg";
-import boysCategoryImg from "./images/homepage/boys_category.jpg";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import bigBannerImg from "../images/homepage/big_banner.jpg";
+import menCategoryImg from "../images/homepage/men_category.jpg";
+import ladiesCategoryImg from "../images/homepage/ladies_category.jpg";
+import girlsCategoryImg from "../images/homepage/girls_category.jpg";
+import boysCategoryImg from "../images/homepage/boys_category.jpg";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Homepage() {
   return (
@@ -28,7 +28,7 @@ function BigBanner() {
     <div className="big-banner">
       <img src={bigBannerImg} alt="big-banner-image"></img>
       <div className="banner-slogan">OUTFIT OF THE WEEK</div>
-      <a href="#">
+      <a href="">
         <button className="btn-shop-now">Shop now</button>
       </a>
     </div>

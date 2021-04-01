@@ -1,30 +1,65 @@
 import closeIcon from "../images/icons/cross.svg";
 import ModalInput from "./ModalInput";
-import React from "react";
+import React,{useState} from "react";
 import ReactDOM from "react-dom";
+import UserService from "../api/UserAPI"
+import Helpers from "../helpers/Helper"
 function LoginModal({ show, toggleModal }) {
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
+  const handleFormChange = () => {
+    if (Email != "" && Password != "") {
+      Helpers.submitButton(true);
+    } else {
+      Helpers.submitButton(false);
+    }
+  };
+  const handleSubmit = async (e) => {
+    Helpers.submitButton(false);
+    let userObject = {
+      email: Email,
+      password: Password,
+    };
+    let res = await UserService.login(userObject);
+    console.log(res)
+    if (res.status == "success") {
+      //Login
+      toggleModal();
+    } else {
+      alert(res.message);
+      Helpers.submitButton(true);
+    }
+  };
   return show
     ? ReactDOM.createPortal(
         <React.Fragment>
-          <div class="modal-backdrop"></div>
+          <div className="modal-backdrop"></div>
           <div className="modal login-modal">
             <ModalCloseButton toggleModal={toggleModal} />
             <div className="modal-header">Log In</div>
             <div className="modal-content">
-              <form>
-              <ModalInput
-                type="email"
-                name="E-MAIL"
-                placeHolder="Enter your email..."
-              />
-              <ModalInput
-                type="password"
-                name="PASSWORD"
-                placeHolder="Enter your password..."
-              />
-              <LoginRememberAndForgotRow />
-              <button className="function-button btn-disabled" disabled>Login</button>
+              <form onChange={handleFormChange} onSubmit={handleSubmit}>
+                <ModalInput
+                  type="email"
+                  name="E-MAIL"
+                  placeHolder="Enter your email..."
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <ModalInput
+                  type="password"
+                  name="PASSWORD"
+                  placeHolder="Enter your password..."
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+                <LoginRememberAndForgotRow />
+                <button id="submit" className="function-button btn-disabled" disabled>
+                  Login
+                </button>
               </form>
             </div>
             <div className="modal-footer">
@@ -64,7 +99,7 @@ const RegisterChoice = () => {
     <div className="login-modal-register">
       Don't have an account?&nbsp;
       <a className="orange-underline" href="#">
-      Register
+        Register
       </a>
     </div>
   );

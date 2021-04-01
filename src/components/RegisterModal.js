@@ -2,57 +2,36 @@ import closeIcon from "../images/icons/cross.svg";
 import ModalInput from "./ModalInput";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-//import userService from "../services/userService";
+import UserService from "../api/UserAPI";
+import Helpers from "../helpers/Helper";
 
 function RegisterModal({ show, toggleModal }) {
   const [Fullname, setFullname] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const disableSubmitBtn = (state) => {
-    if (!state) {
-      let submit = document.getElementById("submit");
-      submit.classList.remove("btn-disabled");
-      submit.removeAttribute("disabled");
-    } else {
-      let submit = document.getElementById("submit");
-      submit.classList.add("btn-disabled");
-      submit.setAttribute("disabled", true);
-    }
-  };
+
   const handleFormChange = () => {
     if (Fullname != "" && Email != "" && Password != "") {
-      disableSubmitBtn(false);
+      Helpers.submitButton(true);
     } else {
-      disableSubmitBtn(true);
+      Helpers.submitButton(false);
     }
   };
-  const handleSubmit = (e) => {
-    disableSubmitBtn(true);
+  const handleSubmit = async (e) => {
+    Helpers.submitButton(false);
     let userObject = {
       fullname: Fullname,
       email: Email,
       password: Password,
     };
-    
-    async function register(userObject) {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userObject),
-      };
-      console.log(requestOptions.body);
-      const data = await fetch(`http://localhost:8080/api/user`, requestOptions)
-        .then((res) => res.text())
-        .then(
-          (result) => {
-            console.log(result);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+    let res = await UserService.register(userObject);
+    if (res.status == "success") {
+      alert("Registration successful!");
+      toggleModal();
+    } else {
+      alert(res.message);
+      Helpers.submitButton(true);
     }
-    register(userObject);
   };
   return show
     ? ReactDOM.createPortal(

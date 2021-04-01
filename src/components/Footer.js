@@ -28,10 +28,10 @@ function Footer() {
       <div className="footer-nav-small">
         <ul>
           <li>
-            <a href="#">Privacy Policy</a>
+            <a href="">Privacy Policy</a>
           </li>
           <li>
-            <a href="#">Terms & Conditions</a>
+            <a href="">Terms & Conditions</a>
           </li>
         </ul>
       </div>
@@ -42,22 +42,22 @@ function Footer() {
       <div className={props.className}>
         <ul>
           <li>
-            <a href="#">Home</a>
+            <a href="">Home</a>
           </li>
           <li>
-            <a href="#">Product</a>
+            <a href="">Product</a>
           </li>
           <li>
-            <a href="#">Service</a>
+            <a href="">Service</a>
           </li>
           <li>
-            <a href="#">About Us</a>
+            <a href="">About Us</a>
           </li>
           <li>
-            <a href="#">Help</a>
+            <a href="">Help</a>
           </li>
           <li>
-            <a href="#">Contacts</a>
+            <a href="">Contacts</a>
           </li>
         </ul>
       </div>
