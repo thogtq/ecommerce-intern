@@ -5,14 +5,15 @@ import girlsCategoryImg from "../images/homepage/girls_category.jpg";
 import boysCategoryImg from "../images/homepage/boys_category.jpg";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import React from "react";
 
 function Homepage() {
   return (
-    <div>
+    <React.Fragment>
       <Header />
       <Body />
       <Footer />
-    </div>
+    </React.Fragment>
   );
 }
 function Body() {
