@@ -1,0 +1,112 @@
+import cartIcon from "../files/images/icons/cart.svg";
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import React, { useState, useEffect } from "react";
+import { isAuthenticated } from "../auth";
+import { makeStyles, Menu ,Avatar} from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
+
+const useStyles = makeStyles((theme) => ({
+  avatar: {
+    height: "28px",
+    width: "28px",
+    border: "2px solid #ffa15f",
+  },
+  avatarMenu: {
+    "& div:nth-child(3)": {
+      boxShadow: "none",
+      borderRadius: "0px",
+      width: "181px",
+      left: "unset!important",
+      right: "0!important",
+      marginRight: "180px",
+    },
+    "& li": {
+      color: "#4d4d4d",
+      fontFamily: "Montserrat-Medium",
+      fontSize: "12px",
+      lineHeight: "22px",
+    },
+    "& ul": {
+      background: "#fbfbfb",
+      border: "0.5px solid #eaeaea",
+    },
+  },
+}));
+const HeaderUserMenu = () => {
+  const classes = useStyles();
+  const [showLoginModal, setshowLoginModal] = useState(false);
+  const toggleLoginModal = () => {
+    setshowLoginModal(!showLoginModal);
+  };
+  const [showRegisterModal, setshowRegisterModal] = useState(false);
+  const toggleRegisterModal = () => {
+    setshowRegisterModal(!showRegisterModal);
+  };
+  const NotLoggedIn = () => {
+    return (
+      <React.Fragment>
+        <a className="register-btn" href="#" onClick={toggleRegisterModal}>
+          Register
+        </a>
+        <RegisterModal
+          show={showRegisterModal}
+          toggleModal={toggleRegisterModal}
+        />
+        <button className="login-btn" onClick={toggleLoginModal}>
+          Login
+        </button>
+        <LoginModal show={showLoginModal} toggleModal={toggleLoginModal} />
+        <a className="cart-btn" href="#">
+          <img src={cartIcon}></img>
+        </a>
+      </React.Fragment>
+    );
+  };
+  const LoggedIn = () => {
+    const [anchorMenu, setAnchorMenu] = useState(null);
+    const handleAvatarClick = (e) => {
+      setAnchorMenu(document.getElementById("category_nav"));
+    };
+    const handleClose = (e) => {
+      e.preventDefault();
+      setAnchorMenu(null);
+    };
+    return (
+      <React.Fragment>
+        <a
+          href="#"
+          onClick={handleAvatarClick}
+          aria-controls="user_menu"
+          
+        >
+          <Avatar
+            className={classes.avatar}
+            alt="avatar"
+            src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+          ></Avatar>
+        </a>
+        <Menu
+          className={classes.avatarMenu}
+          id="user_menu"
+          anchorEl={anchorMenu}
+          open={Boolean(anchorMenu)}
+          onClose={handleClose}
+        >
+          <MenuItem >Account setting</MenuItem>
+          <hr className="line"></hr>
+          <MenuItem >Logout</MenuItem>
+        </Menu>
+        <a className="cart-btn" href="#">
+          <img src={cartIcon}></img>
+        </a>
+      </React.Fragment>
+    );
+  };
+  return (
+    <div className="header-menu">
+      {isAuthenticated() ? <LoggedIn /> : <NotLoggedIn />}
+    </div>
+  );
+};
+export default HeaderUserMenu;

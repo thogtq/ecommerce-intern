@@ -1,7 +1,7 @@
-import logo from "../images/logo.svg";
-import twitterIcon from "../images/icons/twitter-icon.svg";
-import facebookIcon from "../images/icons/facebook-icon.svg";
-import instaIcon from "../images/icons/instagram-icon.svg";
+import logo from "../files/images/logo.svg";
+import twitterIcon from "../files/images/icons/twitter-icon.svg";
+import facebookIcon from "../files/images/icons/facebook-icon.svg";
+import instaIcon from "../files/images/icons/instagram-icon.svg";
 
 function Footer() {
     return (
