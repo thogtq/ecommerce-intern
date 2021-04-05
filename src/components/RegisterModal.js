@@ -1,4 +1,3 @@
-import closeIcon from "../files/images/icons/cross.svg";
 import ModalInput from "./ModalInput";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
@@ -41,6 +40,7 @@ const RegisterModal = ({ show, toggleModal }) => {
       }
     };
     const handleSubmit = async (e) => {
+      e.preventDefault()
       Helpers.submitButton(false);
       let userObject = {
         fullname: Fullname,

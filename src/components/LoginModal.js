@@ -5,7 +5,8 @@ import UserService from "../api/UserAPI";
 import Helpers from "../helpers/Helper";
 import Modal from "./Modal";
 import { authenticate } from "../auth/index";
-function LoginModal({ show, toggleModal }) {
+
+function LoginModal({ setLoggedIn, show, toggleModal }) {
   const RememberPassword = () => {
     return (
       <div className="checkbox-control">
@@ -56,6 +57,7 @@ function LoginModal({ show, toggleModal }) {
       if (res.status == "success") {
         authenticate(res.data);
         toggleModal();
+        setLoggedIn(true);
       } else {
         alert(res.message);
         Helpers.submitButton(true);

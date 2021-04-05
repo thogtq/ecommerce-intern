@@ -22,3 +22,6 @@ export function renewAccessToken() {
   let accessToken = ""; //fetch api to get new jwt
   return accessToken;
 }
+export function logout() {
+  localStorage.removeItem("jwt");
+}

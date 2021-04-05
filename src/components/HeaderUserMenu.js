@@ -2,9 +2,11 @@ import cartIcon from "../files/images/icons/cart.svg";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import React, { useState, useEffect } from "react";
-import { isAuthenticated } from "../auth";
-import { makeStyles, Menu ,Avatar} from "@material-ui/core";
+import { isAuthenticated, logout } from "../auth";
+import { makeStyles, Menu, Avatar } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
+import { useLocation, useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -34,7 +36,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const HeaderUserMenu = () => {
+  const useQuery = new URLSearchParams(useLocation().search);
+  const history = useHistory();
+
   const classes = useStyles();
+  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated());
+  const handleLogout = () => {
+    setLoggedIn(false);
+    logout();
+  };
   const [showLoginModal, setshowLoginModal] = useState(false);
   const toggleLoginModal = () => {
     setshowLoginModal(!showLoginModal);
@@ -43,6 +53,14 @@ const HeaderUserMenu = () => {
   const toggleRegisterModal = () => {
     setshowRegisterModal(!showRegisterModal);
   };
+  useEffect(() => {
+    if (useQuery.has("login_modal")) {
+      let open = useQuery.get("login_modal");
+      setshowLoginModal(Boolean(open));
+      useQuery.delete("login_modal");
+      history.replace({ search: useQuery.toString() });
+    }
+  });
   const NotLoggedIn = () => {
     return (
       <React.Fragment>
@@ -56,7 +74,11 @@ const HeaderUserMenu = () => {
         <button className="login-btn" onClick={toggleLoginModal}>
           Login
         </button>
-        <LoginModal show={showLoginModal} toggleModal={toggleLoginModal} />
+        <LoginModal
+          setLoggedIn={setLoggedIn}
+          show={showLoginModal}
+          toggleModal={toggleLoginModal}
+        />
         <a className="cart-btn" href="#">
           <img src={cartIcon}></img>
         </a>
@@ -66,6 +88,7 @@ const HeaderUserMenu = () => {
   const LoggedIn = () => {
     const [anchorMenu, setAnchorMenu] = useState(null);
     const handleAvatarClick = (e) => {
+      e.preventDefault();
       setAnchorMenu(document.getElementById("category_nav"));
     };
     const handleClose = (e) => {
@@ -74,12 +97,7 @@ const HeaderUserMenu = () => {
     };
     return (
       <React.Fragment>
-        <a
-          href="#"
-          onClick={handleAvatarClick}
-          aria-controls="user_menu"
-          
-        >
+        <a href="" onClick={handleAvatarClick} aria-controls="user_menu">
           <Avatar
             className={classes.avatar}
             alt="avatar"
@@ -93,9 +111,11 @@ const HeaderUserMenu = () => {
           open={Boolean(anchorMenu)}
           onClose={handleClose}
         >
-          <MenuItem >Account setting</MenuItem>
+          <MenuItem>
+            <Link to="/user">Account setting</Link>
+          </MenuItem>
           <hr className="line"></hr>
-          <MenuItem >Logout</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
         <a className="cart-btn" href="#">
           <img src={cartIcon}></img>
@@ -105,7 +125,7 @@ const HeaderUserMenu = () => {
   };
   return (
     <div className="header-menu">
-      {isAuthenticated() ? <LoggedIn /> : <NotLoggedIn />}
+      {isLoggedIn ? <LoggedIn /> : <NotLoggedIn />}
     </div>
   );
 };

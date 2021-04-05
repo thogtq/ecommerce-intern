@@ -1,0 +1,69 @@
+body {
+  background-image: url("../../files/images/admin/login-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.login-form {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(61, 61, 63, 0.9);
+  min-width: 380px;
+}
+.login-form-header {
+  text-align: center;
+  margin-top: 32px;
+  font-family: "Montserrat-Bold";
+  font-size: 28px;
+  line-height: 36px;
+  color: #ffa15f;
+}
+.login-form-body {
+  position: relative;
+  margin: 32px;
+}
+.login-form-body .input-control {
+  margin-top: 24px;
+}
+.input-control label {
+  position: relative;
+  margin-bottom: 10px;
+  font-family: "Montserrat-SemiBold";
+  font-size: 12px;
+  line-height: 18px;
+  color: #acacac;
+}
+.input-control input {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 12px 24px;
+  border-radius: unset;
+  border: none;
+  background-color: #f7f7f7;
+}
+.login-form-body .submit-btn {
+  position: relative;
+  margin-top: 40px;
+  height: 49px;
+  width: 100%;
+  border-radius: unset;
+  border: none;
+  color: #ffffff;
+  background-color: #ffa15f;
+  font-family: "Montserrat-SemiBold";
+  font-size: 14px;
+  cursor: pointer;
+}
+.login-form-footer {
+  margin: 33px auto;
+  color: #ffffff;
+  text-align: center;
+  font-family: "Montserrat-SemiBold";
+  font-size: 12px;
+  cursor: pointer;
+}
