@@ -1,7 +1,7 @@
 import ModalInput from "./ModalInput";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "../api/UserAPI";
+import UserService from "../services/UserService";
 import Helpers from "../helpers/Helper";
 import Modal from "./Modal";
 import { authenticate } from "../auth/index";
@@ -59,7 +59,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
         toggleModal();
         setLoggedIn(true);
       } else {
-        alert(res.message);
+        alert(res.error.message);
         Helpers.submitButton(true);
       }
     };

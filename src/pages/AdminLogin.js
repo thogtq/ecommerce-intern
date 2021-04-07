@@ -1,5 +1,10 @@
-import logo from "../files/images/admin/logo.svg";
+import logo from "../files/images/logo_white.svg";
 import { makeStyles } from "@material-ui/core";
+import { useState, useEffect } from "react";
+import UserService from "../services/UserService";
+import { authenticate, isAuthenticated } from "../auth/index";
+import { Redirect } from "react-router";
+import helpers from "../helpers/Helper";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -9,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const AdminLogin = () => {
   require("../sass/admin.scss");
+  const [loggedIn, setLoggedIn] = useState(isAuthenticated(true));
   const classes = useStyles();
   const Input = (props) => {
     return (
@@ -24,13 +30,46 @@ const AdminLogin = () => {
     );
   };
   const LoginForm = () => {
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+      helpers.submitButton(false);
+      let userObject = {
+        email: email,
+        password: password,
+      };
+      let res = await UserService.adminLogin(userObject);
+      console.log(res);
+      if (res.status == "success") {
+        authenticate(res.data, true);
+        setLoggedIn(true);
+      } else {
+        alert(res.error.message);
+      }
+      helpers.submitButton(true);
+    };
     return (
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleFormSubmit}>
         <div className="login-form-header">Log In</div>
         <div className="login-form-body">
-          <Input name="EMAIL" type="email" placeHolder="email@sample.com" />
-          <Input name="PASSWORD" type="password" placeHolder="Enter password" />
-          <button id="submit" className="submit-btn" disabled>
+          <Input
+            name="EMAIL"
+            type="email"
+            placeHolder="email@sample.com"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Input
+            name="PASSWORD"
+            type="password"
+            placeHolder="Enter password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button type="submit" id="submit" className="submit-btn">
             Login
           </button>
         </div>
@@ -38,11 +77,20 @@ const AdminLogin = () => {
       </form>
     );
   };
-  return (
+  useEffect(() => {
+    if (loggedIn) {
+      document.body.classList.remove("login-body");
+    } else {
+      document.body.classList.add("login-body");
+    }
+  }, loggedIn);
+  return !loggedIn ? (
     <div className={classes.root}>
       <img className={classes.logo} src={logo} alt="logo"></img>
       <LoginForm />
     </div>
+  ) : (
+    <Redirect to="/admin"></Redirect>
   );
 };
 export default AdminLogin;

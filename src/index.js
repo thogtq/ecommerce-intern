@@ -14,7 +14,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Homepage}></Route>
     <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
-    <Route path="/admin/login" component={AdminLogin}></Route>
+    <Route exact path="/admin/login" component={AdminLogin}></Route>
     <AdminRoute exact path="/admin" component={AdminPage}></AdminRoute>
   </BrowserRouter>,
   document.getElementById("root")

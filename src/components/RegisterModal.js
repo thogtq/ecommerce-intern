@@ -1,7 +1,7 @@
 import ModalInput from "./ModalInput";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import UserService from "../api/UserAPI";
+import UserService from "../services/UserService";
 import Helpers from "../helpers/Helper";
 import Modal from "./Modal";
 
