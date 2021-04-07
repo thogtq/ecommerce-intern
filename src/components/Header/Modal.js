@@ -1,9 +1,8 @@
 import React from "react";
-import closeIcon from "../files/images/icons/cross.svg";
+import closeIcon from "assets/images/icons/cross.svg";
 
 const Modal = (props) => {
   const ModalHeader = props.header;
-  const ModalBody = props.body;
   const ModalFooter = props.footer;
   const toggleModal = props.toggle;
   const ModalCloseButton = ({ toggleModal }) => {

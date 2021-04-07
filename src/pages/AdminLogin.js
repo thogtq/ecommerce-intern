@@ -1,10 +1,10 @@
-import logo from "../files/images/logo_white.svg";
+import logo from "assets/images/logo_white.svg";
 import { makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import UserService from "../services/UserService";
-import { authenticate, isAuthenticated } from "../auth/index";
+import UserService from "services/UserService";
+import { authenticate, isAuthenticated } from "services/AuthService";
 import { Redirect } from "react-router";
-import helpers from "../helpers/Helper";
+import { submitButton } from 'helpers/Helpers';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const AdminLogin = () => {
-  require("../sass/admin.scss");
+  require("assets/sass/admin.scss");
   const [loggedIn, setLoggedIn] = useState(isAuthenticated(true));
   const classes = useStyles();
   const Input = (props) => {
@@ -34,20 +34,20 @@ const AdminLogin = () => {
     const [email, setEmail] = useState("");
     const handleFormSubmit = async (e) => {
       e.preventDefault();
-      helpers.submitButton(false);
+      submitButton(false);
       let userObject = {
         email: email,
         password: password,
       };
       let res = await UserService.adminLogin(userObject);
       console.log(res);
-      if (res.status == "success") {
+      if (res.status === "success") {
         authenticate(res.data, true);
         setLoggedIn(true);
       } else {
         alert(res.error.message);
       }
-      helpers.submitButton(true);
+      submitButton(true);
     };
     return (
       <form className="login-form" onSubmit={handleFormSubmit}>
@@ -83,7 +83,7 @@ const AdminLogin = () => {
     } else {
       document.body.classList.add("login-body");
     }
-  }, loggedIn);
+  }, [loggedIn]);
   return !loggedIn ? (
     <div className={classes.root}>
       <img className={classes.logo} src={logo} alt="logo"></img>

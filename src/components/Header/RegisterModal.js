@@ -1,22 +1,23 @@
 import ModalInput from "./ModalInput";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "../services/UserService";
-import Helpers from "../helpers/Helper";
+import UserService from "services/UserService";
+import {submitButton} from "helpers/Helpers";
 import Modal from "./Modal";
+import { Link } from 'react-router-dom';
 
 const RegisterModal = ({ show, toggleModal }) => {
   const PolicyAgree = () => {
     return (
       <div className="policy-agree">
         By creating an account you agree to the&nbsp;
-        <a className="orange-underline" href="#">
+        <Link to="/terms"className="orange-underline" href="#">
           Terms of Service
-        </a>
+        </Link>
         &nbsp; and&nbsp;
-        <a className="orange-underline" href="#">
+        <Link to="/policy"className="orange-underline" href="#">
           Privacy Policy
-        </a>
+        </Link>
       </div>
     );
   };
@@ -33,27 +34,27 @@ const RegisterModal = ({ show, toggleModal }) => {
     const [Password, setPassword] = useState("");
 
     const handleFormChange = () => {
-      if (Fullname != "" && Email != "" && Password != "") {
-        Helpers.submitButton(true);
+      if (Fullname !== "" && Email !== "" && Password !== "") {
+        submitButton(true);
       } else {
-        Helpers.submitButton(false);
+        submitButton(false);
       }
     };
     const handleSubmit = async (e) => {
       e.preventDefault()
-      Helpers.submitButton(false);
+      submitButton(false);
       let userObject = {
         fullname: Fullname,
         email: Email,
         password: Password,
       };
       let res = await UserService.register(userObject);
-      if (res.status == "success") {
+      if (res.status === "success") {
         alert("Registration successful!");
         toggleModal();
       } else {
         alert(res.message);
-        Helpers.submitButton(true);
+        submitButton(true);
       }
     };
     return (
@@ -91,9 +92,9 @@ const RegisterModal = ({ show, toggleModal }) => {
     return (
       <div className="login-modal-register">
         Do you have an account?{" "}
-        <a className="orange-underline" href="#">
+        <Link to="/?login_modal=1"className="orange-underline" href="#">
           Login
-        </a>
+        </Link>
       </div>
     );
   };

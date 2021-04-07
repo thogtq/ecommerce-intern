@@ -1,0 +1,25 @@
+$font-dir:"/assets/fonts";
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: local("Montserrat-Regular"),
+    url($font-dir+"/Montserrat/Montserrat-Regular.ttf") format("woff");
+}
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: local("Montserrat-SemiBold"),
+    url($font-dir+"/Montserrat/Montserrat-SemiBold.ttf") format("woff");
+}
+@font-face {
+  font-family: "Domine-Bold";
+  src: local("Domine-Bold"), url($font-dir+"/Domine/Domine-Bold.ttf") format("woff");
+}
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold"),
+    url($font-dir+"/Montserrat/Montserrat-Bold.ttf") format("woff");
+}
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: local("Montserrat-Medium"),
+    url($font-dir+"/Montserrat/Montserrat-Medium.ttf") format("woff");
+}

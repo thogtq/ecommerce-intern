@@ -1,10 +1,11 @@
-import ModalInput from "./ModalInput";
+import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "../services/UserService";
-import Helpers from "../helpers/Helper";
+import UserService from "services/UserService";
+import {submitButton} from "helpers/Helpers";
 import Modal from "./Modal";
-import { authenticate } from "../auth/index";
+import { authenticate } from "services/AuthService";
+import ModalInput from './ModalInput';
 
 function LoginModal({ setLoggedIn, show, toggleModal }) {
   const RememberPassword = () => {
@@ -18,7 +19,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
   const ForgotPassword = () => {
     return (
       <div className="login-modal-forgot-password">
-        <a href="#">Forgot your password?</a>
+        <Link to="/?fotgot_modal=1">Forgot your password?</Link>
       </div>
     );
   };
@@ -29,9 +30,9 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
     return (
       <div className="login-modal-register">
         Don't have an account?&nbsp;
-        <a className="orange-underline" href="#">
+        <Link to="/?register_modal=1"className="orange-underline" href="#">
           Register
-        </a>
+        </Link>
       </div>
     );
   };
@@ -40,27 +41,27 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
     const [Password, setPassword] = useState("");
 
     const handleFormChange = () => {
-      if (Email != "" && Password != "") {
-        Helpers.submitButton(true);
+      if (Email !== "" && Password !== "") {
+        submitButton(true);
       } else {
-        Helpers.submitButton(false);
+        submitButton(false);
       }
     };
     const handleSubmit = async (e) => {
       e.preventDefault();
-      Helpers.submitButton(false);
+      submitButton(false);
       let userObject = {
         email: Email,
         password: Password,
       };
       let res = await UserService.login(userObject);
-      if (res.status == "success") {
+      if (res.status === "success") {
         authenticate(res.data);
         toggleModal();
         setLoggedIn(true);
       } else {
         alert(res.error.message);
-        Helpers.submitButton(true);
+        submitButton(true);
       }
     };
     return (

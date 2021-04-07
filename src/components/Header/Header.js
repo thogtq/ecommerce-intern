@@ -1,7 +1,7 @@
-import logo from "../files/images/logo.svg";
-import React, { useState, useEffect } from "react";
+import logo from "assets/images/logo.svg";
+import React from "react";
 import HeaderUserMenu from "./HeaderUserMenu";
-import CategoryNavBar from "./CategoryNavBar";
+import CategoryNavBar from "components/Homepage/CategoryNavBar";
 import HeaderSearchBar from "./HeaderSearchBar";
 
 function Header() {

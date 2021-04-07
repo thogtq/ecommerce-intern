@@ -1,8 +1,8 @@
-import cartIcon from "../files/images/icons/cart.svg";
+import cartIcon from "assets/images/icons/cart.svg";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import React, { useState, useEffect } from "react";
-import { isAuthenticated, logout } from "../auth";
+import { isAuthenticated, logout } from "services/AuthService";
 import { makeStyles, Menu, Avatar } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
@@ -53,20 +53,26 @@ const HeaderUserMenu = () => {
   const toggleRegisterModal = () => {
     setshowRegisterModal(!showRegisterModal);
   };
+  console.log("re-render");
   useEffect(() => {
     if (useQuery.has("login_modal")) {
       let open = useQuery.get("login_modal");
+      setshowRegisterModal(false);
       setshowLoginModal(Boolean(open));
       useQuery.delete("login_modal");
       history.replace({ search: useQuery.toString() });
     }
-  });
+  },[useQuery,history]);
   const NotLoggedIn = () => {
     return (
       <React.Fragment>
-        <a className="register-btn" href="#" onClick={toggleRegisterModal}>
+        <Link
+          to=""
+          className="register-btn"
+          onClick={toggleRegisterModal}
+        >
           Register
-        </a>
+        </Link>
         <RegisterModal
           show={showRegisterModal}
           toggleModal={toggleRegisterModal}
@@ -79,9 +85,9 @@ const HeaderUserMenu = () => {
           show={showLoginModal}
           toggleModal={toggleLoginModal}
         />
-        <a className="cart-btn" href="#">
-          <img src={cartIcon}></img>
-        </a>
+        <Link to="/cart" className="cart-btn">
+          <img src={cartIcon} alt="cart"></img>
+        </Link>
       </React.Fragment>
     );
   };
@@ -97,13 +103,13 @@ const HeaderUserMenu = () => {
     };
     return (
       <React.Fragment>
-        <a href="" onClick={handleAvatarClick} aria-controls="user_menu">
+        <Link to="" onClick={handleAvatarClick} aria-controls="user_menu">
           <Avatar
             className={classes.avatar}
             alt="avatar"
             src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
           ></Avatar>
-        </a>
+        </Link>
         <Menu
           className={classes.avatarMenu}
           id="user_menu"
@@ -117,9 +123,9 @@ const HeaderUserMenu = () => {
           <hr className="line"></hr>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-        <a className="cart-btn" href="#">
-          <img src={cartIcon}></img>
-        </a>
+        <Link to="/cart" className="cart-btn" href="#">
+          <img src={cartIcon} alt="cart"></img>
+        </Link>
       </React.Fragment>
     );
   };

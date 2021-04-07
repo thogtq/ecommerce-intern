@@ -1,7 +1,8 @@
-import logo from "../files/images/logo.svg";
-import twitterIcon from "../files/images/icons/twitter-icon.svg";
-import facebookIcon from "../files/images/icons/facebook-icon.svg";
-import instaIcon from "../files/images/icons/instagram-icon.svg";
+import logo from "assets/images/logo.svg";
+import twitterIcon from "assets/images/icons/twitter-icon.svg";
+import facebookIcon from "assets/images/icons/facebook-icon.svg";
+import instaIcon from "assets/images/icons/instagram-icon.svg";
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -28,10 +29,10 @@ function Footer() {
       <div className="footer-nav-small">
         <ul>
           <li>
-            <a href="">Privacy Policy</a>
+            <Link to="/policy">Privacy Policy</Link>
           </li>
           <li>
-            <a href="">Terms & Conditions</a>
+            <Link to="/terms">Terms & Conditions</Link>
           </li>
         </ul>
       </div>
@@ -42,22 +43,22 @@ function Footer() {
       <div className={props.className}>
         <ul>
           <li>
-            <a href="">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="">Product</a>
+            <Link to="/products">Product</Link>
           </li>
           <li>
-            <a href="">Service</a>
+            <Link to="/service">Service</Link>
           </li>
           <li>
-            <a href="">About Us</a>
+            <Link to="/about-us">About Us</Link>
           </li>
           <li>
-            <a href="">Help</a>
+            <Link to="help">Help</Link>
           </li>
           <li>
-            <a href="">Contacts</a>
+            <Link to="/contacts">Contacts</Link>
           </li>
         </ul>
       </div>

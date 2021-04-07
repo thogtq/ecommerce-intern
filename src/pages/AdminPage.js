@@ -4,14 +4,13 @@ import {
   MenuItem,
   Select,
   FormControl,
-  InputLabel,
   TextField,
   InputAdornment,
   Button,
 } from "@material-ui/core";
-import AdminSideBar from "../components/AdminSideBar";
-import AdminMenu from "../components/AdminMenu";
-import searchIcon from "../files/images/admin/icons/search.svg";
+import AdminSideBar from "components/AdminPage/AdminSideBar";
+import AdminMenu from "components/AdminPage/AdminMenu";
+import searchIcon from "assets/images/admin/icons/search.svg";
 import AddIcon from "@material-ui/icons/Add";
 import { SystemUpdateAlt } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const AdminPage = () => {
-  require("../sass/admin.scss");
+  require("assets/sass/admin.scss");
   const classes = useStyles();
   return (
     <Grid container direction="row">
@@ -86,7 +85,7 @@ const AdminPage = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <img src={searchIcon}></img>
+                    <img src={searchIcon} alt="search-icon"></img>
                   </InputAdornment>
                 ),
               }}

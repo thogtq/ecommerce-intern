@@ -1,7 +1,8 @@
 import { makeStyles, Menu } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import arrowIcon from "../files/images/icons/arrow.svg";
-import React, { useState, useEffect } from "react";
+import arrowIcon from "assets/images/icons/arrow.svg";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
       left: "50%!important",
       transform: "translate(-50%)!important",
     },
+
     "& li": {
       display: "inline-block",
       color: "#202124",
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 const CategoryNavBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [currentMenu, setCurrentMenu] = useState("");
+  // const [currentMenu, setCurrentMenu] = useState("");
   const handleClick = (e) => {
     e.preventDefault();
     setAnchorEl(document.getElementById("category_nav"));
@@ -44,8 +46,8 @@ const CategoryNavBar = () => {
       "Accesories",
       "Sale",
     ];
-    let boysItems = menItems;
-    let ladiesItems = [""];
+    // let boysItems = menItems;
+    // let ladiesItems = [""];
     let categoryItems = menItems;
     return (
       <Menu
@@ -68,49 +70,44 @@ const CategoryNavBar = () => {
     <div id="category_nav" className="header-category-nav">
       <ul>
         <li>
-          <a
-            href="#"
+          <Link
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
           >
             Men <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#"
+          <Link
             value="Men"
             onClick={handleClick}
-            value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
           >
             Ladies<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#"
+          <Link
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
           >
             Girls<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#"
+          <Link
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
           >
             Boys <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </a>
+          </Link>
         </li>
       </ul>
       <CategoryMenu />

@@ -31,12 +31,12 @@ export function getAccessToken(admin = false) {
   }
   return JSON.parse(localStorage.getItem(jwtName)).token;
 }
-export function renewAccessToken() {
-  let refreshToken = JSON.parse(localStorage.getItem(jwtDefaultName))
-    .refreshToken;
-  let accessToken = ""; //fetch api to get new jwt
-  return accessToken;
-}
+// export function renewAccessToken() {
+//   let refreshToken = JSON.parse(localStorage.getItem(jwtDefaultName))
+//     .refreshToken;
+//   let accessToken = ""; //fetch api to get new jwt
+//   return accessToken;
+// }
 export function logout(admin = false) {
   let jwtName = jwtDefaultName;
   if (admin) {

@@ -1,4 +1,4 @@
-import searchIcon from "../files/images/icons/search.svg";
+import searchIcon from "assets/images/icons/search.svg";
 const HeaderSearchBar = () => {
   return (
     <div className="header-searchbar">

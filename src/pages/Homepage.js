@@ -1,11 +1,12 @@
-import bigBannerImg from "../files/images/homepage/big_banner.jpg";
-import menCategoryImg from "../files/images/homepage/men_category.jpg";
-import ladiesCategoryImg from "../files/images/homepage/ladies_category.jpg";
-import girlsCategoryImg from "../files/images/homepage/girls_category.jpg";
-import boysCategoryImg from "../files/images/homepage/boys_category.jpg";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import bigBannerImg from "assets/images/homepage/big_banner.jpg";
+import menCategoryImg from "assets/images/homepage/men_category.jpg";
+import ladiesCategoryImg from "assets/images/homepage/ladies_category.jpg";
+import girlsCategoryImg from "assets/images/homepage/girls_category.jpg";
+import boysCategoryImg from "assets/images/homepage/boys_category.jpg";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function Homepage() {
   return (
@@ -27,11 +28,11 @@ function Body() {
 function BigBanner() {
   return (
     <div className="big-banner">
-      <img src={bigBannerImg} alt="big-banner-image"></img>
+      <img src={bigBannerImg} alt="big-banner"></img>
       <div className="banner-slogan">OUTFIT OF THE WEEK</div>
-      <a href="">
+      <Link to="products">
         <button className="btn-shop-now">Shop now</button>
-      </a>
+      </Link>
     </div>
   );
 }
@@ -50,7 +51,7 @@ function CategoryBanners() {
 function CategoryBanner(props) {
   return (
     <div className="category-banner">
-      <img src={props.categoryImg} atl="category image"></img>
+      <img src={props.categoryImg} alt="category"></img>
       <div className="attribute-group">
         <div className="category-name">{props.categoryName}</div>
         <hr className="category-line"></hr>
