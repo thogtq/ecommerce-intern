@@ -1,6 +1,5 @@
-import config from "../config/config.json"
+// import config from "../config/config.json"
 export function fetchAPI (apiURL, method, bodyData = "") {
-  console.log(config.TEST)
   const requestOptions = {
     method: method,
     headers: { "Content-Type": "application/json; charset=UTF-8" },

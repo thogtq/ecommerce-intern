@@ -53,7 +53,6 @@ const HeaderUserMenu = () => {
   const toggleRegisterModal = () => {
     setshowRegisterModal(!showRegisterModal);
   };
-  console.log("re-render");
   useEffect(() => {
     if (useQuery.has("login_modal")) {
       let open = useQuery.get("login_modal");

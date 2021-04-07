@@ -1,31 +1,25 @@
 .big-banner {
   position: relative;
-}
-.big-banner img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #ececec;
-}
-.big-banner .btn-shop-now {
-  position: absolute;
-  border: none;
-  background-color: #ffa15f;
-  width: 180px;
-  height: 49px;
-  color: #ffffff;
-  font-size: 16px;
-  font-family: "Montserrat-Bold";
-  right: 5%;
-  bottom: 10%;
-  cursor: pointer;
-}
-.big-banner .banner-slogan {
-  position: absolute;
-  font-family: "Domine-Bold";
-  font-size: 36px;
-  color: #ffffff;
-  top: 20%;
-  left: 57%;
+  img {
+    @include set-width-height(100%, auto);
+    border: 1px solid #ececec;
+  }
+  .btn-shop-now {
+    position: absolute;
+    border: none;
+    background-color: #ffa15f;
+    @include set-width-height(180px, 49px);
+    @include text-style("Montserrat-Bold", 16px, normal, #ffffff);
+    right: 5%;
+    bottom: 10%;
+    cursor: pointer;
+  }
+  .banner-slogan {
+    position: absolute;
+    @include text-style("Domine-Bold", 36px, normal, #ffffff);
+    top: 20%;
+    left: 57%;
+  }
 }
 .category-banners {
   margin-top: 14px;
@@ -37,37 +31,31 @@
 .category-banner {
   position: relative;
   text-align: center;
-}
-.category-banner img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #ececec;
-  object-fit: fill;
-}
-.category-banner .btn-shop-now {
-  border: none;
-  background-color: #ffa15f;
-  width: 140px;
-  height: 40px;
-  color: #ffffff;
-  font-size: 14px;
-  font-family: "Montserrat-SemiBold";
-  cursor: pointer;
-}
-.category-banner .category-name {
-  display: block;
-  font-family: "Domine-Bold";
-  font-size: 24px;
-  color: #ffffff;
-}
-.category-line {
-  border: none;
-  border-top: solid 1px #ececec;
-  width: 80%;
-}
-.category-banner .attribute-group {
-  position: absolute;
-  bottom: 10%;
-  left: 0;
-  right: 0;
+  img {
+    @include set-width-height(100%, auto);
+    border: 1px solid #ececec;
+    object-fit: fill;
+  }
+  .btn-shop-now {
+    border: none;
+    background-color: #ffa15f;
+    @include set-width-height(140px, 40px);
+    @include text-style("Montserrat-SemiBold", 14px, normal, #ffffff);
+    cursor: pointer;
+  }
+  .category-name {
+    display: block;
+    @include text-style("Domine-Bold", 24px, normal, #ffffff);
+  }
+  .category-line {
+    border: none;
+    border-top: solid 1px #ececec;
+    width: 80%;
+  }
+  .attribute-group {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+  }
 }

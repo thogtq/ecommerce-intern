@@ -2,7 +2,7 @@ import { makeStyles, Menu } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import arrowIcon from "assets/images/icons/arrow.svg";
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,6 +71,7 @@ const CategoryNavBar = () => {
       <ul>
         <li>
           <Link
+            to="#"
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"
@@ -81,6 +82,7 @@ const CategoryNavBar = () => {
         </li>
         <li>
           <Link
+            to="#"
             value="Men"
             onClick={handleClick}
             aria-controls="category_menu"
@@ -91,6 +93,7 @@ const CategoryNavBar = () => {
         </li>
         <li>
           <Link
+            to="#"
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"
@@ -101,6 +104,7 @@ const CategoryNavBar = () => {
         </li>
         <li>
           <Link
+            to="#"
             onClick={handleClick}
             value="Men"
             aria-controls="category_menu"

@@ -4,82 +4,64 @@
   box-shadow: 0 4px 2px -2px #ececec;
 }
 .header-nav {
-  margin-left: 130px;
-  margin-right: 130px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 21px;
-  margin-bottom: 13px;
+  @include flex-space-between-center;
+  margin: 21px 130px 13px 130px;
+  .site-logo {
+    position: absolute;
+    @include left-transform-50;
+    @include set-width-height(96px, 20px);
+  }
 }
 .header-menu {
-  display: flex;
-  justify-content: space-between;
-  gap:28px;
-  align-items: center;
-}
-.site-logo {
-  width: 96px;
-  height: 20px;
+  @include flex-space-between-center;
+  gap: 28px;
+  .register-btn {
+    @include text-style(Montserrat-Regular, 14px, normal, #4d4d4d);
+    text-decoration: none;
+  }
+  .login-btn {
+    @include text-style(Montserrat-Bold, 14px, normal, #ffa15f);
+    @include set-width-height(120px, 35px);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border-radius: 100px;
+    border: solid 1px #ffa15f;
+    cursor: pointer;
+  }
 }
 .header-searchbar {
   position: relative;
-}
-.header-searchbar input {
-  box-sizing: border-box;
-  border: solid 1px #b7b7b7;
-  height: 35px;
-  width: 181px;
-  border-radius: 17px;
-  padding-left: 15px;
-}
-.header-searchbar input::placeholder {
-  display: none;
-  font-family: Montserrat-Regular;
-  color: #cccccc;
-  font-weight: 14px;
-}
-.header-searchbar > .search-icon {
-  position: absolute;
-  right: 12px;
-  top: 5px;
-  opacity: 0.6;
-}
-.header-menu .register-btn {
-  font-family: "Montserrat-Regular";
-  text-decoration: none;
-  color: #4d4d4d;
-  font-size: 14px;
-}
-.header-menu .login-btn {
-  font-family: "Montserrat-Bold";
-  background-color: #ffffff;
-  width: 120px;
-  height: 35px;
-  box-sizing: border-box;
-  border-radius: 100px;
-  border: solid 1px #ffa15f;
-  color: #ffa15f;
-  cursor: pointer;
-}
-.header-category-nav {
-  margin-left: 130px;
-  margin-right: 130px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  input {
+    @include set-width-height(181px, 35px);
+    border-radius: 17px;
+    box-sizing: border-box;
+    border: solid 1px #b7b7b7;
+    padding-left: 15px;
+    &::placeholder {
+      font-family: Montserrat-Regular;
+      color: #cccccc;
+    }
+  }
+  .search-icon {
+    position: absolute;
+    right: 12px;
+    top: 5px;
+    opacity: 0.6;
+  }
 }
 
-.header-category-nav li {
-  margin: auto 7px;
-  display: inline-block;
-}
-.header-category-nav a {
-  font-family: "Montserrat-Medium";
-  text-decoration: none;
-  color: #202124;
-  display: inline-block;
-}
-.header-category-nav .icon {
-  vertical-align: middle;
+.header-category-nav {
+  @include page-margin;
+  @include flex-center-center;
+  li {
+    margin: auto 7px;
+    display: inline-block;
+    a {
+      @include text-style("Montserrat-Medium", 14px, 22px, #202124);
+      text-decoration: none;
+    }
+  }
+  .icon {
+    vertical-align: middle;
+  }
 }

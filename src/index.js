@@ -9,12 +9,14 @@ import { BrowserRouter } from "react-router-dom";
 import {PrivateRoute, AdminRoute} from "components/PrivateRoute"
 import AdminLogin from "./pages/AdminLogin";
 import UserPage from "./pages/UserPage";
+import AdminProducts from './pages/AdminProducts';
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Homepage}></Route>
     <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
     <Route exact path="/admin/login" component={AdminLogin}></Route>
     <AdminRoute exact path="/admin" component={AdminPage}></AdminRoute>
+    <AdminRoute path="/admin/products" component={AdminProducts}></AdminRoute>
   </BrowserRouter>,
   document.getElementById("root")
 );

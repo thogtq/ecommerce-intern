@@ -2,130 +2,100 @@
   position: fixed;
   background: white;
   width: 80%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  @include top-left-transform-50;
   z-index: 1050;
   box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);
-}
-.modal-content {
-  position: relative;
-  margin: 35px 80px 80px 80px;
-  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);
-  background-color: #ffffff;
-}
-.modal-content .input-control{
-  margin-bottom: 24px;
-}
-.modal-content .checkbox-control input{
-  padding: 6px;
-  vertical-align: middle;
-}
-.modal-content .input-control input {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 46px;
-  padding: 12px 24px;
-  border-radius: unset;
-  border: none;
-  background-color:#f7f7f7;
-}
-.modal-content .input-control input::placeholder {
-  font-family: "Montserrat-Medium";
-  color: #4d4d4d;
-  font-size: 14px;
-  line-height: 22px;
-}
-.modal-content .input-control label {
-  position: relative;
-  margin-bottom: 8px;
-  font-family: "Montserrat-Bold";
-  font-size: 12px;
-  line-height: 18px;
-  color: #202124;
-}
-.modal .function-button {
-  position: relative;
-  margin-top: 44px;
-  height: 49px;
-  width: 100%;
-  border-radius: unset;
-  border: none;
-  color: #ffffff;
-  font-family: "Montserrat-Bold";
-  font-size: 14px;
-  background-color: #ffa15f;
-  cursor:pointer;
-}
-.modal .btn-disabled{
-  background-color: #d4d3d3;
-  cursor:not-allowed;
-}
-.modal-header {
-  position: relative;
-  margin-top: 45px;
-  text-align: center;
-  font-family: "Montserrat-Bold";
-  font-size: 32px;
-  line-height: 42px;
-  color: #202124;
-}
-.modal-footer {
-  position: relative;
-  border-top: 1px solid #ececec;
-}
-.modal-close {
-  margin-right: 15px;
-  margin-top: 15px;
-  float: right;
-  cursor: pointer;
+  .modal-content {
+    position: relative;
+    margin: 35px 80px 80px 80px;
+    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);
+    background-color: #ffffff;
+    .input-control {
+      margin-bottom: 24px;
+      input {
+        position: relative;
+        display: block;
+        @include set-width-height(100%, 46px);
+        padding: 12px 24px;
+        border-radius: unset;
+        border: none;
+        background-color: #f7f7f7;
+        &::placeholder {
+          @include text-style("Montserrat-Medium", 14px, 22px, #4d4d4d);
+        }
+      }
+      label {
+        position: relative;
+        margin-bottom: 8px;
+        @include text-style("Montserrat-Bold", 12px, 18px, #202124);
+      }
+    }
+    .checkbox-control{
+      label {
+        @include text-style("Montserrat-Medium", 14px, 20px, #202124);
+      }
+      input {
+        padding: 6px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .function-button {
+    position: relative;
+    margin-top: 44px;
+    @include set-width-height(100%, 50px);
+    border-radius: unset;
+    border: none;
+    @include text-style("Montserrat-Bold", 14px, normal, #ffffff);
+    background-color: #ffa15f;
+    cursor: pointer;
+  }
+  .btn-disabled {
+    background-color: #d4d3d3;
+    cursor: not-allowed;
+  }
+  .modal-header {
+    position: relative;
+    margin-top: 45px;
+    text-align: center;
+    @include text-style("Montserrat-Bold", 32px, 42px, #202124);
+  }
+  .modal-footer {
+    position: relative;
+    border-top: 1px solid #ececec;
+    text-align: center;
+    padding: 21px 0;
+    .login-modal-register {
+      @include text-style("Montserrat-Medium", 14px, 22px, #4d4d4d);
+    }
+  }
+  .modal-close {
+    margin-right: 15px;
+    margin-top: 15px;
+    float: right;
+    cursor: pointer;
+  }
+  .login-modal-forgot-password a {
+    @include text-style("Montserrat-SemiBold", 14px, 22px, #4d4d4d);
+    text-decoration: none;
+  }
+  .policy-agree {
+    @include text-style("Montserrat-Regular", 14px, 22px, #202124);
+    text-align: center;
+  }
+  .orange-underline {
+    @include text-orange-underline;
+  }
+  .space-row {
+    @include flex-space-between-center;
+  }
 }
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1040;
-  width: 100vw;
-  height: 100vh;
+  @include set-width-height(100vw, 100vh);
   background-color: #000;
   opacity: 0.5;
-  z-index: 1040;
-}
-.space-row .checkbox-control label{
-  font-family: "Montserrat-Medium";
-  font-size: 14px;
-  line-height: 20px;
-  color :#202124;
-}
-.space-row .login-modal-forgot-password a{
-  text-decoration: none;
-  font-family: "Montserrat-SemiBold";
-  font-size: 14px;
-  line-height: 22px;
-  color :#4d4d4d;
-}
-.modal-footer{
-  text-align: center;
-  padding: 21px 0;
-}
-.modal-footer .login-modal-register{
-  font-family: "Montserrat-Medium";
-  font-size: 14px ;
-  line-height: 22px;
-  color: #4d4d4d;
-}
-.modal .orange-underline{
-  text-underline-offset: 4px;
-  font-family: "Montserrat-Bold";
-  font-size: 14px ;
-  line-height: 22px;
-  color: #ff7413;
-}
-.modal .policy-agree{
-  text-align: center;
-  font-family: "Montserrat-Regular";
-  font-size: 14px ;
-  line-height: 22px;
-  color: #202124;
 }

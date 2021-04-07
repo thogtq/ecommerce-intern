@@ -1,0 +1,42 @@
+@mixin text-style($family, $size, $height, $color) {
+  font-family: $family;
+  font-size: $size;
+  line-height: $height;
+  color: $color;
+}
+@mixin flex-space-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin set-width-height($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin left-transform-50 {
+  left: 50%;
+  transform: translate(-50%);
+}
+@mixin top-left-transform-50 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin page-margin {
+  margin-left: $page-margin;
+  margin-right: $page-margin;
+}
+@mixin text-orange-underline {
+  text-underline-offset: 4px;
+  @include text-style(Montserrat-Bold, 14px, 22px, #ff7413);
+}
+@mixin border-unset-all {
+  border: none !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
+}

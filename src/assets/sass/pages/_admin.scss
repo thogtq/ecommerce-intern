@@ -15,9 +15,6 @@ body {
   min-height: 640px; //Fix me
 }
 .admin-name {
+  @include text-style("Montserrat-Bold", 14px, 24px, #202124);
   margin-left: 16px;
-  font-family: "Montserrat-Bold";
-  line-height: 24px;
-  font-size: 14px;
-  color: #202124;
 }
