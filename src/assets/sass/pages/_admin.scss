@@ -2,10 +2,7 @@ body {
   background-color: #f6f6f6;
 }
 .admin-container {
-  margin: 26px 20px;
-}
-.admin-feature-bar {
-  margin: 32px 0;
+  padding: 26px 20px;
 }
 .admin-content-table {
   border-radius: 2px;
@@ -17,4 +14,36 @@ body {
 .admin-name {
   @include text-style("Montserrat-Bold", 14px, 24px, #202124);
   margin-left: 16px;
+}
+.MuiButton-root.export-button {
+  background-color: #ffffff;
+  @include text-style("Montserrat-SemiBold", 14px, 24px, #ffa15f);
+  @include set-width-height(112px, 48px);
+}
+.MuiButton-root.add-button {
+  border-radius: unset;
+  height: 48;
+  width: 156;
+  background-color: #ffa15f;
+  color: #ffffff;
+  @include set-width-height(156px, 48px);
+  &:hover {
+    background-color: lighten($color: #ffa15f, $amount: 10);
+  }
+}
+.admin-feature-bar {
+  margin: 32px 0;
+  .text-sort-by {
+    margin-right: 20px;
+    @include text-style("Montserrat-SemiBold", 12px, 18px, #acacac);
+  }
+  .search-input {
+    div {
+      border-radius: unset;
+      background-color: #ffffff;
+      max-height: 48;
+      max-width: 280;
+    }
+    border: 1px solid #ededed;
+  }
 }

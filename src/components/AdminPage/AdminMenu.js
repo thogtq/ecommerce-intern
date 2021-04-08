@@ -7,22 +7,25 @@ import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 export default function AdminMenu() {
   const AdminDetails = () => {
     return (
-      <Grid container alignItems="center" item md>
-        <Avatar src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"></Avatar>
-        <div className="admin-name">admin@gmail.com</div>
-        <img src={dropdownIcon} alt="dropdown-icon"></img>
+      <Grid item>
+        <Grid container alignItems="center">
+          <Avatar src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"></Avatar>
+          <div className="admin-name">admin@gmail.com</div>
+          <img src={dropdownIcon} alt="dropdown-icon"></img>
+        </Grid>
       </Grid>
     );
   };
   return (
-    <Grid className="admin-header-menu" container md={4} justify="space-around">
-      <AdminDetails />
-      <Grid container alignItems="center" md={2}>
-        <img src={mailIcon} alt="mail-icon"></img>
-      </Grid>
-      <Grid container alignItems="center" md={2}>
-        {" "}
-        <img src={notiIcon} alt="noti-icon"></img>
+    <Grid item md>
+      <Grid className="admin-header-menu" container justify="flex-end" alignItems="center" spacing={4}>
+        <AdminDetails />
+        <Grid item >
+          <img src={mailIcon} alt="mail-icon"></img>
+        </Grid>
+        <Grid item>
+          <img src={notiIcon} alt="noti-icon"></img>
+        </Grid>
       </Grid>
     </Grid>
   );

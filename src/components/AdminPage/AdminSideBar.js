@@ -14,11 +14,11 @@ export default function AdminSideBar() {
   //CLick menu ->Link to Component admin/product admin/orders
   return (
     <React.Fragment>
-      <Grid className="sidebar" md={1}>
+      <Grid className="sidebar">
         <Grid container justify="center">
           <img className="sidebar-logo" src={logo} alt="logo"></img>
         </Grid>
-        <Grid>
+        <Grid container>
           <MenuList className="sidebar-menu">
             <MenuItem>
               <img
