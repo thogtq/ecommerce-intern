@@ -1,0 +1,68 @@
+.admin-content-table {
+  padding: 0 24px;
+  border-radius: 2px;
+  box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  width: 100%;
+  min-height: 640px; //Fix me
+  div:first-child {
+    box-shadow: none;
+  }
+}
+.admin-table {
+  .table-body {
+    th {
+      border-bottom: none;
+      @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
+    }
+    .td-action {
+      cursor: pointer;
+      img {
+        vertical-align: middle;
+      }
+      span {
+        @include text-style(Montserrat-Bold, 14px, 20px, #3d3d3f);
+      }
+    }
+    .th-product {
+      img {
+        @include set-width-height(30px, 40px);
+        vertical-align: middle;
+      }
+    }
+    .th-product-name {
+      margin-left: 16px;
+      :first-child {
+        @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
+      }
+      :nth-child(2) {
+        @include text-style(Montserrat-Medium, 12px, 22px, #acacac);
+      }
+    }
+    tr {
+      &:nth-of-type(odd) {
+        background-color: #f6f6f6;
+      }
+    }
+  }
+  .table-header {
+    th {
+      @include text-style(Montserrat-SemiBold, 12px, 18px, #acacac);
+    }
+  }
+  tr {
+    height: 64px;
+  }
+}
+.table-footer {
+  @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
+  @include flex-space-between-center;
+  margin-top: 90px;
+  margin-bottom: 36px;
+}
+.table-pagination {
+  button.Mui-selected {
+    @include text-style(Montserrat-Medium, 14px, 24px, #ffffff);
+    background-color: #ffa15f;
+  }
+}

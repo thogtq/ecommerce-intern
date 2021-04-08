@@ -4,16 +4,12 @@ body {
 .admin-container {
   padding: 26px 20px;
 }
-.admin-content-table {
-  border-radius: 2px;
-  box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
-  width: 100%;
-  min-height: 640px; //Fix me
-}
 .admin-name {
   @include text-style("Montserrat-Bold", 14px, 24px, #202124);
   margin-left: 16px;
+}
+* {
+  box-sizing: border-box;
 }
 .MuiButton-root.export-button {
   background-color: #ffffff;
@@ -41,8 +37,8 @@ body {
     div {
       border-radius: unset;
       background-color: #ffffff;
-      max-height: 48;
-      max-width: 280;
+      max-height: 48px;
+      max-width: 280px;
     }
     border: 1px solid #ededed;
   }

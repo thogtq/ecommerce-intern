@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
   },
 }));
-export default function ProductFeatureBar() {
+export default function OrdersFeatureBar() {
   const classes = useStyles();
   return (
     <Grid item md={12}>
@@ -33,7 +33,7 @@ export default function ProductFeatureBar() {
       >
         <Grid item>
           <Grid container direction="row" alignItems="center">
-            <span className="text-sort-by">SORT BY</span>
+            <span className="text-sort-by">ORDERED DATE</span>
             <FormControl variant="outlined" className={classes.formControl}>
               <Select
                 className={classes.sortSelect}
@@ -54,7 +54,7 @@ export default function ProductFeatureBar() {
               <TextField
                 className="search-input"
                 id="outlined-margin-normal"
-                placeholder="Search product"
+                placeholder="Search order"
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -64,14 +64,6 @@ export default function ProductFeatureBar() {
                   ),
                 }}
               />
-            </Grid>
-            <Grid item>
-              <Button
-                classes={{ root: "add-button" }}
-                startIcon={<AddIcon style={{ color: "#ffffff" }} />}
-              >
-                Add product
-              </Button>
             </Grid>
             <Grid item>
               <Button

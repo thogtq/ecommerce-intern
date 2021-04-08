@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { MenuItem, MenuList } from "@material-ui/core";
 import logo from "assets/images/logo.svg";
@@ -8,10 +8,16 @@ import productsIcon from "assets/images/admin/icons/products.svg";
 import paymentsIcon from "assets/images/admin/icons/payment.svg";
 import promotionsIcon from "assets/images/admin/icons/promotion.svg";
 import settingIcon from "assets/images/admin/icons/setting.svg";
+import { Link } from "react-router-dom";
 
-export default function AdminSideBar() {
+export default function AdminSideBar(props) {
   //Click menu -> change state(current tab) -> switch to load
   //CLick menu ->Link to Component admin/product admin/orders
+  useEffect(() => {
+    if (props.hasOwnProperty("selected")) {
+      document.getElementById(props.selected).classList.add("selected");
+    }
+  });
   return (
     <React.Fragment>
       <Grid className="sidebar">
@@ -20,30 +26,36 @@ export default function AdminSideBar() {
         </Grid>
         <Grid container>
           <MenuList className="sidebar-menu">
-            <MenuItem>
-              <img
-                className="sidebar-menu-icon"
-                src={overviewIcon}
-                alt="overview-icon"
-              ></img>
-              Overview
-            </MenuItem>
-            <MenuItem>
-              <img
-                className="sidebar-menu-icon"
-                src={ordersIcon}
-                alt="orders-icon"
-              ></img>
-              Orders
-            </MenuItem>
-            <MenuItem>
-              <img
-                className="sidebar-menu-icon"
-                src={productsIcon}
-                alt="product-icon"
-              ></img>
-              Products
-            </MenuItem>
+            <Link to="/admin">
+              <MenuItem>
+                <img
+                  className="sidebar-menu-icon"
+                  src={overviewIcon}
+                  alt="overview-icon"
+                ></img>
+                Overview
+              </MenuItem>
+            </Link>
+            <Link to="/admin/orders">
+              <MenuItem id="orders_sidebar">
+                <img
+                  className="sidebar-menu-icon"
+                  src={ordersIcon}
+                  alt="orders-icon"
+                ></img>
+                Orders
+              </MenuItem>
+            </Link>
+            <Link to="/admin/products">
+              <MenuItem id="products_sidebar">
+                <img
+                  className="sidebar-menu-icon"
+                  src={productsIcon}
+                  alt="product-icon"
+                ></img>
+                Products
+              </MenuItem>
+            </Link>
             <MenuItem>
               <img
                 className="sidebar-menu-icon"

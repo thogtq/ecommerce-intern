@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import UserService from "services/UserService";
-import {submitButton} from "helpers/Helpers";
+import { submitButton } from "helpers/Helpers";
 import Modal from "./Modal";
 import { authenticate } from "services/AuthService";
-import ModalInput from './ModalInput';
+import ModalInput from "./ModalInput";
 
 function LoginModal({ setLoggedIn, show, toggleModal }) {
   const RememberPassword = () => {
@@ -30,7 +30,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
     return (
       <div className="login-modal-register">
         Don't have an account?&nbsp;
-        <Link to="/?register_modal=1"className="orange-underline" href="#">
+        <Link to="/?register_modal=1" className="orange-underline" href="#">
           Register
         </Link>
       </div>
@@ -61,6 +61,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
         setLoggedIn(true);
       } else {
         alert(res.error.message);
+        console.log(res.error);
         submitButton(true);
       }
     };

@@ -1,5 +1,7 @@
 const jwtDefaultName = "jwt";
 const jwtAdminName = "jwt_admin";
+const AuthService = { authenticate, isAuthenticated, getAccessToken, logout };
+export default AuthService;
 export function authenticate(data, admin = false) {
   if (typeof window != undefined) {
     let jwtName = jwtDefaultName;

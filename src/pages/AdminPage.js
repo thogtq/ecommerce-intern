@@ -1,14 +1,7 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import AdminSideBar from "components/AdminPage/AdminSideBar";
-import ProductsContainer from "components/AdminPage/Products/ProductsContainer";
+
+import { Redirect } from "react-router";
 
 const AdminPage = () => {
-  require("assets/sass/admin.scss");
-  return (
-    <Grid container direction="row">
-      <AdminSideBar />
-      <ProductsContainer />
-    </Grid>
-  );
+  return <Redirect to="/admin/products" />;
 };
 export default AdminPage;

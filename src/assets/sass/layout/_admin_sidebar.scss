@@ -1,5 +1,13 @@
 * {
   box-sizing: border-box;
+  a{
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; 
+    &:visited{
+      color: inherit; /* blue colors for links too */
+      text-decoration: inherit; 
+    }
+  }
 }
 .sidebar {
   width: 220px;
@@ -22,5 +30,9 @@
   }
   .sidebar-menu-icon {
     margin: 12px 20px;
+  }
+  .selected {
+    border-left: 6px solid #ffa15f;
+    background-color: darken($color: #ffffff, $amount: 8);
   }
 }

@@ -1,8 +1,8 @@
 // import config from "../config/config.json"
-export function fetchAPI (apiURL, method, bodyData = "") {
+export function fetchAPI(apiURL, method, bodyData = "", headerData = "") {
   const requestOptions = {
     method: method,
-    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    headers: { "Content-Type": "application/json; charset=UTF-8", headerData },
     body: JSON.stringify(bodyData),
   };
   return fetch(`http://localhost:8080` + apiURL, requestOptions).then(
@@ -10,7 +10,14 @@ export function fetchAPI (apiURL, method, bodyData = "") {
       return res.json();
     },
     (error) => {
-      return { status: "error", message: "fetching error :\n" + error };
+      return {
+        status: "error",
+        error: {
+          httpCode: "500",
+          code: "CONNECTION_ERROR",
+          message: "fetching error :\n" + error,
+        },
+      };
     }
   );
 }

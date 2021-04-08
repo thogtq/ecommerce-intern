@@ -1,6 +1,8 @@
 @import "abstracts/mixins";
+@import "components/admin_table";
 @import "./pages/admin";
 @import "./layout/admin_sidebar";
 @import "./layout/admin_header.scss";
 
 @import "./pages/admin_login";
+@import "./pages/add_product";

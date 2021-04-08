@@ -1,0 +1,85 @@
+@mixin form-input-default {
+  height: 48px;
+  border-radius: unset;
+  border: 1px solid #ededed;
+  background-color: #ffffff;
+  padding: 14px 16px;
+  width: 100%;
+  &:focus {
+    border-radius: unset;
+  }
+}
+.product-form-container {
+  margin: 60px 100px;
+  @include flex-center-center;
+  flex-direction: column;
+  gap: 24px;
+  .normal-input {
+    @include flex-center-center;
+    position: relative;
+    width: 100%;
+    input {
+      @include form-input-default;
+    }
+  }
+}
+.add-photos {
+  position: relative;
+  @include flex-space-between-center;
+  gap: 35px;
+  margin-bottom: 25px;
+  flex-wrap: wrap; //Fix No wrap
+  .add-photo {
+    vertical-align: middle;
+  }
+}
+.add-photos-tip {
+  position: absolute;
+  bottom: -20%;
+  @include text-style(Montserrat-Medium, 14px, 20px, #acacac);
+  margin-bottom: 20px;
+}
+.photo-input {
+  position: relative;
+  @include set-width-height(180px, 270px);
+  background-color: rgba(255, 255, 255, 0.5);
+  // background-image: url("https://i.pinimg.com/236x/57/16/3b/57163b072a604cd6b1dc973176290a3a.jpg");
+  border: 1px solid #ededed;
+  border-style: dashed;
+  cursor: pointer;
+  .close-icon {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+  }
+  .add-icon-group {
+    position: absolute;
+    @include top-left-transform-50;
+    text-align: center;
+    div {
+      @include text-style(Montserrat-Medium, 12px, 22px, #acacac);
+    }
+  }
+}
+.form-label {
+  position: absolute;
+  @include text-style(Montserrat-Bold, 12px, 14px, #202124);
+  left: -12%; //Fix me
+}
+.multi-select {
+  @include flex-center-center;
+  position: relative;
+  width: 100%;
+  :nth-child(2) {
+    background-color: white;
+  }
+}
+.product-description {
+  position: relative;
+  @include flex-center-center;
+  width: 100%;
+  .MuiInputBase-root {
+    background-color: #ffffff;
+    padding: 14px 16px;
+  }
+}
