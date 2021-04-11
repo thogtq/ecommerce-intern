@@ -12,6 +12,8 @@ import {
   Paper,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
+import { useState, useEffect } from "react";
+import ProductService from "../../services/ProductService";
 
 const Header = () => {
   return (
@@ -36,7 +38,20 @@ const rows = [
   createData("Bread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
 ];
 
-const ProductContentTable = () => {
+const ProductContentTable = ({ filter, setFilter }) => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      let res = await ProductService.getProducts(filter);
+      if (res.status === "success") {
+        setProducts(res.data.products);
+      } else {
+        alert(res.error.message);
+      }
+    };
+    fetchProduct();
+  }, [filter]);
+  console.log(products);
   return (
     <Grid className="admin-content-table">
       <TableContainer component={Paper}>
@@ -51,44 +66,48 @@ const ProductContentTable = () => {
             </TableRow>
           </TableHead>
           <TableBody className="table-body">
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell
-                  align="left"
-                  className="th-product"
-                  component="th"
-                  scope="row"
-                >
-                  <Grid container direction="row">
-                    <Grid item xs={1}>
-                      <img
-                        src="https://cdn.cliqueinc.com/posts/229384/fashion-by-the-decade-229384-1499966720451-square.700x0c.jpg"
-                        alt="product-img"
-                      />
-                    </Grid>
-                    <Grid item xs>
-                      <Grid
-                        className="th-product-name"
-                        container
-                        direction="column"
-                      >
-                        <Grid item>{row.name}</Grid>
-                        <Grid item>Women, Casual dresses</Grid>
+            {products.map((product) => {
+              let profit = product.price * product.sold;
+              let da = new Date(product.createdAt);
+              let dateAdded =
+                da.toLocaleTimeString() + ", " + da.toLocaleDateString();
+              let productImage = ProductService.getImageURL(product.images[0]);
+              return (
+                <TableRow key={product.productID}>
+                  <TableCell
+                    align="left"
+                    className="th-product"
+                    component="th"
+                    scope="row"
+                  >
+                    <Grid container direction="row">
+                      <Grid item xs={1}>
+                        <img src={productImage} alt="product-img" />
+                      </Grid>
+                      <Grid item xs>
+                        <Grid
+                          className="th-product-name"
+                          container
+                          direction="column"
+                        >
+                          <Grid item>{product.name}</Grid>
+                          <Grid item>{product.categories.join(", ")}</Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">
-                  <span>{row.calories}</span>
-                </TableCell>
-                <TableCell align="left">{row.fat}</TableCell>
-                <TableCell align="left">{row.carbs}</TableCell>
-                <TableCell className="td-action" align="left">
-                  <span>{row.protein}</span>
-                  <img src={dropdownIcon} alt="dropdown-icon"></img>
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                  <TableCell align="left">
+                    <span>{product.sold}</span>
+                  </TableCell>
+                  <TableCell align="left">{dateAdded}</TableCell>
+                  <TableCell align="left">{profit}</TableCell>
+                  <TableCell className="td-action" align="left">
+                    <span>Actions</span>
+                    <img src={dropdownIcon} alt="dropdown-icon"></img>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -107,11 +126,19 @@ const ProductContentTable = () => {
 };
 
 export default function ProductsContainer() {
+  const [productFilter, setProductFilter] = useState({
+    sort: "createdAt",
+    search: "",
+    page:1
+  });
   return (
     <Grid className="admin-container" item md>
       <Header />
       <ProductFeatureBar />
-      <ProductContentTable />
+      <ProductContentTable
+        filter={productFilter}
+        setFilter={setProductFilter}
+      />
     </Grid>
   );
 }

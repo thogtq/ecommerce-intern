@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "none",
     },
     "&::before": {
-      borderBottom: "none",
+      borderBottom: "none!important",
     },
     "&:hover": {
       borderBottom: "none",

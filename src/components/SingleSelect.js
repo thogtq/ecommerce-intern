@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
         borderBottom: "none",
       },
       "&::before": {
-        borderBottom: "none",
+        borderBottom: "none!important",
       },
       backgroundColor: "#ffffff",
     },
