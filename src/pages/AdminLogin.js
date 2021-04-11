@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import UserService from "services/UserService";
 import { authenticate, isAuthenticated } from "services/AuthService";
 import { Redirect } from "react-router";
-import { submitButton } from 'helpers/Helpers';
+import { submitButton } from 'helpers/helpers';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -40,7 +40,6 @@ const AdminLogin = () => {
         password: password,
       };
       let res = await UserService.adminLogin(userObject);
-      console.log(res);
       if (res.status === "success") {
         authenticate(res.data, true);
         setLoggedIn(true);

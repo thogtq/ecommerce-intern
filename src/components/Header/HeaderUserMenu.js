@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const HeaderUserMenu = () => {
-  const useQuery = new URLSearchParams(useLocation().search);
-  const history = useHistory();
 
+const HeaderUserMenu = () => {
+  const history = useHistory();
+  const useQuery = new URLSearchParams(useLocation().search);
   const classes = useStyles();
   const [isLoggedIn, setLoggedIn] = useState(isAuthenticated());
   const handleLogout = () => {
@@ -61,15 +61,11 @@ const HeaderUserMenu = () => {
       useQuery.delete("login_modal");
       history.replace({ search: useQuery.toString() });
     }
-  },[useQuery,history]);
+  }, [useQuery, history]);
   const NotLoggedIn = () => {
     return (
       <React.Fragment>
-        <Link
-          to=""
-          className="register-btn"
-          onClick={toggleRegisterModal}
-        >
+        <Link to="" className="register-btn" onClick={toggleRegisterModal}>
           Register
         </Link>
         <RegisterModal

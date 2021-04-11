@@ -23,7 +23,7 @@
       @include form-input-default;
     }
   }
-  .MuiChip-label{
+  .MuiChip-label, .MuiInputBase-input, input{
     @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
   }
 }

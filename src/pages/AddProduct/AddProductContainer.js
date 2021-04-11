@@ -1,15 +1,5 @@
 import AdminMenu from "components/AdminMenu";
-import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
-import {
-  Grid,
-  TableContainer,
-  Table,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableBody,
-  Paper,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import AddProductForm from "./AddProductForm";
 
 const Header = () => {

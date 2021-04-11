@@ -1,82 +1,76 @@
 import {
   Chip,
   FormControl,
-  InputLabel,
   Select,
-  MenuItem,
   Input,
   makeStyles,
-  useTheme,
 } from "@material-ui/core";
 import React from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
+
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
+  root: {
     width: "100%",
+    height: "48px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  input: {
+    "&::after": {
+      borderBottom: "none",
+    },
+    "&::before": {
+      borderBottom: "none",
+    },
+    "&:hover": {
+      borderBottom: "none",
+    },
+    height: "48px",
+    backgroundColor: "#ffffff",
+  },
+  multiSelect: {
+    "&:focus": {
+      backgroundColor: "#ffffff",
+    },
   },
   chips: {
     display: "flex",
     flexWrap: "wrap",
   },
   chip: {
+    borderRadius: 4,
     margin: 2,
+    backgroundColor: "#f6f6f6",
   },
-  noLabel: {
-    marginTop: theme.spacing(3),
+  menu: {
+    marginTop: "50px",
   },
 }));
 
 export default function MultiSelect(props) {
+  const { onChange, choosed, children } = props;
   const classes = useStyles();
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
 
-  const handleChange = (event) => {
-    setPersonName(event.target.value);
-  };
-
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setPersonName(value);
+  const MenuProps = {
+    classes: { paper: classes.menu },
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+    getContentAnchorEl: () => null,
   };
   return (
-    <FormControl className={classes.formControl+" multi-select"}>
+    <FormControl classes={{ root: classes.root }}>
       <div className="form-label">{props.label}</div>
       <Select
-        id="demo-mutiple-chip"
         multiple
-        value={personName}
-        onChange={handleChange}
-        input={<Input id="select-multiple-chip" />}
+        value={choosed}
+        onChange={onChange}
+        input={<Input classes={{ root: classes.input }} />}
         renderValue={(selected) => (
           <div className={classes.chips}>
             {selected.map((value) => (
@@ -85,16 +79,9 @@ export default function MultiSelect(props) {
           </div>
         )}
         MenuProps={MenuProps}
+        classes={{ root: classes.multiSelect }}
       >
-        {names.map((name) => (
-          <MenuItem
-            key={name}
-            value={name}
-            // style={getStyles(name, personName, theme)}
-          >
-            {name}
-          </MenuItem>
-        ))}
+        {children}
       </Select>
     </FormControl>
   );

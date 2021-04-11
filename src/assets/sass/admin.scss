@@ -1,4 +1,8 @@
+@import "abstracts/variables";
+@import "base/fonts";
 @import "abstracts/mixins";
+@import "base/global";
+
 @import "components/admin_table";
 @import "./pages/admin";
 @import "./layout/admin_sidebar";

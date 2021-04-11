@@ -14,7 +14,6 @@ export default function PhotoInput({ formData, setFormData }) {
     if (res.status === "success") {
       let fileName = res.data.fileName;
       setUploaded(fileName);
-      console.log(fileName);
       setFormData({ ...formData, ["images"]: [...formData.images, fileName] });
     } else {
       console.log(res.error);

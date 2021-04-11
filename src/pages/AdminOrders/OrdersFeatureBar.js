@@ -1,5 +1,4 @@
 import searchIcon from "assets/images/admin/icons/search.svg";
-import AddIcon from "@material-ui/icons/Add";
 import { SystemUpdateAlt } from "@material-ui/icons";
 import {
   Grid,

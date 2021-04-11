@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import UserService from "services/UserService";
-import { submitButton } from "helpers/Helpers";
+import { submitButton } from "helpers/helpers";
 import Modal from "./Modal";
 import { authenticate } from "services/AuthService";
 import ModalInput from "./ModalInput";
