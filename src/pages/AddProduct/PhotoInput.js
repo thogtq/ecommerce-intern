@@ -3,7 +3,7 @@ import closeIcon from "assets/images/icons/cross.svg";
 import ProductService from "../../services/ProductService";
 import { useState, useRef, useEffect } from "react";
 
-export default function PhotoInput() {
+export default function PhotoInput({ formData, setFormData }) {
   let inputPhotoDiv = useRef(null);
   const [uploaded, setUploaded] = useState("");
   const handleUpload = async (e) => {
@@ -12,7 +12,10 @@ export default function PhotoInput() {
     data.append("productImage", file);
     let res = await ProductService.uploadImage(data);
     if (res.status === "success") {
-      setUploaded(res.data.fileName);
+      let fileName = res.data.fileName;
+      setUploaded(fileName);
+      console.log(fileName);
+      setFormData({ ...formData, ["images"]: [...formData.images, fileName] });
     } else {
       console.log(res.error);
     }
@@ -24,6 +27,10 @@ export default function PhotoInput() {
     }
   };
   const handleRemoveImage = (e) => {
+    setFormData({
+      ...formData,
+      ["images"]: formData.images.filter((image) => image != uploaded),
+    });
     setUploaded("");
   };
   useEffect(() => {
