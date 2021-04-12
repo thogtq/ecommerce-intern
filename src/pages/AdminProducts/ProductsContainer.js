@@ -1,6 +1,8 @@
 import AdminMenu from "components/AdminMenu";
 import ProductFeatureBar from "./ProductFeatureBar";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
+import CreateIcon from "@material-ui/icons/Create";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {
   Grid,
   TableContainer,
@@ -10,10 +12,14 @@ import {
   TableCell,
   TableBody,
   Paper,
+  MenuItem,
+  ListItemIcon,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ProductService from "../../services/ProductService";
+import DropdownMenu from "components/DropdownMenu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -25,19 +31,6 @@ const Header = () => {
     </Grid>
   );
 };
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Froze", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Ice", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Eclair", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Cupcake", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Gingerbread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Bread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-];
-
 const ProductContentTable = ({ filter, setFilter }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -51,7 +44,57 @@ const ProductContentTable = ({ filter, setFilter }) => {
     };
     fetchProduct();
   }, [filter]);
-  console.log(products);
+  const handlePagination = (e) => {
+    setFilter({ ...filter, page: parseInt(e.target.textContent) });
+  };
+  // console.log(products);
+  const ActionMenu = (props) => {
+    const anchorRef = useRef(null);
+    const [open, setOpen] = React.useState(false);
+    const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
+    };
+    const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+      }
+      setOpen(false);
+    };
+    return (
+      <React.Fragment>
+        <span
+          ref={anchorRef}
+          aria-controls={open ? "menu-list-grow" : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          Actions
+        </span>
+        <DropdownMenu
+          open={open}
+          setOpen={setOpen}
+          anchorRef={anchorRef}
+          handleClose={handleClose}
+        >
+          <Link to={"/admin/products/edit-product/?productID=" + props.ID}>
+            <MenuItem className="table-cell-text" onClick={handleClose}>
+              <ListItemIcon>
+                <CreateIcon color="disabled" />
+              </ListItemIcon>
+              Edit
+            </MenuItem>
+          </Link>
+          <MenuItem className="table-cell-text" onClick={handleClose}>
+            <ListItemIcon>
+              <DeleteIcon color="disabled" />
+            </ListItemIcon>
+            Remove
+          </MenuItem>
+        </DropdownMenu>
+        <img src={dropdownIcon} alt="dropdown-icon"></img>
+      </React.Fragment>
+    );
+  };
   return (
     <Grid className="admin-content-table">
       <TableContainer component={Paper}>
@@ -96,14 +139,17 @@ const ProductContentTable = ({ filter, setFilter }) => {
                       </Grid>
                     </Grid>
                   </TableCell>
-                  <TableCell align="left">
-                    <span>{product.sold}</span>
+                  <TableCell className="table-cell-text" align="left">
+                    {product.sold}
                   </TableCell>
-                  <TableCell align="left">{dateAdded}</TableCell>
-                  <TableCell align="left">{profit}</TableCell>
-                  <TableCell className="td-action" align="left">
-                    <span>Actions</span>
-                    <img src={dropdownIcon} alt="dropdown-icon"></img>
+                  <TableCell className="table-cell-text" align="left">
+                    {dateAdded}
+                  </TableCell>
+                  <TableCell className="table-cell-text" align="left">
+                    {profit}
+                  </TableCell>
+                  <TableCell className="td-action" align="right">
+                    <ActionMenu ID={product.productID} />
                   </TableCell>
                 </TableRow>
               );
@@ -118,7 +164,8 @@ const ProductContentTable = ({ filter, setFilter }) => {
           variant="outlined"
           shape="rounded"
           count={10}
-          page={1}
+          page={filter.page}
+          onChange={handlePagination}
         />
       </div>
     </Grid>
@@ -128,8 +175,9 @@ const ProductContentTable = ({ filter, setFilter }) => {
 export default function ProductsContainer() {
   const [productFilter, setProductFilter] = useState({
     sort: "createdAt",
+    order: -1,
     search: "",
-    page:1
+    page: 1,
   });
   return (
     <Grid className="admin-container" item md>

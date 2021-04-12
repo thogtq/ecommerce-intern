@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
       background: "#fbfbfb",
       border: "0.5px solid #eaeaea",
     },
+    "& a:visited ,& a": {
+      color: "inherit",
+      textDecoration:"none",
+    },
   },
 }));
 

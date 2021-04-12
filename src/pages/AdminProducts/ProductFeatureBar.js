@@ -40,11 +40,11 @@ export default function ProductFeatureBar() {
                 className={classes.sortSelect}
                 labelId="sort_by_label"
                 id="select_sort_by"
-                defaultValue="date"
+                defaultValue="createdAt -1"
               >
-                <MenuItem value="date">Date Added</MenuItem>
-                <MenuItem value="sold">Sold</MenuItem>
-                <MenuItem value="quatity">Quatity</MenuItem>
+                <MenuItem value="createdAt -1">Date Added</MenuItem>
+                <MenuItem value="name 1">A - Z</MenuItem>
+                <MenuItem value="name -1">Z - A</MenuItem>
               </Select>
             </FormControl>
           </Grid>

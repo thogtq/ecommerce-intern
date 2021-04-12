@@ -62,7 +62,6 @@ function getProducts(filter) {
     }
     queries += key + "=" + filter[key] + "&";
   }
-  console.log(api.SERVER + api.PRODUCTS + queries);
   return fetch(api.SERVER + api.PRODUCTS + queries, {
     method: "GET",
     headers: header,

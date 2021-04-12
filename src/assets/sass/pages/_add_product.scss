@@ -23,8 +23,15 @@
       @include form-input-default;
     }
   }
-  .MuiChip-label, .MuiInputBase-input, input{
+  .MuiChip-label,
+  .MuiInputBase-input,
+  input {
     @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
+  }
+  .form-label {
+    position: absolute;
+    @include text-style(Montserrat-Bold, 12px, 14px, #202124);
+    left: -12%;
   }
 }
 .add-photos {
@@ -67,11 +74,6 @@
       @include text-style(Montserrat-Medium, 12px, 22px, #acacac);
     }
   }
-}
-.form-label {
-  position: absolute;
-  @include text-style(Montserrat-Bold, 12px, 14px, #202124);
-  left: -12%; //Fix me
 }
 
 .product-description {

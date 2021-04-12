@@ -44,6 +44,9 @@
         background-color: #f6f6f6;
       }
     }
+    .table-cell-text {
+      @include text-style("Montserrat-Medium", 14px, 20px, #3d3d3f);
+    }
   }
   .table-header {
     th {
