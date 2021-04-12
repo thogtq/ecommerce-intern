@@ -1,0 +1,49 @@
+.products-sidebar-nav {
+  min-width: 180px;
+  margin-right: 33px;
+  .list-title {
+    @include text-style(Montserrat-Bold, 16px, 24px, #202124);
+    margin-bottom: 30px;
+  }
+  .category-sidebar {
+    span {
+      @include text-style(Montserrat-Regular, 14px, 22px, #4d4d4d);
+    }
+    .parent > span {
+      @include text-style(Montserrat-Medium, 14px, 22px, #ff6900);
+    }
+  }
+  .filter-sidebar {
+    span.MuiTypography-root,
+    span.MuiButton-label {
+      @include text-style(Montserrat-Regular, 14px, 22px, #4d4d4d);
+    }
+    div.MuiButtonBase-root {
+      border-bottom: 1px solid #cccccc;
+    }
+    div.active.MuiButtonBase-root {
+      border-style: dashed;
+      span {
+        @include text-style(Montserrat-Medium, 14px, 22px, #202124);
+      }
+    }
+    button.active {
+      border: unset;
+      background-color: #ffa15f;
+      span {
+        @include text-style(Montserrat-Bold, 14px, 22px, #ffffff);
+      }
+    }
+  }
+}
+.products-breadcrumb.MuiTypography-root {
+  margin: 40px auto;
+  @include flex-center-center;
+  a {
+    :visited {
+      color: inherit;
+    }
+    @include text-style(Montserrat-Regular, 14px, 22px, #202124);
+    text-decoration: none;
+  }
+}

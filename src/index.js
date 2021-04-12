@@ -6,10 +6,11 @@ import Homepage from "./pages/Homepage";
 import "assets/sass/main.scss";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { PrivateRoute} from "components/PrivateRoute";
+import { PrivateRoute } from "components/PrivateRoute";
 import AdminLogin from "./pages/AdminLogin";
 import UserPage from "./pages/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
+import ProductRoutes from "routes/ProductRoutes";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ ReactDOM.render(
     <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
     <Route exact path="/admin/login" component={AdminLogin}></Route>
     <AdminRoutes />
+    <ProductRoutes />
   </BrowserRouter>,
   document.getElementById("root")
 );
