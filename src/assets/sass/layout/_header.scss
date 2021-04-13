@@ -51,6 +51,7 @@
 }
 
 .header-category-nav {
+  height: 45px;
   @include page-margin;
   @include flex-center-center;
   li {

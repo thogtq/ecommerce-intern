@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "60px",
+    marginTop: "55px",
     "& div:nth-child(3)": {
       boxShadow: "none",
       borderRadius: "0px",

@@ -156,7 +156,7 @@ const FilterList = () => {
 export default function SidebarNav() {
   const classes = useStyles();
   return (
-    <Grid className="products-sidebar-nav" item>
+    <Grid classes={{ root: "products-sidebar-nav" }}>
       <CategoryList />
       <hr className={classes.hr + " line"}></hr>
       <FilterList />

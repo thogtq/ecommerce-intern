@@ -6,13 +6,14 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
+import SimplePagination from "components/SimplePagination";
 import ProductItem from "./ProductItem";
 const useStyles = makeStyles({
   sortBar: {
-    margin: "14px 0",
+    marginBottom: "14px",
   },
   gridList: {
-    gap: "20px",
+    gap: "35px",
   },
   productImage: {
     objectFit: "cover",
@@ -32,8 +33,7 @@ export default function ProductsContainer() {
           </Select>
         </Grid>
         <Grid item xs container alignItems="flex-end" justify="flex-end">
-          {" "}
-          1/100{" "}
+          <SimplePagination />
         </Grid>
       </Grid>
       <Grid item container>
@@ -54,6 +54,9 @@ export default function ProductsContainer() {
           <ProductItem />
           <ProductItem />
         </GridList>
+      </Grid>
+      <Grid container justify="flex-end">
+        <SimplePagination />
       </Grid>
     </Grid>
   );

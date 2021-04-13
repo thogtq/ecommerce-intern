@@ -11,6 +11,13 @@ body {
 * {
   box-sizing: border-box;
 }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:visited {
+  color: inherit;
+}
 .container {
   @include page-margin;
 }
