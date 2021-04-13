@@ -5,6 +5,9 @@ const ColorPicker = (props) => {
   if (props.color === "White") {
     color = "rgba(237, 237, 237, 0.4)";
   }
+  const handleClick = (e) => {
+    e.currentTarget.classList.toggle("color-active");
+  };
   const ColorPickerButton = withStyles({
     root: {
       minWidth: "30px",
@@ -17,6 +20,6 @@ const ColorPicker = (props) => {
       },
     },
   })(Button);
-  return <ColorPickerButton></ColorPickerButton>;
+  return <ColorPickerButton onClick={handleClick}></ColorPickerButton>;
 };
 export default ColorPicker;

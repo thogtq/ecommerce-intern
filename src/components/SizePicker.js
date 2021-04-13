@@ -3,7 +3,7 @@ import { Button, withStyles } from "@material-ui/core";
 const SizePicker = (props) => {
   const handleClick = (e) => {
     //rerender
-    e.currentTarget.classList.toggle("active");
+    e.currentTarget.classList.toggle("size-active");
     //set State
   };
   const SizePickerButton = withStyles({
@@ -12,6 +12,15 @@ const SizePicker = (props) => {
       height: "40px",
       border: "1px solid #808080",
       borderRadius: "0px",
+      "&:hover": {
+        backgroundColor: "#ffa15f",
+      },
+      "& span": {
+        color: "#202124",
+        fontFamily: "Montserrat-Regular",
+        fontSize: "14px",
+        lineHeight: "22px",
+      },
     },
   })(Button);
   return (

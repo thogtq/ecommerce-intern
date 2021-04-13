@@ -1,7 +1,7 @@
 import { Breadcrumbs, Grid } from "@material-ui/core";
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
@@ -24,12 +24,18 @@ const CatgoryBreadcrumb = (props) => {
   );
 };
 const Body = () => {
+  const [productFilter, setProductFilter] = useState({
+    sort: "createdAt",
+    order: -1,
+    search: "",
+    page: 1,
+  });
   return (
     <div className="container">
       <CatgoryBreadcrumb />
       <Grid container direction="row">
         <SidebarNav />
-        <ProductsContainer />
+        <ProductsContainer filter={productFilter} setFilter={setProductFilter} />
       </Grid>
     </div>
   );

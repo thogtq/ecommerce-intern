@@ -1,5 +1,7 @@
 import { Grid, GridListTile, makeStyles } from "@material-ui/core";
 import SiteButton from "components/SiteButton";
+import { Link } from "react-router-dom";
+import ProductService from "services/ProductService";
 
 const useStyles = makeStyles({
   root: {
@@ -36,15 +38,16 @@ const useStyles = makeStyles({
     lineHeight: "22px",
   },
 });
-export default function ProductItem() {
+export default function ProductItem(props) {
+  const { image, name, price, id } = props;
   const classes = useStyles();
   return (
     <GridListTile classes={{ root: classes.root }}>
-      <Grid>
+      <Link to={"/product/?productID=" + id}>
         <div className={classes.productImageWrapper}>
           <img
             className={classes.productImage}
-            src="https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/3/20/hoang-thuy2-1616208064114462802460.jpeg"
+            src={ProductService.getImageURL(image)}
             alt="test"
           />
           <div className={classes.shopButton + " toggle"}>
@@ -58,9 +61,9 @@ export default function ProductItem() {
             />
           </div>
         </div>
-        <div className={classes.productName}>Button-Down Denim Mini Dress</div>
-        <div className={classes.productPrice}>$69.00</div>
-      </Grid>
+        <div className={classes.productName}>{name}</div>
+        <div className={classes.productPrice}>{price?"$" + price + ".00":""}</div>
+      </Link>
     </GridListTile>
   );
 }

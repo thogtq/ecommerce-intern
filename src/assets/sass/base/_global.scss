@@ -29,3 +29,24 @@ a:visited {
   background-color: #d4d3d3 !important;
   cursor: not-allowed !important;
 }
+.size-active.MuiButton-root {
+  border: unset;
+  background-color: #ffa15f;
+  span.MuiButton-label {
+    @include text-style(Montserrat-Bold, 14px, 22px, #ffffff);
+  }
+}
+.color-active {
+  opacity: 0.5;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

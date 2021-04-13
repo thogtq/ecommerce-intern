@@ -27,7 +27,7 @@
         @include text-style(Montserrat-Medium, 14px, 22px, #202124);
       }
     }
-    button.active {
+    .size-active.MuiButton-root{
       border: unset;
       background-color: #ffa15f;
       span {

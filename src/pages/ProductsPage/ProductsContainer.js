@@ -1,13 +1,14 @@
 import {
   Grid,
   GridList,
-  GridListTile,
   makeStyles,
   MenuItem,
   Select,
 } from "@material-ui/core";
 import SimplePagination from "components/SimplePagination";
-import ProductItem from "./ProductItem";
+import ProductItem from "../../components/ProductItem";
+import { useState, useEffect } from "react";
+import ProductService from "services/ProductService";
 const useStyles = makeStyles({
   sortBar: {
     marginBottom: "14px",
@@ -21,8 +22,21 @@ const useStyles = makeStyles({
     height: "269px",
   },
 });
-export default function ProductsContainer() {
+export default function ProductsContainer({ filter, setFilter }) {
+  const [products, setProducts] = useState([]);
+
   const classes = useStyles();
+  useEffect(() => {
+    const fetchProduct = async () => {
+      let res = await ProductService.getProducts(filter);
+      if (res.status === "success") {
+        setProducts(res.data.products);
+      } else {
+        alert(res.error.message);
+      }
+    };
+    fetchProduct();
+  }, [filter]);
   return (
     <Grid item xs>
       <Grid className={classes.sortBar} item container justify="space-between">
@@ -43,16 +57,23 @@ export default function ProductsContainer() {
           cols={0}
           spacing={0}
         >
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
+          {products === {} ? (
+            <Grid container justify="center">
+              No result found
+            </Grid>
+          ) : (
+            products.map((product) => {
+              return (
+                <ProductItem
+                  name={product.name}
+                  image={product.images[0]}
+                  price={product.price}
+                  key={product.productID}
+                  id={product.productID}
+                ></ProductItem>
+              );
+            })
+          )}
         </GridList>
       </Grid>
       <Grid container justify="flex-end">

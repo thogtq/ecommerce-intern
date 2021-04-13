@@ -1,9 +1,7 @@
 import {
   ListItem,
-  ListItemIcon,
   ListItemText,
   withStyles,
-  Grid,
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import CustomCheckbox from "./CustomCheckbox";

@@ -7,6 +7,7 @@ const ProductService = {
   getTempImageURL,
   addProduct,
   getProducts,
+  getProduct,
 };
 export default ProductService;
 
@@ -63,6 +64,22 @@ function getProducts(filter) {
     queries += key + "=" + filter[key] + "&";
   }
   return fetch(api.SERVER + api.PRODUCTS + queries, {
+    method: "GET",
+    headers: header,
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
+}
+function getProduct(productID) {
+  let header = {
+    "Content-Type": "application/json",
+  };
+  return fetch(api.SERVER + api.PRODUCT + "/?productID=" + productID, {
     method: "GET",
     headers: header,
   }).then(
