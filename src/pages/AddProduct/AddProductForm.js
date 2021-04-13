@@ -132,6 +132,7 @@ export default function AddProductForm() {
         height="48px"
         name="Complete"
         color="white"
+        weight="SemiBold"
         backgroundColor="#ffa15f"
         submit
         onClick={handleSubmit}
@@ -146,6 +147,7 @@ export default function AddProductForm() {
       <SiteButton
         width="180px"
         height="48px"
+        weight="SemiBold"
         name="Cancel"
         color="#ffa15f"
         backgroundColor="#ffffff"

@@ -1,8 +1,23 @@
-import { Grid, makeStyles, MenuItem, Select } from "@material-ui/core";
+import {
+  Grid,
+  GridList,
+  GridListTile,
+  makeStyles,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 import ProductItem from "./ProductItem";
 const useStyles = makeStyles({
   sortBar: {
     margin: "14px 0",
+  },
+  gridList: {
+    gap: "20px",
+  },
+  productImage: {
+    objectFit: "cover",
+    width: "180px",
+    height: "269px",
   },
 });
 export default function ProductsContainer() {
@@ -22,7 +37,23 @@ export default function ProductsContainer() {
         </Grid>
       </Grid>
       <Grid item container>
-        <ProductItem />
+        <GridList
+          className={classes.gridList}
+          cellHeight="auto"
+          cols={0}
+          spacing={0}
+        >
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+        </GridList>
       </Grid>
     </Grid>
   );

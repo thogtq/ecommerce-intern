@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     border: "none",
     borderRadius: 0,
-    fontFamily: "Montserrat-SemiBold",
+    fontFamily: (props) => "Montserrat-" + props.weight,
     fontSize: "14px",
     lineHeight: "24px",
     color: (props) => props.color,
