@@ -3,6 +3,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import arrowIcon from "assets/images/icons/arrow.svg";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import * as productConst from "constants/product";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CategoryNavBar = () => {
+  const history = useHistory();
+  const [categoryItems, setCategoryItems] = useState({});
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   // const [currentMenu, setCurrentMenu] = useState("");
   const handleClick = (e) => {
-    e.preventDefault();
+    let parentCategory = e.currentTarget.attributes["value"].nodeValue;
+    setCategoryItems(productConst.categories[parentCategory]);
     setAnchorEl(document.getElementById("category_nav"));
   };
   const handleClose = (e) => {
@@ -35,17 +40,10 @@ const CategoryNavBar = () => {
     setAnchorEl(null);
   };
   const CategoryMenu = () => {
-    let menItems = [
-      "Tops",
-      "Bottoms",
-      "Dresses",
-      "Shoes",
-      "Accesories",
-      "Sale",
-    ];
-    // let boysItems = menItems;
-    // let ladiesItems = [""];
-    let categoryItems = menItems;
+    const handleCategoryClick = (e) => {
+      let category = e.currentTarget.attributes["value"].nodeValue;
+      history.push("/products/?category=" + encodeURIComponent(category));
+    };
     return (
       <Menu
         className={classes.root}
@@ -54,69 +52,59 @@ const CategoryNavBar = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        //Fix me
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
         // MenuListProps={{ onMouseLeave: handleClose }}
         disableAutoFocusItem={true}
       >
-        {categoryItems.map((item, index) => (
-          <MenuItem key={index} onClick={handleClose}>
-            {item}
-          </MenuItem>
-        ))}
+        {Object.keys(categoryItems).map((item) => {
+          let name = categoryItems[item].name;
+          let value = categoryItems[item].value;
+          console.log(name);
+          return (
+            <MenuItem key={value} onClick={handleCategoryClick} value={value}>
+              {name}
+            </MenuItem>
+          );
+        })}
       </Menu>
     );
   };
   return (
     <div id="category_nav" className="header-category-nav">
       <ul>
-        <li>
-          <Link
-            to="#"
-            onClick={handleClick}
-          
-            value="Men"
-            aria-controls="category_menu"
-            aria-haspopup="true"
-          >
-            Men <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </Link>
+        <li
+          onClick={handleClick}
+          value="Men"
+          aria-controls="category_menu"
+          aria-haspopup="true"
+        >
+          Men <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li>
-          <Link
-            to="#"
-            value="Men"
-            onClick={handleClick}
-           
-            aria-controls="category_menu"
-            aria-haspopup="true"
-          >
-            Ladies<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </Link>
+        <li
+          value="Ladies"
+          onClick={handleClick}
+          aria-controls="category_menu"
+          aria-haspopup="true"
+        >
+          Ladies<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li>
-          <Link
-            to="#"
-            onClick={handleClick}
-           
-            value="Men"
-            aria-controls="category_menu"
-            aria-haspopup="true"
-          >
-            Girls<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </Link>
+        <li
+          onClick={handleClick}
+          value="Girls"
+          aria-controls="category_menu"
+          aria-haspopup="true"
+        >
+          Girls<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li>
-          <Link
-            to="#"
-            onClick={handleClick}
-           
-            value="Men"
-            aria-controls="category_menu"
-            aria-haspopup="true"
-          >
-            Boys <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
-          </Link>
+        <li
+          onClick={handleClick}
+          value="Boys"
+          aria-controls="category_menu"
+          aria-haspopup="true"
+        >
+          Boys <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
       </ul>
       <CategoryMenu />

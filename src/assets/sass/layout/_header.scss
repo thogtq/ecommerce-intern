@@ -58,12 +58,10 @@
   @include page-margin;
   @include flex-center-center;
   li {
+    cursor: pointer;
     margin: auto 7px;
     display: inline-block;
-    a {
-      @include text-style("Montserrat-Medium", 14px, 22px, #202124);
-      text-decoration: none;
-    }
+    @include text-style("Montserrat-Medium", 14px, 22px, #202124);
   }
   .icon {
     vertical-align: middle;
