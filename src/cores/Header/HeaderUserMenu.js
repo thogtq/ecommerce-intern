@@ -106,6 +106,7 @@ const HeaderUserMenu = () => {
         <Avatar
           aria-controls="user_menu"
           onClick={handleAvatarClick}
+          //onMouseOver={handleAvatarClick}
           className={classes.avatar}
           alt="avatar"
           src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
@@ -116,6 +117,7 @@ const HeaderUserMenu = () => {
           anchorEl={anchorMenu}
           open={Boolean(anchorMenu)}
           onClose={handleClose}
+          MenuListProps={{ onMouseLeave: handleClose }}
           getContentAnchorEl={null}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
@@ -129,6 +131,7 @@ const HeaderUserMenu = () => {
         </Menu>
         <img
           onClick={handleCartClick}
+          //onMouseOver={handleCartClick}
           className="cart-btn"
           src={cartIcon}
           alt="cart"

@@ -10,10 +10,7 @@ const useStyles = makeStyles((theme) => ({
     "& div:nth-child(3)": {
       boxShadow: "none",
       borderRadius: "0px",
-      left: "50%!important",
-      transform: "translate(-50%)!important",
     },
-
     "& li": {
       display: "inline-block",
       color: "#202124",
@@ -57,6 +54,10 @@ const CategoryNavBar = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        transformOrigin={{ vertical: "top", horizontal: "center" }}
+        // MenuListProps={{ onMouseLeave: handleClose }}
+        disableAutoFocusItem={true}
       >
         {categoryItems.map((item, index) => (
           <MenuItem key={index} onClick={handleClose}>
@@ -73,6 +74,7 @@ const CategoryNavBar = () => {
           <Link
             to="#"
             onClick={handleClick}
+          
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
@@ -85,6 +87,7 @@ const CategoryNavBar = () => {
             to="#"
             value="Men"
             onClick={handleClick}
+           
             aria-controls="category_menu"
             aria-haspopup="true"
           >
@@ -95,6 +98,7 @@ const CategoryNavBar = () => {
           <Link
             to="#"
             onClick={handleClick}
+           
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"
@@ -106,6 +110,7 @@ const CategoryNavBar = () => {
           <Link
             to="#"
             onClick={handleClick}
+           
             value="Men"
             aria-controls="category_menu"
             aria-haspopup="true"

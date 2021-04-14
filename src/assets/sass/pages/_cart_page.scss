@@ -1,0 +1,39 @@
+.cart-page {
+  .table-header {
+    th {
+      @include text-style("Montserrat-Bold", 14px, 22px, #202124);
+    }
+  }
+  .header-title {
+    margin-top: 10px;
+    margin-bottom: 35px;
+    @include text-style("Montserrat-Medium", 24px, 32px, #202124);
+  }
+  .product-name {
+    white-space: initial;
+    @include text-style("Montserrat-Medium", 14px, 20px, #202124);
+  }
+  .product-image {
+    max-width: 80px;
+  }
+  .total-title {
+    padding: 16px 0;
+  }
+  .total-box {
+    padding: 32px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    .item {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .subtotal{
+      span {
+        @include text-style("Montserrat-Bold", 16px, 24px, #202124);
+      }
+    }
+    hr {
+      margin: 5px 0;
+    }
+  }
+}

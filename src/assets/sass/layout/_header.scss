@@ -4,6 +4,7 @@
   box-shadow: 0 4px 2px -2px #ececec;
 }
 .header-nav {
+  position: relative;
   @include flex-space-between-center;
   margin: 21px 130px 13px 130px;
   .site-logo {

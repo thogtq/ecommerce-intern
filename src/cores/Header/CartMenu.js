@@ -1,5 +1,6 @@
-import { makeStyles, Menu, MenuItem } from "@material-ui/core";
+import { Grid, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import CartMenuItem from "./CartMenuItem";
 
 const styles = makeStyles({
   root: {
@@ -10,7 +11,14 @@ const styles = makeStyles({
     backgroundColor: "#fbfbfb",
   },
   listItem: {
-    height: "80px",
+    maxHeight: "80px",
+  },
+  viewCart: {
+    padding: "20px 0",
+    color: "#ffa15f",
+    fontFamily: "Montserrat-Bold",
+    fontSize: "14px",
+    lineHeight: "22px",
   },
 });
 export default function CartMenu({ cart, setCart, anchorEl, setAnchorEl }) {
@@ -29,20 +37,25 @@ export default function CartMenu({ cart, setCart, anchorEl, setAnchorEl }) {
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       disableAutoFocusItem={true}
+      //MenuListProps={{ onMouseLeave: handleClose }}
     >
-      <MenuItem classes={{ root: classes.listItem }}>Cart</MenuItem>
+      <MenuItem classes={{ root: classes.listItem }}>
+        <CartMenuItem />
+      </MenuItem>
       <hr className="line"></hr>
-      <MenuItem classes={{ root: classes.listItem }}>Cart</MenuItem>
+      <MenuItem classes={{ root: classes.listItem }}>
+        <CartMenuItem />
+      </MenuItem>
       <hr className="line"></hr>
-      <MenuItem classes={{ root: classes.listItem }}>Cart</MenuItem>
-      <hr className="line"></hr>
-      <MenuItem classes={{ root: classes.listItem }}>Cart</MenuItem>
-      <hr className="line"></hr>
-      <MenuItem classes={{ root: classes.listItem }}>Cart</MenuItem>
-      <hr className="line"></hr>
-        
+      <MenuItem classes={{ root: classes.listItem }}>
+        <CartMenuItem />
+      </MenuItem>
       <Link to="/cart">
-        <MenuItem classes={{ root: classes.listItem }}>View cart</MenuItem>
+        <MenuItem classes={{ root: classes.viewCart }}>
+          <Grid container justify="center" alignItems="center">
+            View cart
+          </Grid>
+        </MenuItem>
       </Link>
     </Menu>
   );

@@ -24,9 +24,11 @@ const useStyles = makeStyles({
 });
 export default function ProductContainer({ product }) {
   const classes = useStyles();
-  const [currentImage, setCurrentImage] = useState("");
+  const [currentImage, setCurrentImage] = useState();
   useEffect(() => {
-    setCurrentImage(ProductService.getImageURL(product.images[0]));
+    if (product.images[0] !== undefined) {
+      setCurrentImage(ProductService.getImageURL(product.images[0]));
+    }
   }, [product]);
   return (
     <Grid

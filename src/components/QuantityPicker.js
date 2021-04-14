@@ -52,7 +52,6 @@ export default function QuantityPicker(props) {
           </InputAdornment>
         ),
         classes: { underline: classes.underline },
-        defaultValue: 1,
       }}
     />
   );
