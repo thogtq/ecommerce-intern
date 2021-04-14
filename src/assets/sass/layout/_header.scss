@@ -16,8 +16,10 @@
   @include flex-space-between-center;
   gap: 28px;
   .register-btn {
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
     @include text-style(Montserrat-Regular, 14px, normal, #4d4d4d);
-    text-decoration: none;
   }
   .login-btn {
     @include text-style(Montserrat-Bold, 14px, normal, #ffa15f);

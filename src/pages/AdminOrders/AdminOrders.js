@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import AdminSideBar from "components/AdminSideBar";
+import AdminSideBar from "pages/AdminPage/AdminSideBar";
 import OrdersContainer from "pages/AdminOrders/OrdersContainer";
 
 const AdminOrders = () => {

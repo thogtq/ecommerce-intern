@@ -3,8 +3,8 @@ import menCategoryImg from "assets/images/homepage/men_category.jpg";
 import ladiesCategoryImg from "assets/images/homepage/ladies_category.jpg";
 import girlsCategoryImg from "assets/images/homepage/girls_category.jpg";
 import boysCategoryImg from "assets/images/homepage/boys_category.jpg";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+import Header from "cores/Header/Header";
+import Footer from "cores/Footer/Footer";
 import React from "react";
 import { Link } from 'react-router-dom';
 

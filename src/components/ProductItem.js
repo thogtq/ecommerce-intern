@@ -5,22 +5,30 @@ import ProductService from "services/ProductService";
 
 const useStyles = makeStyles({
   root: {
-    width: "180px",
+    width: "100%",
+    // flex: "0 0 17%",
     "&:hover": {
       cursor: "pointer",
     },
+    "&:hover $shopButton": {
+      display: "block",
+    },
   },
-
   productImage: {
     objectFit: "cover",
-    height: "269px",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0,
   },
   productImageWrapper: {
     position: "relative",
+    height: "auto",
+    paddingTop: "150%",
   },
   shopButton: {
-    //Fix me
-    // display: "none",
+    display: "none",
+    width: "100%",
     position: "absolute",
     bottom: "0",
   },
@@ -42,7 +50,7 @@ export default function ProductItem(props) {
   const { image, name, price, id } = props;
   const classes = useStyles();
   return (
-    <GridListTile classes={{ root: classes.root }}>
+    <GridListTile className={props.className} classes={{ root: classes.root }}>
       <Link to={"/product/?productID=" + id}>
         <div className={classes.productImageWrapper}>
           <img
@@ -53,7 +61,7 @@ export default function ProductItem(props) {
           <div className={classes.shopButton + " toggle"}>
             <SiteButton
               name="+ Quick shop"
-              width="180px"
+              width="100%"
               height="54px"
               backgroundColor="#ffa15f"
               color="#ffffff"
@@ -61,8 +69,10 @@ export default function ProductItem(props) {
             />
           </div>
         </div>
-        <div className={classes.productName}>{name}</div>
-        <div className={classes.productPrice}>{price?"$" + price + ".00":""}</div>
+        <div className={classes.productName}>{name ? name : ""}</div>
+        <div className={classes.productPrice}>
+          {price ? "$" + price + ".00" : ""}
+        </div>
       </Link>
     </GridListTile>
   );

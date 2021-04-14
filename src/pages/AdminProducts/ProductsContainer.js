@@ -1,4 +1,4 @@
-import AdminMenu from "components/AdminMenu";
+import AdminMenu from "pages/AdminPage/AdminMenu";
 import ProductFeatureBar from "./ProductFeatureBar";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 import CreateIcon from "@material-ui/icons/Create";

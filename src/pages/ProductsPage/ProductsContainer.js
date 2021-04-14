@@ -16,10 +16,9 @@ const useStyles = makeStyles({
   gridList: {
     gap: "35px",
   },
-  productImage: {
-    objectFit: "cover",
-    width: "180px",
-    height: "269px",
+  productItem: {
+    flex: "0 0 17%",
+    minWidth: "180px",
   },
 });
 export default function ProductsContainer({ filter, setFilter }) {
@@ -65,6 +64,7 @@ export default function ProductsContainer({ filter, setFilter }) {
             products.map((product) => {
               return (
                 <ProductItem
+                  className={classes.productItem}
                   name={product.name}
                   image={product.images[0]}
                   price={product.price}

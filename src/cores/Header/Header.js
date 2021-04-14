@@ -1,7 +1,7 @@
 import logo from "assets/images/logo.svg";
 import React from "react";
 import HeaderUserMenu from "./HeaderUserMenu";
-import CategoryNavBar from "components/Homepage/CategoryNavBar";
+import CategoryNavBar from "cores/Header/CategoryNavBar";
 import HeaderSearchBar from "./HeaderSearchBar";
 import { Link } from "react-router-dom";
 

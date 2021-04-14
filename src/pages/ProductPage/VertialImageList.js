@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     gap: (props) => props.gap,
     "& img": {
       width: "100%",
+      
     },
   },
 });

@@ -7,6 +7,9 @@ const useStyles = makeStyles({
   root: {
     "& img": {
       width: "100%",
+      objectFit: "cover",
+      // minHeight: "483px",
+      // maxHeight: "755px",
     },
   },
 });

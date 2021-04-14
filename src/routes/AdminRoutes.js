@@ -1,8 +1,8 @@
 import { Switch } from "react-router";
-import AdminPage from "pages/AdminPage";
+import AdminPage from "pages/AdminPage/AdminPage";
 import AdminProducts from "pages/AdminProducts/AdminProducts";
 import AdminOrders from "pages/AdminOrders/AdminOrders";
-import { AdminRoute } from "components/PrivateRoute";
+import { AdminRoute } from "cores/PrivateRoute";
 import AddProduct from "../pages/AddProduct/AddProduct";
 
 export default function AdminRoutes() {

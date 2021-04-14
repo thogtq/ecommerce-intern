@@ -47,6 +47,10 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.text-regular-grey {
+  @include text-style(Montserrat-Regular, 14px, 22px, #b7b7b7);
 }

@@ -6,7 +6,7 @@ import Homepage from "./pages/Homepage";
 import "assets/sass/main.scss";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { PrivateRoute } from "components/PrivateRoute";
+import { PrivateRoute } from "cores/PrivateRoute";
 import AdminLogin from "./pages/AdminLogin";
 import UserPage from "./pages/UserPage";
 import AdminRoutes from "routes/AdminRoutes";

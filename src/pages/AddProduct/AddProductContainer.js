@@ -1,4 +1,4 @@
-import AdminMenu from "components/AdminMenu";
+import AdminMenu from "pages/AdminPage/AdminMenu";
 import { Grid } from "@material-ui/core";
 import AddProductForm from "./AddProductForm";
 

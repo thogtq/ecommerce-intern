@@ -1,10 +1,13 @@
 import { Breadcrumbs, Grid } from "@material-ui/core";
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
+import TextDivider from "components/TextDivider";
+import Footer from "cores/Footer/Footer";
+import Header from "cores/Header/Header";
 import React from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import ProductContainer from "./ProductContainer";
+import ReviewsContainer from "./ReviewsContainer";
+import SuggestionProducts from "./SuggestionProducts";
 
 export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
@@ -22,7 +25,10 @@ export default function ProductPage() {
           </Breadcrumbs>
         </Grid>
         <ProductContainer />
-        
+        <TextDivider text="Reviews" />
+        <ReviewsContainer />
+        <TextDivider text="You may also like" />
+        <SuggestionProducts />
       </Grid>
     );
   };

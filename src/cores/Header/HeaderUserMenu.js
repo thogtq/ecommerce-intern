@@ -1,6 +1,6 @@
 import cartIcon from "assets/images/icons/cart.svg";
-import LoginModal from "./LoginModal";
-import RegisterModal from "./RegisterModal";
+import LoginModal from "components/LoginModal";
+import RegisterModal from "components/RegisterModal";
 import React, { useState, useEffect } from "react";
 import { isAuthenticated, logout } from "services/AuthService";
 import { makeStyles, Menu, Avatar } from "@material-ui/core";
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& a:visited ,& a": {
       color: "inherit",
-      textDecoration:"none",
+      textDecoration: "none",
     },
   },
 }));
@@ -69,9 +69,9 @@ const HeaderUserMenu = () => {
   const NotLoggedIn = () => {
     return (
       <React.Fragment>
-        <Link to="" className="register-btn" onClick={toggleRegisterModal}>
+        <button className="register-btn" onClick={toggleRegisterModal}>
           Register
-        </Link>
+        </button>
         <RegisterModal
           show={showRegisterModal}
           toggleModal={toggleRegisterModal}

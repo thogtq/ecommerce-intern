@@ -19,13 +19,13 @@ function valuetext(value) {
 }
 const InputRange = () => {
   const classes = useStyles();
-  const [value, setValue] = useState([0, 5000]);
+  const [value, setValue] = useState([0, 500]);
   const marks = [
     {
       value: 0,
       label: "$0",
     },
-    { value: 5000, label: "$5000" },
+    { value: 500, label: "$500" },
   ];
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -39,9 +39,9 @@ const InputRange = () => {
       aria-labelledby="range-slider"
       getAriaValueText={valuetext}
       marks={marks}
-      max={5000}
+      max={500}
       min={0}
-      step={100}
+      step={10}
     />
   );
 };

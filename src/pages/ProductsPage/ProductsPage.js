@@ -1,6 +1,6 @@
 import { Breadcrumbs, Grid } from "@material-ui/core";
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
+import Footer from "cores/Footer/Footer";
+import Header from "cores/Header/Header";
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";

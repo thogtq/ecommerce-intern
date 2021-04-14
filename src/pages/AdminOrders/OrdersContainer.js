@@ -1,4 +1,4 @@
-import AdminMenu from "components/AdminMenu";
+import AdminMenu from "pages/AdminPage/AdminMenu";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 import {
   Grid,
