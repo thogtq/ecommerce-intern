@@ -11,6 +11,7 @@ import AdminLogin from "./pages/AdminLogin";
 import UserPage from "./pages/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
+import OrderRoutes from "./routes/OrderRoutes";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Route exact path="/admin/login" component={AdminLogin}></Route>
     <AdminRoutes />
     <ProductRoutes />
+    <OrderRoutes />
   </BrowserRouter>,
   document.getElementById("root")
 );

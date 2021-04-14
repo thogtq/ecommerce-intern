@@ -7,35 +7,29 @@ import { makeStyles, Menu, Avatar } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import { useLocation, useHistory } from "react-router";
+import CartMenu from "./CartMenu";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
+    cursor: "pointer",
     height: "28px",
     width: "28px",
     border: "2px solid #ffa15f",
   },
   avatarMenu: {
-    "& div:nth-child(3)": {
-      boxShadow: "none",
-      borderRadius: "0px",
-      width: "181px",
-      left: "unset!important",
-      right: "0!important",
-      marginRight: "180px",
-    },
+    marginTop: "20px",
+    boxShadow: "none",
+    borderRadius: "0px",
+    width: "181px",
+  },
+  avatarMenuList: {
+    background: "#fbfbfb",
+    border: "0.5px solid #eaeaea",
     "& li": {
       color: "#4d4d4d",
       fontFamily: "Montserrat-Medium",
       fontSize: "12px",
       lineHeight: "22px",
-    },
-    "& ul": {
-      background: "#fbfbfb",
-      border: "0.5px solid #eaeaea",
-    },
-    "& a:visited ,& a": {
-      color: "inherit",
-      textDecoration: "none",
     },
   },
 }));
@@ -91,40 +85,55 @@ const HeaderUserMenu = () => {
     );
   };
   const LoggedIn = () => {
+    //Avatar
     const [anchorMenu, setAnchorMenu] = useState(null);
     const handleAvatarClick = (e) => {
-      e.preventDefault();
-      setAnchorMenu(document.getElementById("category_nav"));
+      //Fix me
+      setAnchorMenu(e.target);
     };
     const handleClose = (e) => {
       e.preventDefault();
       setAnchorMenu(null);
     };
+    //Cart
+    const [anchorCart, setAnchorCart] = useState(null);
+    const handleCartClick = (e) => {
+      setAnchorCart(e.target);
+    };
+
     return (
       <React.Fragment>
-        <Link to="" onClick={handleAvatarClick} aria-controls="user_menu">
-          <Avatar
-            className={classes.avatar}
-            alt="avatar"
-            src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
-          ></Avatar>
-        </Link>
+        <Avatar
+          aria-controls="user_menu"
+          onClick={handleAvatarClick}
+          className={classes.avatar}
+          alt="avatar"
+          src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+        ></Avatar>
         <Menu
-          className={classes.avatarMenu}
+          classes={{ paper: classes.avatarMenu, list: classes.avatarMenuList }}
           id="user_menu"
           anchorEl={anchorMenu}
           open={Boolean(anchorMenu)}
           onClose={handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+          disableAutoFocusItem={true}
         >
-          <MenuItem>
-            <Link to="/user">Account setting</Link>
-          </MenuItem>
+          <Link to="/user">
+            <MenuItem>Account setting</MenuItem>
+          </Link>
           <hr className="line"></hr>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-        <Link to="/cart" className="cart-btn" href="#">
-          <img src={cartIcon} alt="cart"></img>
-        </Link>
+        <img
+          onClick={handleCartClick}
+          className="cart-btn"
+          src={cartIcon}
+          alt="cart"
+        ></img>
+        <CartMenu anchorEl={anchorCart} setAnchorEl={setAnchorCart} />
       </React.Fragment>
     );
   };

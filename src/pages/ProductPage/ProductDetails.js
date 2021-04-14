@@ -18,11 +18,11 @@ const useStyles = makeStyles({
     marginBottom: "9px",
   },
 });
-const TitleGroup = () => {
+const TitleGroup = (props) => {
   const classes = useStyles();
   return (
     <Grid className="title-group">
-      <div className="product-name">Collete Stretch Linen Minidress</div>
+      <div className="product-name">{props.name}</div>
       <div className="price">$99.00</div>
       <Grid className="review" container>
         <ReviewStarts />
@@ -73,7 +73,8 @@ const ColorInput = () => {
     </Grid>
   );
 };
-export default function ProductDetails() {
+export default function ProductDetails(props) {
+  const { product } = props;
   const classes = useStyles();
   return (
     <Grid
@@ -82,7 +83,7 @@ export default function ProductDetails() {
       container
       direction="column"
     >
-      <TitleGroup />
+      <TitleGroup name={product.name} price={product.price} />
       <SizeInput />
       <ColorInput />
       <Grid
@@ -104,7 +105,8 @@ export default function ProductDetails() {
       />
       <Divider />
       <Typography className="description">
-        Model wearing size S<br/>- Chest: 36”<br/>- Length: 25.75”
+        Model wearing size S<br />- Chest: 36”
+        <br />- Length: 25.75”
       </Typography>
     </Grid>
   );

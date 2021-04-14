@@ -1,6 +1,5 @@
 import { Grid, makeStyles } from "@material-ui/core";
-const dummyImg =
-  "https://fashionjackson.com/wp-content/uploads/2021/04/Fashion-Jackson-Wearing-Amazon-Fashion-Black-Long-Sleeve-Top-Ripped-Jeans-Chanel-Slingbacks-Chanel-Backpack-1140x1530.jpg";
+import ProductService from "services/ProductService";
 //Fix me
 //sync height image
 const useStyles = makeStyles({
@@ -14,11 +13,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProductImage() {
+export default function ProductImage({ image }) {
   const classes = useStyles();
-  return (
+  return image ? (
     <Grid container classes={{ root: classes.root }}>
-      <img src={dummyImg} alt="product-img"></img>
+      <img src={image} alt="product-img"></img>
     </Grid>
+  ) : (
+    ""
   );
 }
