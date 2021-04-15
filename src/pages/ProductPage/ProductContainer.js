@@ -5,7 +5,7 @@ import VerticalImageList from "./VertialImageList";
 import ProductItem from "../../components/ProductItem";
 import { useState, useEffect } from "react";
 import ProductService from "services/ProductService";
-
+const dummyImg = "http://localhost:8080/api/product/image/dummy.jpg";
 const useStyles = makeStyles({
   root: {
     marginBottom: "30px",
@@ -24,12 +24,7 @@ const useStyles = makeStyles({
 });
 export default function ProductContainer({ product }) {
   const classes = useStyles();
-  const [currentImage, setCurrentImage] = useState();
-  useEffect(() => {
-    if (product.images[0] !== undefined) {
-      setCurrentImage(product.images[0]);
-    }
-  }, [product]);
+  const [currentImage, setCurrentImage] = useState(product.images[0]);
   return (
     <Grid
       classes={{ root: classes.root }}
@@ -57,25 +52,10 @@ export default function ProductContainer({ product }) {
           <span>More from</span> <span className="brand-name">Zara</span>
         </div>
         <GridList style={{ gap: "10px" }}>
-          <ProductItem
-            className={classes.productItem}
-            image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
-          />
-          <ProductItem
-            className={classes.productItem}
-            image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
-            minWidth="80px"
-          />
-          <ProductItem
-            className={classes.productItem}
-            image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
-            minWidth="80px"
-          />
-          <ProductItem
-            className={classes.productItem}
-            image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
-            minWidth="80px"
-          />
+          <ProductItem className={classes.productItem} image={dummyImg} />
+          <ProductItem className={classes.productItem} image={dummyImg} />
+          <ProductItem className={classes.productItem} image={dummyImg} />
+          <ProductItem className={classes.productItem} image={dummyImg} />
         </GridList>
       </Grid>
     </Grid>

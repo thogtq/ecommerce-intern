@@ -2,11 +2,13 @@ import { Button, withStyles } from "@material-ui/core";
 //rename file
 const ColorPicker = (props) => {
   let color = props.color;
+  let active = Boolean(props.active);
   if (props.color === "White") {
     color = "rgba(237, 237, 237, 0.4)";
   }
+
   const handleClick = (e) => {
-    e.currentTarget.classList.toggle("color-active");
+    props.onClick(props.color);
   };
   const ColorPickerButton = withStyles({
     root: {
@@ -20,6 +22,11 @@ const ColorPicker = (props) => {
       },
     },
   })(Button);
-  return <ColorPickerButton onClick={handleClick}></ColorPickerButton>;
+  return (
+    <ColorPickerButton
+      className={active ? "color-active" : ""}
+      onClick={handleClick}
+    ></ColorPickerButton>
+  );
 };
 export default ColorPicker;

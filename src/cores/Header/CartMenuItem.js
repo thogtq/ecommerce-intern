@@ -31,7 +31,7 @@ export default function CartMenuItem() {
   return (
     <Grid className={classes.image} container direction="row">
       <img
-        src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
+        src="http://localhost:8080/api/product/image/dummy.jpg"
         alt="item"
         width="60"
         height="60"

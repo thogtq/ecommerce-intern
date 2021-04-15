@@ -1,10 +1,9 @@
 import { Button, withStyles } from "@material-ui/core";
-//Rename file
+
 const SizePicker = (props) => {
+  const active = Boolean(props.active);
   const handleClick = (e) => {
-    //rerender
-    e.currentTarget.classList.toggle("size-active");
-    //set State
+    props.onClick(props.size);
   };
   const SizePickerButton = withStyles({
     root: {
@@ -24,7 +23,12 @@ const SizePicker = (props) => {
     },
   })(Button);
   return (
-    <SizePickerButton onClick={handleClick}>{props.size}</SizePickerButton>
+    <SizePickerButton
+      className={active ? "size-active" : ""}
+      onClick={handleClick}
+    >
+      {props.size}
+    </SizePickerButton>
   );
 };
 export default SizePicker;

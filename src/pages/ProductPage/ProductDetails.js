@@ -3,6 +3,7 @@ import ColorPicker from "components/ColorPicker";
 import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
+import { useState } from "react";
 import { ReviewStarts } from "../../components/ReviewStars";
 import { submitButton } from "../../helpers/helpers";
 const useStyles = makeStyles({
@@ -37,7 +38,13 @@ const TitleGroup = (props) => {
     </Grid>
   );
 };
-const SizeInput = () => {
+const SizeInput = ({ sizes, productCart, setProductCart }) => {
+  const handleSizeClick = (value) => {
+    setProductCart({
+      ...productCart,
+      size: value === productCart.size ? "" : value,
+    });
+  };
   const classes = useStyles();
   return (
     <Grid>
@@ -48,14 +55,25 @@ const SizeInput = () => {
         Size
       </Grid>
       <Grid container style={{ gap: "16px" }}>
-        <SizePicker size="S" />
-        <SizePicker size="M" />
-        <SizePicker size="L" />
+        {sizes.map((size) => (
+          <SizePicker
+            active={productCart.size === size}
+            key={size}
+            size={size}
+            onClick={handleSizeClick}
+          />
+        ))}
       </Grid>
     </Grid>
   );
 };
-const ColorInput = () => {
+const ColorInput = ({ colors, productCart, setProductCart }) => {
+  const handleColorClick = (value) => {
+    setProductCart({
+      ...productCart,
+      color: value === productCart.color ? "" : value,
+    });
+  };
   const classes = useStyles();
   return (
     <Grid>
@@ -66,21 +84,33 @@ const ColorInput = () => {
         Color
       </Grid>
       <Grid container style={{ gap: "16px" }}>
-        <ColorPicker color="Red" />
-        <ColorPicker color="Green" />
-        <ColorPicker color="Yellow" />
-        <ColorPicker color="Black" />
+        {colors.map((color) => (
+          <ColorPicker
+            active={productCart.color === color}
+            key={color}
+            color={color}
+            onClick={handleColorClick}
+          />
+        ))}
       </Grid>
     </Grid>
   );
 };
 export default function ProductDetails(props) {
   const { product } = props;
+  const [productCart, setProductCart] = useState({
+    productID: product.productID,
+  });
+
   const classes = useStyles();
   const handleAddCart = (e) => {
+    console.log(JSON.stringify(productCart));
     submitButton(false);
     window.scrollTo(0, 0);
     submitButton(true);
+  };
+  const handleQuantityChange = (value) => {
+    setProductCart({ ...productCart, quantity: value });
   };
   return (
     <Grid
@@ -90,8 +120,16 @@ export default function ProductDetails(props) {
       direction="column"
     >
       <TitleGroup name={product.name} price={product.price} />
-      <SizeInput />
-      <ColorInput />
+      <SizeInput
+        sizes={product.sizes}
+        productCart={productCart}
+        setProductCart={setProductCart}
+      />
+      <ColorInput
+        colors={product.colors}
+        productCart={productCart}
+        setProductCart={setProductCart}
+      />
       <Grid
         container
         direction="row"
@@ -99,7 +137,11 @@ export default function ProductDetails(props) {
         style={{ gap: "20px" }}
       >
         <Grid className="attribute-name">Quantity</Grid>
-        <QuantityPicker className="attribute-name" defaultValue={1} />
+        <QuantityPicker
+          className="attribute-name"
+          defaultValue={1}
+          onChange={handleQuantityChange}
+        />
       </Grid>
       <SiteButton
         name="Add to cart"
@@ -112,10 +154,7 @@ export default function ProductDetails(props) {
         submit
       />
       <Divider />
-      <Typography className="description">
-        Model wearing size S<br />- Chest: 36”
-        <br />- Length: 25.75”
-      </Typography>
+      <pre className="description">{product.description}</pre>
     </Grid>
   );
 }

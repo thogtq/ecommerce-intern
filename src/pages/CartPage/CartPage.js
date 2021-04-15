@@ -55,7 +55,7 @@ export default function CartPage() {
                         <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
-                            src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
+                            src="http://localhost:8080/api/product/image/dummy.jpg"
                             alt="product-img"
                           />
                         </Grid>
@@ -93,7 +93,7 @@ export default function CartPage() {
                         <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
-                            src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
+                            src="http://localhost:8080/api/product/image/dummy.jpg"
                             alt="product-img"
                           />
                         </Grid>
@@ -131,7 +131,7 @@ export default function CartPage() {
                         <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
-                            src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
+                            src="http://localhost:8080/api/product/image/dummy.jpg"
                             alt="product-img"
                           />
                         </Grid>

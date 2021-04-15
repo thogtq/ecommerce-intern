@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     height: "100%",
   },
 });
+
+const dummyImg = "http://localhost:8080/api/product/image/dummy.jpg";
+
 export default function SuggestionProducts() {
   const classes = useStyles();
   return (
@@ -18,25 +21,25 @@ export default function SuggestionProducts() {
       <GridList classes={{ root: classes.gridList }}>
         <ProductItem
           className={classes.productItem}
-          image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
+          image={dummyImg}
           name="Button-Down Denim Mini Dress"
          
         />
         <ProductItem
           className={classes.productItem}
-          image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
+          image={dummyImg}
           name="Button-Down Denim Mini Dress"
          
         />
           <ProductItem
           className={classes.productItem}
-          image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
+          image={dummyImg}
           name="Button-Down Denim Mini Dress"
          
         />
           <ProductItem
           className={classes.productItem}
-          image="ziCPYSdwa3vGWcbF2q2fyY.jpg"
+          image={dummyImg}
           name="Button-Down Denim Mini Dress"
          
         />

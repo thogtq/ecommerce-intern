@@ -20,6 +20,8 @@
     @include text-style(Montserrat-Medium, 14px, 22px, #202124);
   }
   .description {
+    white-space: pre-wrap;
+    word-wrap: break-word;
     @include text-style(Montserrat-Regular, 12px, 22px, #202124);
   }
 }

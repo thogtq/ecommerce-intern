@@ -1,7 +1,7 @@
 import { InputAdornment, makeStyles, TextField } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import { useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 const useStyles = makeStyles({
   root: {
     width: "108px",
@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   },
 });
 export default function QuantityPicker(props) {
+  const refTest = useRef(null);
   const classes = useStyles();
   const [value, setValue] = useState(1);
   const handleIncrease = (e) => {
@@ -36,9 +37,18 @@ export default function QuantityPicker(props) {
     if (value === 1) return;
     setValue(value - 1);
   };
+  const handleChange = (e) => {
+    setValue(parseInt(e.target.value));
+  };
+  useEffect(() => {
+    props.onChange(value);
+  }, [value]);
+
   return (
     <TextField
+      ref={refTest}
       value={value}
+      onChange={handleChange}
       className={classes.root}
       InputProps={{
         startAdornment: (

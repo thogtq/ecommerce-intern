@@ -12,9 +12,11 @@ import UserPage from "./pages/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
+import TestPage from "./pages/AddProduct/TestPage/TestPage";
 
 ReactDOM.render(
   <BrowserRouter>
+    <Route exact path="/test" component={TestPage}></Route>
     <Route exact path="/" component={Homepage}></Route>
     <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
     <Route exact path="/admin/login" component={AdminLogin}></Route>
