@@ -5,52 +5,45 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
-const CatgoryBreadcrumb = (props) => {
-  const handleClick = () => {};
-  return (
-    <React.Fragment>
-      <Breadcrumbs
-        classes={{ root: "products-breadcrumb" }}
-        aria-label="breadcrumb"
-      >
-        <Link to="/" onClick={handleClick}>
-          Men
-        </Link>
-        <Link to="/" onClick={handleClick}>
-          Hats
-        </Link>
-      </Breadcrumbs>
-    </React.Fragment>
-  );
-};
-const Body = () => {
-  const [productFilter, setProductFilter] = useState({
-    sort: "createdAt",
-    order: -1,
-    search: "",
-    page: 1,
-  });
-  return (
-    <div className="container">
-      <CatgoryBreadcrumb />
-      <Grid container direction="row">
-        <SidebarNav />
-        <ProductsContainer
-          filter={productFilter}
-          setFilter={setProductFilter}
-        />
-      </Grid>
-    </div>
-  );
-};
+import { useLocation, useHistory } from "react-router";
+
 export default function ProductsPage() {
+  const useQuery = new URLSearchParams(useLocation().search);
+  const [productFilter, setProductFilter] = useState();
+  let category = useQuery.get("category");
+  if (!category) {
+    category = "";
+  };
+  useEffect(() => {
+    setProductFilter({
+      sortBy: "sold",
+      category: category,
+    });
+  }, [useLocation()]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <React.Fragment>
       <Header />
-      <Body />
+      <div className="container">
+        <Breadcrumbs
+          classes={{ root: "products-breadcrumb" }}
+          aria-label="breadcrumb"
+        >
+          <Link to={"?category=" + category.split("/", 1)[0]}>
+            {category.split("/", 1)[0]}
+          </Link>
+          <Link to={"?category=" + category}>{category.split("/")[1]}</Link>
+        </Breadcrumbs>
+        <Grid container direction="row">
+          <SidebarNav />
+          <ProductsContainer
+            filter={productFilter}
+            setFilter={setProductFilter}
+          />
+        </Grid>
+      </div>
       <Footer />
     </React.Fragment>
   );

@@ -8,7 +8,6 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "55px",
     "& div:nth-child(3)": {
       boxShadow: "none",
       borderRadius: "0px",
@@ -39,8 +38,9 @@ const CategoryNavBar = () => {
     e.preventDefault();
     setAnchorEl(null);
   };
-  const CategoryMenu = () => {
+  const CategoryMenu = (e) => {
     const handleCategoryClick = (e) => {
+      handleClose(e);
       let category = e.currentTarget.attributes["value"].nodeValue;
       history.push("/products/?category=" + encodeURIComponent(category));
     };
@@ -57,11 +57,11 @@ const CategoryNavBar = () => {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
         // MenuListProps={{ onMouseLeave: handleClose }}
         disableAutoFocusItem={true}
+        getContentAnchorEl={null}
       >
         {Object.keys(categoryItems).map((item) => {
           let name = categoryItems[item].name;
           let value = categoryItems[item].value;
-          console.log(name);
           return (
             <MenuItem key={value} onClick={handleCategoryClick} value={value}>
               {name}

@@ -23,7 +23,6 @@ export default function AddProductForm() {
     price: 0,
     description: "",
   });
-  console.log(formData);
   const CategorySelect = () => {
     const categories = productConst.addProductCategory;
     const handleCategory = (e) => {

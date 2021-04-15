@@ -7,8 +7,9 @@ import {
 } from "@material-ui/core";
 import SimplePagination from "components/SimplePagination";
 import ProductItem from "../../components/ProductItem";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useHistory } from "react";
 import ProductService from "services/ProductService";
+import { useLocation } from "react-router";
 const useStyles = makeStyles({
   sortBar: {
     marginBottom: "14px",
@@ -23,7 +24,6 @@ const useStyles = makeStyles({
 });
 export default function ProductsContainer({ filter, setFilter }) {
   const [products, setProducts] = useState([]);
-
   const classes = useStyles();
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,7 +35,7 @@ export default function ProductsContainer({ filter, setFilter }) {
       }
     };
     fetchProduct();
-  }, [filter]);
+  }, [filter, useLocation()]);
   return (
     <Grid item xs>
       <Grid className={classes.sortBar} item container justify="space-between">
