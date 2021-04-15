@@ -1,7 +1,7 @@
 import { Breadcrumbs, Grid } from "@material-ui/core";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
-import React,{useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
@@ -35,12 +35,18 @@ const Body = () => {
       <CatgoryBreadcrumb />
       <Grid container direction="row">
         <SidebarNav />
-        <ProductsContainer filter={productFilter} setFilter={setProductFilter} />
+        <ProductsContainer
+          filter={productFilter}
+          setFilter={setProductFilter}
+        />
       </Grid>
     </div>
   );
 };
 export default function ProductsPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <React.Fragment>
       <Header />

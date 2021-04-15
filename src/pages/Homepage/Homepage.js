@@ -6,7 +6,8 @@ import boysCategoryImg from "assets/images/homepage/boys_category.jpg";
 import Header from "cores/Header/Header";
 import Footer from "cores/Footer/Footer";
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { parentCategory } from "constants/product";
 
 function Homepage() {
   return (
@@ -30,7 +31,7 @@ function BigBanner() {
     <div className="big-banner">
       <img src={bigBannerImg} alt="big-banner"></img>
       <div className="banner-slogan">OUTFIT OF THE WEEK</div>
-      <Link to="products">
+      <Link to="products/?category=Ladies">
         <button className="btn-shop-now">Shop now</button>
       </Link>
     </div>
@@ -40,10 +41,22 @@ function BigBanner() {
 function CategoryBanners() {
   return (
     <div className="category-banners">
-      <CategoryBanner categoryImg={menCategoryImg} categoryName="Men" />
-      <CategoryBanner categoryImg={ladiesCategoryImg} categoryName="Ladies" />
-      <CategoryBanner categoryImg={girlsCategoryImg} categoryName="Girls" />
-      <CategoryBanner categoryImg={boysCategoryImg} categoryName="Boys" />
+      <CategoryBanner
+        categoryImg={menCategoryImg}
+        categoryName={parentCategory.Men}
+      />
+      <CategoryBanner
+        categoryImg={ladiesCategoryImg}
+        categoryName={parentCategory.Ladies}
+      />
+      <CategoryBanner
+        categoryImg={girlsCategoryImg}
+        categoryName={parentCategory.Girls}
+      />
+      <CategoryBanner
+        categoryImg={boysCategoryImg}
+        categoryName={parentCategory.Boys}
+      />
     </div>
   );
 }
@@ -56,7 +69,9 @@ function CategoryBanner(props) {
         <div className="category-name">{props.categoryName}</div>
         <hr className="category-line"></hr>
         <div className="category-btn">
-          <button className="btn-shop-now">Shop now</button>
+          <Link to={"/products/?category=" + props.categoryName}>
+            <button className="btn-shop-now">Shop now</button>
+          </Link>
         </div>
       </div>
     </div>

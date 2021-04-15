@@ -12,9 +12,9 @@ export default function PhotoInput({ formData, setFormData }) {
     data.append("productImage", file);
     let res = await ProductService.uploadImage(data);
     if (res.status === "success") {
-      let fileName = res.data.fileName;
-      setUploaded(fileName);
-      setFormData({ ...formData, ["images"]: [...formData.images, fileName] });
+      let imageUrl = res.data.fileUrl;
+      setUploaded(imageUrl);
+      setFormData({ ...formData, ["images"]: [...formData.images, imageUrl] });
     } else {
       console.log(res.error);
     }
@@ -35,8 +35,7 @@ export default function PhotoInput({ formData, setFormData }) {
   useEffect(() => {
     if (inputPhotoDiv != null) {
       if (uploaded !== "") {
-        inputPhotoDiv.current.style.backgroundImage =
-          "url(" + ProductService.getTempImageURL(uploaded) + ")";
+        inputPhotoDiv.current.style.backgroundImage = "url(" + uploaded + ")";
       } else {
         inputPhotoDiv.current.style.backgroundImage = "unset";
       }

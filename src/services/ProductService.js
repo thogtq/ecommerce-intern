@@ -3,20 +3,12 @@ import * as api from "constants/api";
 
 const ProductService = {
   uploadImage,
-  getImageURL,
-  getTempImageURL,
   addProduct,
   getProducts,
   getProduct,
 };
 export default ProductService;
 
-function getTempImageURL(fileName) {
-  return api.SERVER + api.PRODUCT_TEMP_IMAGE + "/" + fileName;
-}
-function getImageURL(fileName) {
-  return api.SERVER + api.PRODUCT_IMAGE + "/" + fileName;
-}
 function uploadImage(image) {
   let header = {
     token: AuthService.getAccessToken(true),

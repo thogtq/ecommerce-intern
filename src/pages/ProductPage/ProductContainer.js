@@ -27,7 +27,7 @@ export default function ProductContainer({ product }) {
   const [currentImage, setCurrentImage] = useState();
   useEffect(() => {
     if (product.images[0] !== undefined) {
-      setCurrentImage(ProductService.getImageURL(product.images[0]));
+      setCurrentImage(product.images[0]);
     }
   }, [product]);
   return (

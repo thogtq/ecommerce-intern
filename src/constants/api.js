@@ -1,6 +1,5 @@
 export const SERVER = "http://localhost:8080";
 export const PRODUCT_IMAGE = "/api/product/image";
-export const PRODUCT_TEMP_IMAGE = "/api/product/temp";
 export const ADMIN_LOGIN = "/api/admin/login";
 export const USER_LOGIN = "/api/user/login";
 export const USER = "/api/user";

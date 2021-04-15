@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/Homepage/Homepage";
 
 import "assets/sass/main.scss";
 import { Route } from "react-router";

@@ -29,7 +29,7 @@ export default function VerticalImageList({
           <img
             key={index}
             onClick={handleClick}
-            src={ProductService.getImageURL(image)}
+            src={image}
             alt="small-thumbnail"
           ></img>
         );

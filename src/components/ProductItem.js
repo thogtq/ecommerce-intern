@@ -55,7 +55,7 @@ export default function ProductItem(props) {
         <div className={classes.productImageWrapper}>
           <img
             className={classes.productImage}
-            src={ProductService.getImageURL(image)}
+            src={image}
             alt="test"
           />
           <div className={classes.shopButton + " toggle"}>

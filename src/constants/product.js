@@ -1,3 +1,9 @@
+export const parentCategory = {
+  Men: "Men",
+  Ladies: "Ladies",
+  Girls: "Girls",
+  Boys: "Boys",
+};
 export const menCategory = [
   { name: "Shirts", value: "Men/Shirts" },
   { name: "Shorts & Pants", value: "Men/Shorts & Pants" },

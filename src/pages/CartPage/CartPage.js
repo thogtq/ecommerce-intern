@@ -24,6 +24,7 @@ export default function CartPage() {
       minWidth: "100px",
     },
   })(TableCell);
+  
   return (
     <React.Fragment>
       <Header />
@@ -51,7 +52,7 @@ export default function CartPage() {
                       scope="row"
                     >
                       <Grid container direction="row">
-                        <Grid item xs={5}>
+                        <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
                             src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
@@ -89,7 +90,7 @@ export default function CartPage() {
                       scope="row"
                     >
                       <Grid container direction="row">
-                        <Grid item xs={5}>
+                        <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
                             src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
@@ -127,7 +128,7 @@ export default function CartPage() {
                       scope="row"
                     >
                       <Grid container direction="row">
-                        <Grid item xs={5}>
+                        <Grid item xs={6} lg={3}>
                           <img
                             className="product-image"
                             src="http://localhost:8080/api/product/image/ziCPYSdwa3vGWcbF2q2fyY.jpg"
@@ -174,7 +175,7 @@ export default function CartPage() {
                 <span>Total product:</span>
                 <span className="f-right">$6.900</span>
               </div>
-              <Divider />
+              <Divider className="total-divider" />
               <div className="item subtotal">
                 <span>Subtotal</span>
                 <span className="f-right">$6.900</span>
@@ -187,6 +188,7 @@ export default function CartPage() {
               color="#ffffff"
               backgroundColor="#ff5f6d"
               weight="Bold"
+            
             />
           </Grid>
         </Grid>

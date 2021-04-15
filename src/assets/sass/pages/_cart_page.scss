@@ -27,12 +27,13 @@
       width: 100%;
       margin-bottom: 5px;
     }
-    .subtotal{
+    .subtotal {
       span {
         @include text-style("Montserrat-Bold", 16px, 24px, #202124);
       }
     }
     hr {
+      width: 100%;
       margin: 5px 0;
     }
   }

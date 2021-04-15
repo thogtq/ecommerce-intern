@@ -4,6 +4,7 @@ import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
 import { ReviewStarts } from "../../components/ReviewStars";
+import { submitButton } from "../../helpers/helpers";
 const useStyles = makeStyles({
   root: {
     gap: "28px",
@@ -76,6 +77,11 @@ const ColorInput = () => {
 export default function ProductDetails(props) {
   const { product } = props;
   const classes = useStyles();
+  const handleAddCart = (e) => {
+    submitButton(false);
+    window.scrollTo(0, 0);
+    submitButton(true);
+  };
   return (
     <Grid
       classes={{ root: classes.root }}
@@ -102,6 +108,8 @@ export default function ProductDetails(props) {
         color="#ffffff"
         weight="Bold"
         backgroundColor="#5f6dff"
+        onClick={handleAddCart}
+        submit
       />
       <Divider />
       <Typography className="description">

@@ -61,6 +61,10 @@ const HeaderUserMenu = () => {
     }
   }, [useQuery, history]);
   const NotLoggedIn = () => {
+    const [anchorCart, setAnchorCart] = useState(null);
+    const handleCartClick = (e) => {
+      setAnchorCart(e.target);
+    };
     return (
       <React.Fragment>
         <button className="register-btn" onClick={toggleRegisterModal}>
@@ -78,9 +82,14 @@ const HeaderUserMenu = () => {
           show={showLoginModal}
           toggleModal={toggleLoginModal}
         />
-        <Link to="/cart" className="cart-btn">
-          <img src={cartIcon} alt="cart"></img>
-        </Link>
+       <img
+          onClick={handleCartClick}
+          //onMouseOver={handleCartClick}
+          className="cart-btn"
+          src={cartIcon}
+          alt="cart"
+        ></img>
+        <CartMenu anchorEl={anchorCart} setAnchorEl={setAnchorCart} />
       </React.Fragment>
     );
   };

@@ -114,7 +114,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
               let da = new Date(product.createdAt);
               let dateAdded =
                 da.toLocaleTimeString() + ", " + da.toLocaleDateString();
-              let productImage = ProductService.getImageURL(product.images[0]);
+              let productImage = product.images[0];
               return (
                 <TableRow key={product.productID}>
                   <TableCell

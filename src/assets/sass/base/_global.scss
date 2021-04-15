@@ -34,7 +34,8 @@ a:visited {
   }
 }
 .color-active {
-  opacity: 0.5;
+  opacity: 0.4;
+  border: 2px solid #202124 !important;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
