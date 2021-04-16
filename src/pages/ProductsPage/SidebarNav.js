@@ -11,8 +11,11 @@ import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import CheckListItem from "components/CheckListItem";
 import InputRange from "components/InputRange";
 import SizePicker from "components/SizePicker";
+import { brands, colors } from "constants/product";
 import React from "react";
 import ColorPicker from "../../components/ColorPicker";
+import { sizes } from "../../constants/product";
+import { available } from "../../constants/product";
 
 const useStyles = makeStyles({
   hr: {
@@ -26,7 +29,7 @@ const CategoryList = () => {
       <div className="list-title">Category</div>
       <List className="category-sidebar">
         <ListItem disableGutters>
-          <ListItemText className="parent">All dresses</ListItemText>
+          <ListItemText className="parent">All Men products</ListItemText>
         </ListItem>
         <hr className="line"></hr>
         <ListItem disableGutters>
@@ -52,7 +55,7 @@ const CategoryList = () => {
   );
 };
 
-const FilterList = () => {
+const FilterList = ({ filter, setFilter }) => {
   const [open, setOpen] = React.useState({
     Size: false,
     Color: false,
@@ -64,6 +67,24 @@ const FilterList = () => {
     e.currentTarget.classList.toggle("active");
     let name = e.currentTarget.textContent;
     setOpen({ ...open, [name]: !open[name] });
+  };
+  const handleColorClick = (value) => {
+    setFilter({ ...filter, color: filter.color === value ? "" : value });
+  };
+  const handleSizeClick = (value) => {
+    setFilter({ ...filter, size: filter.size === value ? "" : value });
+  };
+  const handleBrandClick = (value) => {
+    setFilter({ ...filter, brand: filter.brand === value ? "" : value });
+  };
+  const handlePriceFilterChange = (min, max) => {
+    setFilter({ ...filter, minPrice: min, maxPrice: max });
+  };
+  const handleAvailableCick = (value) => {
+    setFilter({
+      ...filter,
+      available: filter.available === value ? "" : value,
+    });
   };
   const ExpandLessIcon = withStyles({
     root: { color: "#4d4d4d" },
@@ -81,15 +102,15 @@ const FilterList = () => {
         </ListItem>
         <Collapse in={open.Size} timeout="auto" unmountOnExit>
           <Grid container style={{ padding: "20px 0" }} spacing={1}>
-            <Grid item>
-              <SizePicker size="S" />
-            </Grid>
-            <Grid item>
-              <SizePicker size="M" />
-            </Grid>
-            <Grid item>
-              <SizePicker size="L" />
-            </Grid>
+            {sizes.map((size) => (
+              <Grid item key={size}>
+                <SizePicker
+                  size={size}
+                  onClick={handleSizeClick}
+                  active={size === filter.size}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Collapse>
         <ListItem disableGutters button onClick={handleClick}>
@@ -97,22 +118,16 @@ const FilterList = () => {
           {open.Color ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItem>
         <Collapse in={open.Color} timeout="auto" unmountOnExit>
-          <Grid container style={{ padding: "20px 0" }} spacing={1} wrap="wrap">
-            <Grid item xs={3}>
-              <ColorPicker color="Red" />
-            </Grid>
-            <Grid item xs={3}>
-              <ColorPicker color="Blue" />
-            </Grid>
-            <Grid item xs={3}>
-              <ColorPicker color="Black" />
-            </Grid>
-            <Grid item xs={3}>
-              <ColorPicker color="Green" />
-            </Grid>
-            <Grid item xs={3}>
-              <ColorPicker color="Yellow" />
-            </Grid>
+          <Grid container style={{ padding: "20px 0" }} wrap="wrap">
+            {colors.map((color) => (
+              <Grid key={color} item xs={3}>
+                <ColorPicker
+                  active={color == filter.color}
+                  color={color}
+                  onClick={handleColorClick}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Collapse>
         <ListItem disableGutters button onClick={handleClick}>
@@ -122,9 +137,15 @@ const FilterList = () => {
         <Collapse in={open.Brand} timeout="auto" unmountOnExit>
           <Grid container style={{ padding: "15px 0" }}>
             <List dense style={{ width: "100%" }}>
-              <CheckListItem>Zara</CheckListItem>
-              <CheckListItem>H&M</CheckListItem>
-              <CheckListItem>Dior</CheckListItem>
+              {brands.map((brand) => (
+                <CheckListItem
+                  key={brand}
+                  name={brand}
+                  value={brand}
+                  onClick={handleBrandClick}
+                  checked={brand === filter.brand}
+                />
+              ))}
             </List>
           </Grid>
         </Collapse>
@@ -134,7 +155,7 @@ const FilterList = () => {
         </ListItem>
         <Collapse in={open.Price} timeout="auto" unmountOnExit>
           <Grid container>
-            <InputRange />
+            <InputRange onChange={handlePriceFilterChange} min={0} max={500} />
           </Grid>
         </Collapse>
         <ListItem disableGutters button onClick={handleClick}>
@@ -144,8 +165,14 @@ const FilterList = () => {
         <Collapse in={open.Available} timeout="auto" unmountOnExit>
           <Grid container style={{ padding: "15px 0" }}>
             <List dense style={{ width: "100%" }}>
-              <CheckListItem>In-store</CheckListItem>
-              <CheckListItem>Out of stock</CheckListItem>
+              {available.map((item) => (
+                <CheckListItem
+                  checked={item.value === filter.available}
+                  name={item.name}
+                  value={item.value}
+                  onClick={handleAvailableCick}
+                />
+              ))}
             </List>
           </Grid>
         </Collapse>
@@ -153,13 +180,13 @@ const FilterList = () => {
     </React.Fragment>
   );
 };
-export default function SidebarNav() {
+export default function SidebarNav({ filter, setFilter }) {
   const classes = useStyles();
   return (
     <Grid classes={{ root: "products-sidebar-nav" }}>
       <CategoryList />
       <hr className={classes.hr + " line"}></hr>
-      <FilterList />
+      <FilterList filter={filter} setFilter={setFilter} />
     </Grid>
   );
 }

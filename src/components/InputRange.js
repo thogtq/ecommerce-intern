@@ -17,18 +17,20 @@ const useStyles = makeStyles({
 function valuetext(value) {
   return `$${value}`;
 }
-const InputRange = () => {
+const InputRange = (props) => {
+  const { min, max } = props;
   const classes = useStyles();
-  const [value, setValue] = useState([0, 500]);
+  const [value, setValue] = useState([min, max]);
   const marks = [
     {
-      value: 0,
-      label: "$0",
+      value: min,
+      label: "$"+min,
     },
-    { value: 500, label: "$500" },
+    { value: max, label: "$"+max },
   ];
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    props.onChange(value[0], value[1]);
   };
   return (
     <Slider
@@ -39,8 +41,8 @@ const InputRange = () => {
       aria-labelledby="range-slider"
       getAriaValueText={valuetext}
       marks={marks}
-      max={500}
-      min={0}
+      max={max}
+      min={min}
       step={10}
     />
   );

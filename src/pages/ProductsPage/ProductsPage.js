@@ -9,11 +9,11 @@ import { useLocation, useHistory } from "react-router";
 
 export default function ProductsPage() {
   const useQuery = new URLSearchParams(useLocation().search);
-  const [productFilter, setProductFilter] = useState();
+  const [productFilter, setProductFilter] = useState({});
   let category = useQuery.get("category");
   if (!category) {
     category = "";
-  };
+  }
   useEffect(() => {
     setProductFilter({
       sortBy: "sold",
@@ -37,7 +37,7 @@ export default function ProductsPage() {
           <Link to={"?category=" + category}>{category.split("/")[1]}</Link>
         </Breadcrumbs>
         <Grid container direction="row">
-          <SidebarNav />
+          <SidebarNav setFilter={setProductFilter} filter={productFilter} />
           <ProductsContainer
             filter={productFilter}
             setFilter={setProductFilter}

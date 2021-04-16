@@ -2,7 +2,7 @@ import { Button, withStyles } from "@material-ui/core";
 
 const SizePicker = (props) => {
   const active = Boolean(props.active);
-  const handleClick = (e) => {
+  const handleClick = () => {
     props.onClick(props.size);
   };
   const SizePickerButton = withStyles({

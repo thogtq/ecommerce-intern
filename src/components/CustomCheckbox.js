@@ -7,10 +7,15 @@ const CustomCheckbox = (props) => {
       },
     },
     checked: {},
-  })((props) => (
-    <Checkbox onChange={props.onChange}  edge="end" color="default" {...props} />
-  ));
-  return <StyledCheckbox />;
+  })(Checkbox);
+  return (
+    <StyledCheckbox
+      edge="end"
+      color="default"
+      onClick={props.onClick}
+      checked={Boolean(props.checked)}
+    />
+  );
 };
 
 export default CustomCheckbox;

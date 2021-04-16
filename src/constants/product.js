@@ -83,3 +83,13 @@ export const brands = [
   "Louis Vuittion",
   "Chanel",
 ];
+export const available = [
+  {
+    name: "In-store",
+    value: "in",
+  },
+  {
+    name: "Out of stock",
+    value: "out",
+  },
+];
