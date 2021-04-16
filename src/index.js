@@ -12,7 +12,7 @@ import UserPage from "./pages/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
-import TestPage from "./pages/AddProduct/TestPage/TestPage";
+import TestPage from "./pages/TestPage/TestPage";
 
 ReactDOM.render(
   <BrowserRouter>

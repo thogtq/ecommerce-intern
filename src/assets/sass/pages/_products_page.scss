@@ -10,7 +10,7 @@
       @include text-style(Montserrat-Regular, 14px, 22px, #4d4d4d);
     }
     .parent > span {
-      @include text-style(Montserrat-Medium, 14px, 22px, #ff6900);
+      @include text-style(Montserrat-Medium, 14px, 22px, #4d4d4d);
     }
   }
   .filter-sidebar {
@@ -25,13 +25,6 @@
       border-style: dashed;
       span {
         @include text-style(Montserrat-Medium, 14px, 22px, #202124);
-      }
-    }
-    .size-active.MuiButton-root{
-      border: unset;
-      background-color: #ffa15f;
-      span {
-        @include text-style(Montserrat-Bold, 14px, 22px, #ffffff);
       }
     }
   }

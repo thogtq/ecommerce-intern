@@ -55,10 +55,10 @@ export const addProductCategory = [
   ...boysCategory,
 ];
 export const categories = {
-  Men: { ...menCategory },
-  Ladies: { ...ladiesCategory },
-  Girls: { ...girlsCategory },
-  Boys: { ...boysCategory },
+  Men: [...menCategory],
+  Ladies: [...ladiesCategory],
+  Girls: [...girlsCategory],
+  Boys: [...boysCategory],
 };
 export const colors = [
   "Black",

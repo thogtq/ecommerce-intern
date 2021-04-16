@@ -22,7 +22,11 @@ const useStyles = makeStyles({
     minWidth: "180px",
   },
 });
-export default function ProductsContainer({ filter, setFilter }) {
+export default function ProductsContainer({
+  filter,
+  setFilter,
+  currentCategory,
+}) {
   const [products, setProducts] = useState([]);
   const classes = useStyles();
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function ProductsContainer({ filter, setFilter }) {
             products.map((product) => {
               return (
                 <ProductItem
+                  currentCategory={currentCategory}
                   className={classes.productItem}
                   name={product.name}
                   image={product.images[0]}

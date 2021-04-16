@@ -47,17 +47,13 @@ const useStyles = makeStyles({
   },
 });
 export default function ProductItem(props) {
-  const { image, name, price, id } = props;
+  const { image, name, price, id, currentCategory } = props;
   const classes = useStyles();
   return (
     <GridListTile className={props.className} classes={{ root: classes.root }}>
-      <Link to={"/product/?productID=" + id}>
+      <Link to={"/product/?productID=" + id + "&category=" + currentCategory}>
         <div className={classes.productImageWrapper}>
-          <img
-            className={classes.productImage}
-            src={image}
-            alt="test"
-          />
+          <img className={classes.productImage} src={image} alt="test" />
           <div className={classes.shopButton + " toggle"}>
             <SiteButton
               name="+ Quick shop"

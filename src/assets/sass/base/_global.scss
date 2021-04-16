@@ -37,6 +37,18 @@ a:visited {
   opacity: 0.4;
   border: 2px solid #202124 !important;
 }
+.category-active {
+  span {
+    color: #ff6900 !important;
+  }
+}
+.size-active.MuiButton-root {
+  border: unset;
+  background-color: #ffa15f;
+  span {
+    @include text-style(Montserrat-Bold, 14px, 22px, #ffffff);
+  }
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

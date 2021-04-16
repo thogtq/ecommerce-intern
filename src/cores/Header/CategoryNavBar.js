@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CategoryNavBar = () => {
   const history = useHistory();
-  const [categoryItems, setCategoryItems] = useState({});
+  const [categoryItems, setCategoryItems] = useState([]);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   // const [currentMenu, setCurrentMenu] = useState("");
@@ -42,7 +42,7 @@ const CategoryNavBar = () => {
     const handleCategoryClick = (e) => {
       handleClose(e);
       let category = e.currentTarget.attributes["value"].nodeValue;
-      history.push("/products/?category=" + encodeURIComponent(category));
+      history.push("/products/?category="+category);
     };
     return (
       <Menu
@@ -59,9 +59,9 @@ const CategoryNavBar = () => {
         disableAutoFocusItem={true}
         getContentAnchorEl={null}
       >
-        {Object.keys(categoryItems).map((item) => {
-          let name = categoryItems[item].name;
-          let value = categoryItems[item].value;
+        {categoryItems.map((category) => {
+          let name = category.name;
+          let value = category.value;
           return (
             <MenuItem key={value} onClick={handleCategoryClick} value={value}>
               {name}

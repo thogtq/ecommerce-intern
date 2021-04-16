@@ -10,6 +10,7 @@ import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import ProductService from "services/ProductService";
+import { render } from "@testing-library/react";
 
 export default function ProductPage() {
   //Fix me
@@ -17,6 +18,7 @@ export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState();
+  const category = useQuery.get("category");
   useEffect(() => {
     const fetchProduct = async () => {
       let productID = useQuery.get("productID");
@@ -41,9 +43,23 @@ export default function ProductPage() {
             classes={{ root: "product-breadcrumb" }}
             aria-label="breadcrumb"
           >
-            <Link to="/">Men</Link>
-            <Link to="/">Hats</Link>
-            <Link to="/">{product.name}</Link>
+            {category ? (
+              <Link to={"/products/?category=" + category.split("/")[0]}>
+                {category.split("/")[0]}
+              </Link>
+            ) : (
+              ""
+            )}
+            {category ? (
+              <Link to={"/products/?category=" + category}>
+                {category.split("/")[1]}
+              </Link>
+            ) : (
+              ""
+            )}
+            <Link to={"/product/?productID=" + product.productID}>
+              {product.name}
+            </Link>
           </Breadcrumbs>
         </Grid>
         <ProductContainer product={product} loading={loading} />

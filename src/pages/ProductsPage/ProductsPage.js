@@ -31,16 +31,17 @@ export default function ProductsPage() {
           classes={{ root: "products-breadcrumb" }}
           aria-label="breadcrumb"
         >
-          <Link to={"?category=" + category.split("/", 1)[0]}>
+          <Link to={"?category=" + category.split("/")[0]}>
             {category.split("/", 1)[0]}
           </Link>
           <Link to={"?category=" + category}>{category.split("/")[1]}</Link>
         </Breadcrumbs>
         <Grid container direction="row">
-          <SidebarNav setFilter={setProductFilter} filter={productFilter} />
+          <SidebarNav currentCategory={category} setFilter={setProductFilter} filter={productFilter} />
           <ProductsContainer
             filter={productFilter}
             setFilter={setProductFilter}
+            currentCategory={category}
           />
         </Grid>
       </div>
