@@ -40,7 +40,11 @@ export default function ProductsContainer({
     };
     fetchProduct();
   }, [filter, useLocation()]);
-  return (
+  return products.length === 0 ? (
+    <Grid className="text-regular-grey" item xs container justify="center" style={{marginTop:"50px"}}>
+      No result found
+    </Grid>
+  ) : (
     <Grid item xs>
       <Grid className={classes.sortBar} item container justify="space-between">
         <Grid item xs container alignItems="center">
@@ -60,25 +64,19 @@ export default function ProductsContainer({
           cols={0}
           spacing={0}
         >
-          {products === {} ? (
-            <Grid container justify="center">
-              No result found
-            </Grid>
-          ) : (
-            products.map((product) => {
-              return (
-                <ProductItem
-                  currentCategory={currentCategory}
-                  className={classes.productItem}
-                  name={product.name}
-                  image={product.images[0]}
-                  price={product.price}
-                  key={product.productID}
-                  id={product.productID}
-                ></ProductItem>
-              );
-            })
-          )}
+          {products.map((product) => {
+            return (
+              <ProductItem
+                currentCategory={currentCategory}
+                className={classes.productItem}
+                name={product.name}
+                image={product.images[0]}
+                price={product.price}
+                key={product.productID}
+                id={product.productID}
+              ></ProductItem>
+            );
+          })}
         </GridList>
       </Grid>
       <Grid container justify="flex-end">

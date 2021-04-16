@@ -10,11 +10,8 @@ import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import ProductService from "services/ProductService";
-import { render } from "@testing-library/react";
 
 export default function ProductPage() {
-  //Fix me
-  // init productID here not work
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState();
