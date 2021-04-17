@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     marginBottom: "30px",
   },
   sameBrand: {
+    maxWidth: "130px",
     padding: "0!important",
     marginTop: "20px",
   },

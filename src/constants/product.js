@@ -6,10 +6,10 @@ export const parentCategory = {
 };
 export const menCategory = [
   { name: "Shirts", value: "Men/Shirts" },
-  { name: "Shorts & Pants", value: "Men/Shorts & Pants" },
+  { name: "Shorts and Pants", value: "Men/Shorts and Pants" },
   { name: "Belts", value: "Men/Belts" },
   { name: "Hats", value: "Men/Hats" },
-  { name: "Coats & Jackets", value: "Men/Coats & Jackets" },
+  { name: "Coats and Jackets", value: "Men/Coats and Jackets" },
 ];
 export const ladiesCategory = [
   { name: "Top", value: "Ladies/Top" },

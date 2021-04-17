@@ -21,7 +21,9 @@ export default function SidebarNav({ filter, setFilter, currentCategory }) {
   const parentCategory = currentCategory.split("/", 1)[0];
   const categories = productConst.categories[parentCategory];
   const classes = useStyles();
-  return (
+  return !currentCategory ? (
+    ""
+  ) : (
     <Grid classes={{ root: "products-sidebar-nav" }}>
       <div>
         <div className="list-title">Category</div>

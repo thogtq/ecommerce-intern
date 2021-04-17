@@ -15,7 +15,10 @@ export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState();
-  const category = useQuery.get("category");
+  let category = useQuery.get("category");
+  if (!category) {
+    category = "";
+  }
   useEffect(() => {
     const fetchProduct = async () => {
       let productID = useQuery.get("productID");
@@ -40,14 +43,14 @@ export default function ProductPage() {
             classes={{ root: "product-breadcrumb" }}
             aria-label="breadcrumb"
           >
-            {category ? (
+            {category? (
               <Link to={"/products/?category=" + category.split("/")[0]}>
                 {category.split("/")[0]}
               </Link>
             ) : (
               ""
             )}
-            {category ? (
+            {category.split("/")[1] ? (
               <Link to={"/products/?category=" + category}>
                 {category.split("/")[1]}
               </Link>

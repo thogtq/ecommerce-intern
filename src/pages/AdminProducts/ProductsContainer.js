@@ -140,7 +140,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
                     </Grid>
                   </TableCell>
                   <TableCell className="table-cell-text" align="left">
-                    {product.sold}
+                    {product.sold + "/" + product.quantity}
                   </TableCell>
                   <TableCell className="table-cell-text" align="left">
                     {dateAdded}
@@ -174,8 +174,8 @@ const ProductContentTable = ({ filter, setFilter }) => {
 
 export default function ProductsContainer() {
   const [productFilter, setProductFilter] = useState({
-    sort: "createdAt",
-    order: -1,
+    sortBy: "createdAt",
+    sortOrder: -1,
     search: "",
     page: 1,
   });
