@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     gap: "20px",
   },
 });
-export default function ProductContainer({ product }) {
+export default function ProductContainer({ product, cart, setCart }) {
   const classes = useStyles();
   const [currentImage, setCurrentImage] = useState(product.images[0]);
   return (
@@ -46,7 +46,7 @@ export default function ProductContainer({ product }) {
         </Grid>
       </Grid>
       <Grid item xs={5}>
-        <ProductDetails product={product} />
+        <ProductDetails product={product} cart={cart} setCart={setCart} />
       </Grid>
       <Grid classes={{ root: classes.sameBrand }} item xs>
         <div className="product-same-brand">

@@ -15,19 +15,23 @@ import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
-import React from "react";
+import { loadCart } from "helpers/helpers";
+import React, { useState } from "react";
+import CartItem from "./CartItem";
 
 export default function CartPage() {
+  const [total, setTotal] = useState(0);
+  const [cart, setCart] = useState(loadCart());
   const StyledTableCell = withStyles({
     root: {
       padding: "16px 0",
       minWidth: "100px",
     },
   })(TableCell);
-  
+
   return (
     <React.Fragment>
-      <Header />
+      <Header cart={cart} setCart={setCart} />
       <div className="container cart-page">
         <Grid className="header-title">My bag</Grid>
         <Grid container spacing={8}>
@@ -44,120 +48,14 @@ export default function CartPage() {
                   </TableRow>
                 </TableHead>
                 <TableBody className="table-body">
-                  <TableRow>
-                    <StyledTableCell
-                      align="left"
-                      className="th-product"
-                      component="th"
-                      scope="row"
-                    >
-                      <Grid container direction="row">
-                        <Grid item xs={6} lg={3}>
-                          <img
-                            className="product-image"
-                            src="http://localhost:8080/api/product/image/dummy.jpg"
-                            alt="product-img"
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          xs
-                          container
-                          direction="column"
-                          justify="space-between"
-                        >
-                          <Grid className="product-name" item>
-                            Collete Stretch Linen Minidress Long Text
-                          </Grid>
-                          <Grid item>Change | Remove</Grid>
-                        </Grid>
-                      </Grid>
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      <ColorPicker color="Black" />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">XXL</StyledTableCell>
-                    <StyledTableCell align="center">
-                      <QuantityPicker />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">$69.00</StyledTableCell>
-                  </TableRow>
-                  <TableRow>
-                    <StyledTableCell
-                      align="left"
-                      className="th-product"
-                      component="th"
-                      scope="row"
-                    >
-                      <Grid container direction="row">
-                        <Grid item xs={6} lg={3}>
-                          <img
-                            className="product-image"
-                            src="http://localhost:8080/api/product/image/dummy.jpg"
-                            alt="product-img"
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          xs
-                          container
-                          direction="column"
-                          justify="space-between"
-                        >
-                          <Grid className="product-name" item>
-                            Collete Stretch Linen Minidress Long Text
-                          </Grid>
-                          <Grid item>Change | Remove</Grid>
-                        </Grid>
-                      </Grid>
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      <ColorPicker color="Black" />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">XXL</StyledTableCell>
-                    <StyledTableCell align="center">
-                      <QuantityPicker />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">$69.00</StyledTableCell>
-                  </TableRow>
-                  <TableRow>
-                    <StyledTableCell
-                      align="left"
-                      className="th-product"
-                      component="th"
-                      scope="row"
-                    >
-                      <Grid container direction="row">
-                        <Grid item xs={6} lg={3}>
-                          <img
-                            className="product-image"
-                            src="http://localhost:8080/api/product/image/dummy.jpg"
-                            alt="product-img"
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          xs
-                          container
-                          direction="column"
-                          justify="space-between"
-                        >
-                          <Grid className="product-name" item>
-                            Collete Stretch Linen Minidress Long Text
-                          </Grid>
-                          <Grid item>Change | Remove</Grid>
-                        </Grid>
-                      </Grid>
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      <ColorPicker color="Black" />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">XXL</StyledTableCell>
-                    <StyledTableCell align="center">
-                      <QuantityPicker />
-                    </StyledTableCell>
-                    <StyledTableCell align="center">$69.00</StyledTableCell>
-                  </TableRow>
+                  {cart.map((cartItem, index) => (
+                    <CartItem
+                      key={index}
+                      cartItem={cartItem}
+                      total={total}
+                      setTotal={setTotal}
+                    />
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -173,12 +71,12 @@ export default function CartPage() {
               </div>
               <div className="item">
                 <span>Total product:</span>
-                <span className="f-right">$6.900</span>
+                <span className="f-right">${total}</span>
               </div>
               <Divider className="total-divider" />
               <div className="item subtotal">
                 <span>Subtotal</span>
-                <span className="f-right">$6.900</span>
+                <span className="f-right">${total}</span>
               </div>
             </Grid>
             <SiteButton
@@ -188,7 +86,6 @@ export default function CartPage() {
               color="#ffffff"
               backgroundColor="#ff5f6d"
               weight="Bold"
-            
             />
           </Grid>
         </Grid>

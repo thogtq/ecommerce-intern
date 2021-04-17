@@ -1,9 +1,9 @@
 import cartIcon from "assets/images/icons/cart.svg";
 import LoginModal from "components/LoginModal";
 import RegisterModal from "components/RegisterModal";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { isAuthenticated, logout } from "services/AuthService";
-import { makeStyles, Menu, Avatar } from "@material-ui/core";
+import { makeStyles, Menu, Avatar, Badge } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import { useLocation, useHistory } from "react-router";
@@ -32,9 +32,13 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: "22px",
     },
   },
+  cartBadge: {
+    backgroundColor: "#ffa15f",
+    color: "#ffffff",
+  },
 }));
 
-const HeaderUserMenu = () => {
+const HeaderUserMenu = ({ cart }) => {
   const history = useHistory();
   const useQuery = new URLSearchParams(useLocation().search);
   const classes = useStyles();
@@ -60,6 +64,18 @@ const HeaderUserMenu = () => {
       history.replace({ search: useQuery.toString() });
     }
   }, [useQuery, history]);
+  const CartButton = ({ onClick, cart }) => {
+    return (
+      <Badge badgeContent={cart.length} classes={{ badge: classes.cartBadge }}>
+        <img
+          onClick={onClick}
+          className="cart-btn"
+          src={cartIcon}
+          alt="cart"
+        ></img>
+      </Badge>
+    );
+  };
   const NotLoggedIn = () => {
     const [anchorCart, setAnchorCart] = useState(null);
     const handleCartClick = (e) => {
@@ -82,14 +98,12 @@ const HeaderUserMenu = () => {
           show={showLoginModal}
           toggleModal={toggleLoginModal}
         />
-       <img
-          onClick={handleCartClick}
-          //onMouseOver={handleCartClick}
-          className="cart-btn"
-          src={cartIcon}
-          alt="cart"
-        ></img>
-        <CartMenu anchorEl={anchorCart} setAnchorEl={setAnchorCart} />
+        <CartButton cart={cart} onClick={handleCartClick} />
+        <CartMenu
+          cart={cart}
+          anchorEl={anchorCart}
+          setAnchorEl={setAnchorCart}
+        />
       </React.Fragment>
     );
   };
@@ -138,14 +152,13 @@ const HeaderUserMenu = () => {
           <hr className="line"></hr>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-        <img
-          onClick={handleCartClick}
-          //onMouseOver={handleCartClick}
-          className="cart-btn"
-          src={cartIcon}
-          alt="cart"
-        ></img>
-        <CartMenu anchorEl={anchorCart} setAnchorEl={setAnchorCart} />
+        <CartButton cart={cart} onClick={handleCartClick} />
+
+        <CartMenu
+          cart={cart}
+          anchorEl={anchorCart}
+          setAnchorEl={setAnchorCart}
+        />
       </React.Fragment>
     );
   };

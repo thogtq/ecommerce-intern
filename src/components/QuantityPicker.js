@@ -26,9 +26,13 @@ const useStyles = makeStyles({
   },
 });
 export default function QuantityPicker(props) {
+  let defaultValue = 1;
+  if (props.hasOwnProperty("value")) {
+    defaultValue = props.value;
+  }
   const refTest = useRef(null);
   const classes = useStyles();
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(defaultValue);
   const handleIncrease = (e) => {
     if (value === 999) return;
     setValue(value + 1);
@@ -41,7 +45,9 @@ export default function QuantityPicker(props) {
     setValue(parseInt(e.target.value));
   };
   useEffect(() => {
-    props.onChange(value);
+    if (props.hasOwnProperty("onChange")) {
+      props.onChange(value);
+    }
   }, [value]);
 
   return (

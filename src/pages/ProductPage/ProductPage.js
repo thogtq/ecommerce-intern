@@ -10,11 +10,13 @@ import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import ProductService from "services/ProductService";
+import { loadCart } from "helpers/helpers";
 
 export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState();
+  const [cart, setCart] = useState(loadCart());
   let category = useQuery.get("category");
   if (!category) {
     category = "";
@@ -36,14 +38,14 @@ export default function ProductPage() {
     ""
   ) : (
     <React.Fragment>
-      <Header />
+      <Header cart={cart} setCart={setCart} />
       <Grid className="container">
         <Grid container justify="center">
           <Breadcrumbs
             classes={{ root: "product-breadcrumb" }}
             aria-label="breadcrumb"
           >
-            {category? (
+            {category ? (
               <Link to={"/products/?category=" + category.split("/")[0]}>
                 {category.split("/")[0]}
               </Link>
@@ -62,7 +64,12 @@ export default function ProductPage() {
             </Link>
           </Breadcrumbs>
         </Grid>
-        <ProductContainer product={product} loading={loading} />
+        <ProductContainer
+          product={product}
+          loading={loading}
+          cart={cart}
+          setCart={setCart}
+        />
         <TextDivider text="Reviews" />
         <ReviewsContainer />
         <TextDivider text="You may also like" />

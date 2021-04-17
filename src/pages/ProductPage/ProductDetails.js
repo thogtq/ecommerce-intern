@@ -5,7 +5,7 @@ import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
 import { useState } from "react";
 import { ReviewStarts } from "../../components/ReviewStars";
-import { submitButton } from "../../helpers/helpers";
+import { isExistCartItem, submitButton } from "../../helpers/helpers";
 const useStyles = makeStyles({
   root: {
     gap: "28px",
@@ -96,7 +96,7 @@ const ColorInput = ({ colors, productCart, setProductCart }) => {
     </Grid>
   );
 };
-export default function ProductDetails(props) {
+export default function ProductDetails({ cart, setCart, ...props }) {
   const { product } = props;
   const [productCart, setProductCart] = useState({
     productID: product.productID,
@@ -104,10 +104,25 @@ export default function ProductDetails(props) {
 
   const classes = useStyles();
   const handleAddCart = (e) => {
-    console.log(JSON.stringify(productCart));
     submitButton(false);
-    window.scrollTo(0, 0);
+    if (
+      (product.sizes.length !== 0 && !productCart.size) ||
+      (product.colors.length !== 0 && !productCart.color)
+    ) {
+      alert("Please select attributes");
+      return;
+    }
+    let existCheck = isExistCartItem(cart, productCart);
+    if (existCheck !== -1) {
+      cart[existCheck].quantity += productCart.quantity;
+      setCart([...cart]);
+    }else{
+      setCart([...cart, productCart]);
+    }
+    setProductCart({ productID: product.productID });
+    alert("Product has been added to cart");
     submitButton(true);
+    window.scrollTo(0, 0);
   };
   const handleQuantityChange = (value) => {
     setProductCart({ ...productCart, quantity: value });

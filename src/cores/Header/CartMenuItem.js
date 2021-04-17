@@ -1,4 +1,6 @@
 import { Grid, makeStyles } from "@material-ui/core";
+import { useState, useEffect } from "react";
+import ProductService from "../../services/ProductService";
 const useStyles = makeStyles({
   root: {
     marginLeft: 20,
@@ -26,16 +28,27 @@ const useStyles = makeStyles({
     lineHeight: "22px",
   },
 });
-export default function CartMenuItem() {
+export default function CartMenuItem({ cartItem }) {
+  const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
-  return (
+  useEffect(() => {
+    const fetchProduct = async () => {
+      let res = await ProductService.getProduct(cartItem.productID);
+      if (res.status === "success") {
+        setProduct(res.data.product);
+        setLoading(false);
+      } else {
+        console.log(res.error.message);
+      }
+    };
+    fetchProduct();
+  }, []);
+  return loading ? (
+    ""
+  ) : (
     <Grid className={classes.image} container direction="row">
-      <img
-        src="http://localhost:8080/api/product/image/dummy.jpg"
-        alt="item"
-        width="60"
-        height="60"
-      />
+      <img src={product.images[0]} alt="item" width="60" height="60" />
       <Grid
         classes={{ root: classes.root }}
         item
@@ -45,11 +58,15 @@ export default function CartMenuItem() {
         justify="space-between"
       >
         <Grid item className={classes.name}>
-          New Balance Men's Street Backpack
+          {product.name}
         </Grid>
         <Grid item>
-          <span className={classes.price}>$485</span>
-          <span className={classes.attr}> S &middot; Black &middot; 1pcs </span>
+          <span className={classes.price}>${product.price}</span>
+          <span className={classes.attr}>
+            {" "}
+            {cartItem.size} &middot; {cartItem.color} &middot;{" "}
+            {cartItem.quantity}pcs{" "}
+          </span>
         </Grid>
       </Grid>
     </Grid>

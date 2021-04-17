@@ -8,7 +8,9 @@ const ColorPicker = (props) => {
   }
 
   const handleClick = (e) => {
-    props.onClick(props.color);
+    if (props.hasOwnProperty("onClick")) {
+      props.onClick(props.color);
+    }
   };
   const ColorPickerButton = withStyles({
     root: {
