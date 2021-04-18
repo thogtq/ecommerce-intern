@@ -1,5 +1,7 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import ProductService from "services/ProductService";
+import { useEffect } from "react";
+import { useLocation } from "react-router";
 //Fix me
 //sync height image
 const useStyles = makeStyles({
@@ -12,11 +14,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProductImage({ image }) {
+export default function ProductImage({ currentImage }) {
   const classes = useStyles();
-  return image ? (
+  return currentImage ? (
     <Grid container classes={{ root: classes.root }}>
-      <img src={image} alt="product-img"></img>
+      <img src={currentImage} alt="product-img"></img>
     </Grid>
   ) : (
     ""

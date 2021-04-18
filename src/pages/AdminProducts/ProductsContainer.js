@@ -20,6 +20,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ProductService from "../../services/ProductService";
 import DropdownMenu from "components/DropdownMenu";
 import { Link } from "react-router-dom";
+import ConfirmBox from "components/ConfirmBox";
 
 const Header = () => {
   return (
@@ -34,6 +35,8 @@ const Header = () => {
 const ProductContentTable = ({ filter, setFilter }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    //Fix me
+    //Unounted
     const fetchProduct = async () => {
       let res = await ProductService.getProducts(filter);
       if (res.status === "success") {
@@ -47,36 +50,52 @@ const ProductContentTable = ({ filter, setFilter }) => {
   const handlePagination = (e) => {
     setFilter({ ...filter, page: parseInt(e.target.textContent) });
   };
-  // console.log(products);
+
   const ActionMenu = (props) => {
     const anchorRef = useRef(null);
-    const [open, setOpen] = React.useState(false);
-    const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
+    const handleToggle = (e) => {
+      setOpenMenu((prevOpen) => !prevOpen);
+    };
+    //Handle remove product
+    const handleRemove = async () => {
+      let res = await ProductService.deleteProduct(props.productID);
+      if (res.status === "success") {
+        setProducts(
+          products.filter((product) => product.productID != props.productID)
+        );
+      } else {
+        console.log(res);
+        //alert(res.error.message);
+      }
+      setOpenMenu(false);
     };
     const handleClose = (event) => {
       if (anchorRef.current && anchorRef.current.contains(event.target)) {
         return;
       }
-      setOpen(false);
+      setOpenMenu(false);
     };
     return (
       <React.Fragment>
         <span
           ref={anchorRef}
-          aria-controls={open ? "menu-list-grow" : undefined}
+          aria-controls={openMenu ? "menu-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
         >
           Actions
         </span>
         <DropdownMenu
-          open={open}
-          setOpen={setOpen}
+          open={openMenu}
+          setOpen={setOpenMenu}
           anchorRef={anchorRef}
           handleClose={handleClose}
         >
-          <Link to={"/admin/products/edit-product/?productID=" + props.ID}>
+          <Link
+            to={"/admin/products/edit-product/?productID=" + props.productID}
+          >
             <MenuItem className="table-cell-text" onClick={handleClose}>
               <ListItemIcon>
                 <CreateIcon color="disabled" />
@@ -84,12 +103,23 @@ const ProductContentTable = ({ filter, setFilter }) => {
               Edit
             </MenuItem>
           </Link>
-          <MenuItem className="table-cell-text" onClick={handleClose}>
+          <MenuItem
+            className="table-cell-text"
+            onClick={(e) => {
+              setOpenConfirm(true);
+            }}
+          >
             <ListItemIcon>
               <DeleteIcon color="disabled" />
             </ListItemIcon>
             Remove
           </MenuItem>
+          <ConfirmBox
+            openConfirm={openConfirm}
+            setOpenConfirm={setOpenConfirm}
+            onConfirm={handleRemove}
+            content={"Do you want to remove `" + props.name + "` ?"}
+          />
         </DropdownMenu>
         <img src={dropdownIcon} alt="dropdown-icon"></img>
       </React.Fragment>
@@ -149,7 +179,10 @@ const ProductContentTable = ({ filter, setFilter }) => {
                     {profit}
                   </TableCell>
                   <TableCell className="td-action" align="right">
-                    <ActionMenu ID={product.productID} />
+                    <ActionMenu
+                      productID={product.productID}
+                      name={product.name}
+                    />
                   </TableCell>
                 </TableRow>
               );

@@ -4,6 +4,7 @@ import AdminProducts from "pages/AdminProducts/AdminProducts";
 import AdminOrders from "pages/AdminOrders/AdminOrders";
 import { AdminRoute } from "cores/PrivateRoute";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import EditProduct from '../pages/EditProduct/EditProduct';
 
 export default function AdminRoutes() {
   return (
@@ -14,6 +15,10 @@ export default function AdminRoutes() {
       <AdminRoute
         path="/admin/products/add-product"
         component={AddProduct}
+      ></AdminRoute>
+       <AdminRoute
+        path="/admin/products/edit-product"
+        component={EditProduct}
       ></AdminRoute>
     </Switch>
   );

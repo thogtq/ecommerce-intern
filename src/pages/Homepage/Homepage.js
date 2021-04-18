@@ -5,25 +5,22 @@ import girlsCategoryImg from "assets/images/homepage/girls_category.jpg";
 import boysCategoryImg from "assets/images/homepage/boys_category.jpg";
 import Header from "cores/Header/Header";
 import Footer from "cores/Footer/Footer";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { parentCategory } from "constants/product";
+import { loadCart } from "helpers/helpers";
 
 function Homepage() {
+  const [cart, setCart] = useState(loadCart());
   return (
     <React.Fragment>
-      <Header />
-      <Body />
+      <Header cart={cart} setCart={setCart} />
+      <div className="container">
+        <BigBanner />
+        <CategoryBanners />
+      </div>
       <Footer />
     </React.Fragment>
-  );
-}
-function Body() {
-  return (
-    <div className="container">
-      <BigBanner />
-      <CategoryBanners />
-    </div>
   );
 }
 function BigBanner() {

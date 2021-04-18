@@ -6,6 +6,8 @@ const ProductService = {
   addProduct,
   getProducts,
   getProduct,
+  deleteProduct,
+  updateProduct,
 };
 export default ProductService;
 
@@ -17,6 +19,24 @@ function uploadImage(image) {
     method: "POST",
     headers: header,
     body: image,
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
+}
+function updateProduct(productData) {
+  let header = {
+    "Content-Type": "application/json",
+    token: AuthService.getAccessToken(true),
+  };
+  return fetch(api.SERVER + api.PRODUCT, {
+    method: "PUT",
+    headers: header,
+    body: JSON.stringify(productData),
   }).then(
     (res) => {
       return res.json();
@@ -73,6 +93,23 @@ function getProduct(productID) {
   };
   return fetch(api.SERVER + api.PRODUCT + "/?productID=" + productID, {
     method: "GET",
+    headers: header,
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
+}
+function deleteProduct(productID) {
+  let header = {
+    "Content-Type": "application/json",
+    token: AuthService.getAccessToken(true),
+  };
+  return fetch(api.SERVER + api.PRODUCT + "/?productID=" + productID, {
+    method: "DELETE",
     headers: header,
   }).then(
     (res) => {

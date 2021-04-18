@@ -1,5 +1,6 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import ProductService from "services/ProductService";
+import { useState } from "react";
 
 const dummyImg =
   "https://fashionjackson.com/wp-content/uploads/2021/04/Fashion-Jackson-Wearing-Amazon-Fashion-Black-Long-Sleeve-Top-Ripped-Jeans-Chanel-Slingbacks-Chanel-Backpack-1140x1530.jpg";
@@ -21,6 +22,7 @@ export default function VerticalImageList({
   const handleClick = (e) => {
     setCurrentImage(e.currentTarget.src);
   };
+ 
   const classes = useStyles(props);
   return (
     <Grid container direction="column" classes={{ root: classes.root }}>

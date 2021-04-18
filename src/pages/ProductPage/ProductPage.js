@@ -33,7 +33,7 @@ export default function ProductPage() {
       }
     };
     fetchProduct();
-  }, []);
+  }, [useLocation()]);
   return loading ? (
     ""
   ) : (

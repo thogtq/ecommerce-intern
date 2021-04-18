@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
 import { useLocation, useHistory } from "react-router";
+import { loadCart } from "helpers/helpers";
 
 export default function ProductsPage() {
+  const [cart, setCart] = useState(loadCart());
   const useQuery = new URLSearchParams(useLocation().search);
   let category = useQuery.get("category");
   if (!category) {
@@ -28,7 +30,7 @@ export default function ProductsPage() {
   }, []);
   return (
     <React.Fragment>
-      <Header />
+      <Header cart={cart} setCart={setCart} />
       <div className="container">
         <Breadcrumbs
           classes={{ root: "products-breadcrumb" }}

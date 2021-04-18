@@ -1,6 +1,7 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
     marginLeft: 20,
@@ -27,6 +28,9 @@ const useStyles = makeStyles({
     fontSize: "12px",
     lineHeight: "22px",
   },
+  listItem: {
+    maxHeight: "80px",
+  },
 });
 export default function CartMenuItem({ cartItem }) {
   const [product, setProduct] = useState({});
@@ -47,28 +51,35 @@ export default function CartMenuItem({ cartItem }) {
   return loading ? (
     ""
   ) : (
-    <Grid className={classes.image} container direction="row">
-      <img src={product.images[0]} alt="item" width="60" height="60" />
-      <Grid
-        classes={{ root: classes.root }}
-        item
-        xs
-        container
-        direction="column"
-        justify="space-between"
-      >
-        <Grid item className={classes.name}>
-          {product.name}
-        </Grid>
-        <Grid item>
-          <span className={classes.price}>${product.price}</span>
-          <span className={classes.attr}>
-            {" "}
-            {cartItem.size} &middot; {cartItem.color} &middot;{" "}
-            {cartItem.quantity}pcs{" "}
-          </span>
+    <MenuItem
+      component={Link}
+      to={"/product/?productID=" + product.productID}
+      classes={{ root: classes.listItem }}
+    >
+      <Grid className={classes.image} container direction="row">
+        <img src={product.images[0]} alt="item" width="60" height="60" />
+        <Grid
+          classes={{ root: classes.root }}
+          item
+          xs
+          container
+          direction="column"
+          justify="space-between"
+        >
+          <Grid item className={classes.name}>
+            {product.name}
+          </Grid>
+          <Grid item>
+            <span className={classes.price}>${product.price}</span>
+            <span className={classes.attr}>
+              {" "}
+              {cartItem.size} &middot; {cartItem.color} &middot;{" "}
+              {cartItem.quantity}pcs{" "}
+            </span>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <hr className="line"></hr>
+    </MenuItem>
   );
 }

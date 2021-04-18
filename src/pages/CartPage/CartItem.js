@@ -1,31 +1,18 @@
-import {
-  Grid,
-  Table,
-  TableCell,
-  TableRow,
-  TableContainer,
-  Paper,
-  TableHead,
-  TableBody,
-  withStyles,
-  Divider,
-} from "@material-ui/core";
+import { Grid, TableCell, TableRow, withStyles } from "@material-ui/core";
 import ColorPicker from "components/ColorPicker";
+import ConfirmBox from "components/ConfirmBox";
 import QuantityPicker from "components/QuantityPicker";
-import SiteButton from "components/SiteButton";
-import Footer from "cores/Footer/Footer";
-import Header from "cores/Header/Header";
-import { loadCart } from "helpers/helpers";
 import React, { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
 
 export default function CartItem({ cartItem, onRemove, total, setTotal }) {
+  const [amount, setAmount] = useState(0);
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleRemove = () => {
-    // if (onRemove) {
-    //   onRemove(index);
-    // }
+    setTotal(total - amount);
+    onRemove(cartItem);
   };
   const StyledTableCell = withStyles({
     root: {
@@ -33,6 +20,14 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
       minWidth: "100px",
     },
   })(TableCell);
+
+  useEffect(() => {
+    if (!loading) {
+      let _amount = product.price * cartItem.quantity;
+      setAmount(_amount);
+      setTotal(total + _amount);
+    }
+  }, [loading]);
   useEffect(() => {
     const fetchProduct = async () => {
       let res = await ProductService.getProduct(cartItem.productID);
@@ -45,11 +40,6 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
     };
     fetchProduct();
   }, []);
-  useEffect(() => {
-    if (product.price) {
-      setTotal(total + product.price * cartItem.quantity);
-    }
-  }, [product]);
   return (
     !loading && (
       <TableRow>
@@ -71,8 +61,21 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
               <Grid className="product-name" item>
                 {product.name}
               </Grid>
-              <Grid item>
-                Change | <span onClick={handleRemove}>Remove</span>
+              <Grid item className="action-menu">
+                <span>Change</span> |{" "}
+                <span
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Remove
+                </span>
+                <ConfirmBox
+                  open={open}
+                  setOpen={setOpen}
+                  onConfirm={handleRemove}
+                  content="Do you want to remove this product from cart"
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -84,9 +87,7 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
         <StyledTableCell align="center">
           <QuantityPicker value={cartItem.quantity} />
         </StyledTableCell>
-        <StyledTableCell align="center">
-          ${product.price * cartItem.quantity}.00
-        </StyledTableCell>
+        <StyledTableCell align="center">${amount}.00</StyledTableCell>
       </TableRow>
     )
   );

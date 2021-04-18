@@ -8,7 +8,6 @@ import { saveCart, loadCart } from "../../helpers/helpers";
 
 function Header({ cart, setCart }) {
   useEffect(() => {
-    console.log(cart);
     saveCart(cart);
   }, [cart]);
   return (

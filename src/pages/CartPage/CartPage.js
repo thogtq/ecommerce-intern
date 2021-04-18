@@ -11,6 +11,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import ColorPicker from "components/ColorPicker";
+import ConfirmBox from "components/ConfirmBox";
 import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import Footer from "cores/Footer/Footer";
@@ -28,7 +29,9 @@ export default function CartPage() {
       minWidth: "100px",
     },
   })(TableCell);
-
+  const handleItemRemove = (item) => {
+    setCart(cart.filter((cartItem) => cartItem.id !== item.id));
+  };
   return (
     <React.Fragment>
       <Header cart={cart} setCart={setCart} />
@@ -54,6 +57,7 @@ export default function CartPage() {
                       cartItem={cartItem}
                       total={total}
                       setTotal={setTotal}
+                      onRemove={handleItemRemove}
                     />
                   ))}
                 </TableBody>

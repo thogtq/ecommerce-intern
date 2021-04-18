@@ -4,7 +4,7 @@ import ProductImage from "./ProductImage";
 import VerticalImageList from "./VertialImageList";
 import ProductItem from "../../components/ProductItem";
 import { useState, useEffect } from "react";
-import ProductService from "services/ProductService";
+import { useLocation } from "react-router";
 const dummyImg = "http://localhost:8080/api/product/image/dummy.jpg";
 const useStyles = makeStyles({
   root: {
@@ -25,7 +25,10 @@ const useStyles = makeStyles({
 });
 export default function ProductContainer({ product, cart, setCart }) {
   const classes = useStyles();
-  const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [currentImage, setCurrentImage] = useState([]);
+  useEffect(() => {
+    setCurrentImage(product.images[0]);
+  }, [useLocation(), product]);
   return (
     <Grid
       classes={{ root: classes.root }}
@@ -42,7 +45,7 @@ export default function ProductContainer({ product, cart, setCart }) {
           />
         </Grid>
         <Grid item xs>
-          <ProductImage image={currentImage} />
+          <ProductImage currentImage={currentImage} />
         </Grid>
       </Grid>
       <Grid item xs={5}>

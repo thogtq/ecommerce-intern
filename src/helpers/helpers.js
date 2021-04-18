@@ -25,6 +25,7 @@ export function isExistCartItem(cart, cartItem) {
   let result = -1;
   const omitQuantity = (key, value) => {
     if (key == "quantity") return undefined;
+    else if (key == "id") return undefined;
     else return value;
   };
   cart.map((item, index) => {

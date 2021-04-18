@@ -1,7 +1,7 @@
 import cartIcon from "assets/images/icons/cart.svg";
 import LoginModal from "components/LoginModal";
 import RegisterModal from "components/RegisterModal";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { isAuthenticated, logout } from "services/AuthService";
 import { makeStyles, Menu, Avatar, Badge } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";

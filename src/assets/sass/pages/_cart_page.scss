@@ -37,4 +37,10 @@
       margin: 5px 0;
     }
   }
+  .action-menu {
+    span {
+      cursor: pointer;
+      @include text-style("Montserrat-Regular", 12px, 22px, #202124);
+    }
+  }
 }
