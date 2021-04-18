@@ -110,7 +110,7 @@ const TitleGroup = (props) => {
   return (
     <Grid className="title-group">
       <div className="product-name">{props.name}</div>
-      <div className="price">$99.00</div>
+      <div className="price">${props.price}.00</div>
       <Grid className="review" container>
         <ReviewStarts />
         <Divider

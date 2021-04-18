@@ -205,7 +205,7 @@ export default function AddProductForm() {
             rows={4}
             variant="outlined"
             fullWidth={true}
-            onBlur={(e) => {
+            onChange={(e) => {
               setFormData({ ...formData, description: e.target.value });
             }}
           />

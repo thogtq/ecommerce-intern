@@ -112,15 +112,14 @@ export default function EditProductForm({ product, setProduct }) {
   };
   const SubmitButton = () => {
     const handleSubmit = async () => {
-      // submitButton(false);
-      // let res = await ProductService.addProduct(formData);
-      // if (res.status === "success") {
-      //   history.push("/admin/products");
-      // } else {
-      //   alert(res.error.message);
-      //   submitButton(true);
-      // }
-      console.log(product);
+      submitButton(false);
+      let res = await ProductService.updateProduct(product);
+      if (res.status === "success") {
+        history.push("/admin/products");
+      } else {
+        alert(res.error.message);
+        submitButton(true);
+      }
     };
     return (
       <SiteButton
