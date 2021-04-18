@@ -34,6 +34,8 @@ const Header = () => {
 };
 const ProductContentTable = ({ filter, setFilter }) => {
   const [products, setProducts] = useState([]);
+  const [counts, setCounts] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     //Fix me
     //Unounted
@@ -41,6 +43,8 @@ const ProductContentTable = ({ filter, setFilter }) => {
       let res = await ProductService.getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
+        setTotalPages(res.data.pages);
+        setCounts(res.data.counts);
       } else {
         alert(res.error.message);
       }
@@ -50,7 +54,6 @@ const ProductContentTable = ({ filter, setFilter }) => {
   const handlePagination = (e) => {
     setFilter({ ...filter, page: parseInt(e.target.textContent) });
   };
-
   const ActionMenu = (props) => {
     const anchorRef = useRef(null);
     const [openConfirm, setOpenConfirm] = useState(false);
@@ -191,12 +194,12 @@ const ProductContentTable = ({ filter, setFilter }) => {
         </Table>
       </TableContainer>
       <div className="table-footer">
-        <span>Show 1 to 10 of 123 entries</span>
+        <span>Show 1 to 6 of {counts} entries</span>
         <Pagination
           className="table-pagination"
           variant="outlined"
           shape="rounded"
-          count={10}
+          count={totalPages}
           page={filter.page}
           onChange={handlePagination}
         />
@@ -211,11 +214,12 @@ export default function ProductsContainer() {
     sortOrder: -1,
     search: "",
     page: 1,
+    limit: 6,
   });
   return (
     <Grid className="admin-container" item md>
       <Header />
-      <ProductFeatureBar />
+      <ProductFeatureBar filter={productFilter} setFilter={setProductFilter} />
       <ProductContentTable
         filter={productFilter}
         setFilter={setProductFilter}

@@ -21,8 +21,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
   },
 }));
-export default function ProductFeatureBar() {
+export default function ProductFeatureBar({ filter, setFilter }) {
   const classes = useStyles();
+  const handleFilterChange = (e) => {
+    let _sortBy = e.target.value.split(" ")[0];
+    let _sortOrder = e.target.value.split(" ")[1];
+    setFilter({ ...filter, sortBy: _sortBy, sortOrder: _sortOrder });
+  };
+  const handleSearch = (e) => {
+    setFilter({ ...filter, search: e.target.value });
+  };
   return (
     <Grid item md={12}>
       <Grid
@@ -41,6 +49,7 @@ export default function ProductFeatureBar() {
                 labelId="sort_by_label"
                 id="select_sort_by"
                 defaultValue="createdAt -1"
+                onChange={handleFilterChange}
               >
                 <MenuItem value="createdAt -1">Date Added</MenuItem>
                 <MenuItem value="name 1">A - Z</MenuItem>
@@ -53,6 +62,7 @@ export default function ProductFeatureBar() {
           <Grid container alignItems="center" spacing={2}>
             <Grid item>
               <TextField
+                onChange={handleSearch}
                 className="search-input"
                 id="outlined-margin-normal"
                 placeholder="Search product"

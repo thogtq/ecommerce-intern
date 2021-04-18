@@ -16,11 +16,15 @@ export default function ProductsPage() {
     category = "";
   }
   const [productFilter, setProductFilter] = useState({
+    page: 1,
+    limit: 20,
     sortBy: "sold",
     category: category,
   });
   useEffect(() => {
     setProductFilter({
+      page: 1,
+      limit: 20,
       sortBy: "sold",
       category: category,
     });

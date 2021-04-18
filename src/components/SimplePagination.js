@@ -18,16 +18,14 @@ const useStyles = makeStyles({
   },
 });
 export default function SimplePagination(props) {
-  let { page, setPage, max } = props;
-  page = 1;
-  max = 100;
+  let { page, onChange, max } = props;
   const handleNext = () => {
     if (page === max) return;
-    setPage(page + 1);
+    onChange(page + 1);
   };
   const handleBack = () => {
     if (page === 1) return;
-    setPage(page - 1);
+    onChange(page - 1);
   };
   const classes = useStyles();
   return (

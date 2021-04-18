@@ -28,20 +28,32 @@ export default function ProductsContainer({
   currentCategory,
 }) {
   const [products, setProducts] = useState([]);
+  const [pages, setPages] = useState(0);
   const classes = useStyles();
   useEffect(() => {
     const fetchProduct = async () => {
       let res = await ProductService.getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
+        setPages(res.data.pages);
       } else {
         alert(res.error.message);
       }
     };
     fetchProduct();
   }, [filter, useLocation()]);
+  const handlePageChange = (value) => {
+    setFilter({ ...filter, page: value });
+  };
   return products.length === 0 ? (
-    <Grid className="text-regular-grey" item xs container justify="center" style={{marginTop:"50px"}}>
+    <Grid
+      className="text-regular-grey"
+      item
+      xs
+      container
+      justify="center"
+      style={{ marginTop: "50px" }}
+    >
       No result found
     </Grid>
   ) : (
@@ -54,7 +66,11 @@ export default function ProductsContainer({
           </Select>
         </Grid>
         <Grid item xs container alignItems="flex-end" justify="flex-end">
-          <SimplePagination />
+        <SimplePagination
+          page={filter.page}
+          max={pages}
+          onChange={handlePageChange}
+        />
         </Grid>
       </Grid>
       <Grid item container>
@@ -80,7 +96,11 @@ export default function ProductsContainer({
         </GridList>
       </Grid>
       <Grid container justify="flex-end">
-        <SimplePagination />
+        <SimplePagination
+          page={filter.page}
+          max={pages}
+          onChange={handlePageChange}
+        />
       </Grid>
     </Grid>
   );

@@ -71,8 +71,8 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
                   Remove
                 </span>
                 <ConfirmBox
-                  open={open}
-                  setOpen={setOpen}
+                  openConfirm={open}
+                  setOpenConfirm={setOpen}
                   onConfirm={handleRemove}
                   content="Do you want to remove this product from cart"
                 />
