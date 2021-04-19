@@ -12,7 +12,7 @@ export function PrivateRoute({ component: Component, ...rest }){
         auth === true ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/?login_modal=1" />
+          <Redirect to="?login_modal=1" />
         )
       }
     />

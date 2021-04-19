@@ -9,6 +9,7 @@ import {
   TableBody,
   withStyles,
   Divider,
+  Link,
 } from "@material-ui/core";
 import ColorPicker from "components/ColorPicker";
 import ConfirmBox from "components/ConfirmBox";
@@ -18,9 +19,14 @@ import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
 import { loadCart } from "helpers/helpers";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import CartItem from "./CartItem";
+import { isAuthenticated } from "services/AuthService";
+import OrderService from "services/OrderService";
 
 export default function CartPage() {
+  const [order, setOrder] = useState({});
+  const history = useHistory();
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useState(loadCart());
   const StyledTableCell = withStyles({
@@ -30,7 +36,23 @@ export default function CartPage() {
     },
   })(TableCell);
   const handleItemRemove = (item) => {
+    //Fix me
+    //Remove on backend but frontend dont
     setCart(cart.filter((cartItem) => cartItem.id !== item.id));
+  };
+  const handleCheckout = async () => {
+    if (!isAuthenticated()) {
+      history.push("?login_modal=1");
+      return;
+    }
+    let res = await OrderService.addOrder(cart);
+    if (res.status === "success") {
+      setCart([]);
+      history.push("/checkout?orderID=" + res.data.orderID);
+      return;
+    } else {
+      console.log(res);
+    }
   };
   return (
     <React.Fragment>
@@ -90,6 +112,7 @@ export default function CartPage() {
               color="#ffffff"
               backgroundColor="#ff5f6d"
               weight="Bold"
+              onClick={handleCheckout}
             />
           </Grid>
         </Grid>

@@ -12,6 +12,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { debounce } from "helpers/helpers";
 const useStyles = makeStyles((theme) => ({
   sortSelect: {
     minWidth: 172,
@@ -19,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "unset!important",
     border: "1px solid #ededed",
     backgroundColor: "#ffffff",
+    font: "14px/20px Montserrat-Medium",
+    color: "#3d3d3f",
+    "& :focus": {
+      backgroundColor: "#ffffff",
+    },
+  },
+  menuItem: {
+    font: "14px/20px Montserrat-Medium",
+    color: "#3d3d3f",
   },
 }));
 export default function ProductFeatureBar({ filter, setFilter }) {
@@ -50,10 +60,24 @@ export default function ProductFeatureBar({ filter, setFilter }) {
                 id="select_sort_by"
                 defaultValue="createdAt -1"
                 onChange={handleFilterChange}
+                MenuProps={{
+                  style: { marginTop: "48px" },
+                  anchorOrigin: { vertical: "bottom", horizontal: "center" },
+                  transformOrigin: { vertical: "top", horizontal: "center" },
+                }}
               >
-                <MenuItem value="createdAt -1">Date Added</MenuItem>
-                <MenuItem value="name 1">A - Z</MenuItem>
-                <MenuItem value="name -1">Z - A</MenuItem>
+                <MenuItem
+                  classes={{ root: classes.menuItem }}
+                  value="createdAt -1"
+                >
+                  Date Added
+                </MenuItem>
+                <MenuItem classes={{ root: classes.menuItem }} value="name 1">
+                  A - Z
+                </MenuItem>
+                <MenuItem classes={{ root: classes.menuItem }} value="name -1">
+                  Z - A
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -62,7 +86,7 @@ export default function ProductFeatureBar({ filter, setFilter }) {
           <Grid container alignItems="center" spacing={2}>
             <Grid item>
               <TextField
-                onChange={handleSearch}
+                onChange={debounce(handleSearch, 600)}
                 className="search-input"
                 id="outlined-margin-normal"
                 placeholder="Search product"

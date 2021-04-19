@@ -10,6 +10,7 @@ import {
   InputAdornment,
   Button,
 } from "@material-ui/core";
+import { debounce } from "helpers/helpers";
 const useStyles = makeStyles((theme) => ({
   sortSelect: {
     minWidth: 172,
@@ -19,8 +20,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
   },
 }));
-export default function OrdersFeatureBar() {
+export default function OrdersFeatureBar({ filter, setFilter }) {
   const classes = useStyles();
+  const handleSearch = (e) => {
+    //Debounce
+    setFilter({ ...filter, search: e.target.value });
+  };
   return (
     <Grid item md={12}>
       <Grid
@@ -51,6 +56,7 @@ export default function OrdersFeatureBar() {
           <Grid container alignItems="center" spacing={2}>
             <Grid item>
               <TextField
+                onChange={debounce(handleSearch, 500)}
                 className="search-input"
                 id="outlined-margin-normal"
                 placeholder="Search order"

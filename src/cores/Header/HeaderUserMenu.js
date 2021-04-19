@@ -132,7 +132,7 @@ const HeaderUserMenu = ({ cart }) => {
           //onMouseOver={handleAvatarClick}
           className={classes.avatar}
           alt="avatar"
-          src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+          src="http://localhost:8080/api/user/image/avatar.jpg"
         ></Avatar>
         <Menu
           classes={{ paper: classes.avatarMenu, list: classes.avatarMenuList }}

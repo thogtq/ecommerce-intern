@@ -50,7 +50,7 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
           scope="row"
         >
           <Grid container direction="row">
-            <Grid item xs={6} lg={3}>
+            <Grid item lg={5}>
               <img
                 className="product-image"
                 src={product.images[0]}

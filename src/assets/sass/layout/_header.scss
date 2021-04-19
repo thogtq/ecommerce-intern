@@ -40,8 +40,9 @@
     box-sizing: border-box;
     border: solid 1px #b7b7b7;
     padding-left: 15px;
-    &::placeholder {
-      font-family: Montserrat-Regular;
+    outline: none;
+    ::placeholder {
+      font: "14px/22px Montserrat-Regular";
       color: #cccccc;
     }
   }

@@ -79,7 +79,6 @@ export default function CartMenuItem({ cartItem }) {
           </Grid>
         </Grid>
       </Grid>
-      <hr className="line"></hr>
     </MenuItem>
   );
 }

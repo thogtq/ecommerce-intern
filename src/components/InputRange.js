@@ -24,18 +24,21 @@ const InputRange = (props) => {
   const marks = [
     {
       value: min,
-      label: "$"+min,
+      label: "$" + min,
     },
-    { value: max, label: "$"+max },
+    { value: max, label: "$" + max },
   ];
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.onChange(value[0], value[1]);
+  };
+  const handleCommit = () => {
+    props.onCommit(value[0], value[1]);
   };
   return (
     <Slider
       classes={{ thumb: classes.thumb, root: classes.root }}
       value={value}
+      onChangeCommitted={handleCommit}
       onChange={handleChange}
       valueLabelDisplay="auto"
       aria-labelledby="range-slider"

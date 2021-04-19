@@ -9,9 +9,14 @@ import {
   TableCell,
   TableBody,
   Paper,
+  Menu,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import OrdersFeatureBar from "./OrdersFeatureBar";
+import { useEffect, useState } from "react";
+import OrderService from "services/OrderService";
+import StatusButton from "../../components/StatusButton";
+import ActionMenu from "./ActionMenu";
 
 const Header = () => {
   return (
@@ -36,7 +41,27 @@ const rows = [
   createData("Bread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
 ];
 
-const OrderContentTable = () => {
+const OrderContentTable = ({ filter, setFilter }) => {
+  const [orders, setOrders] = useState([]);
+  const [counts, setCounts] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      let res = await OrderService.getOrders(filter);
+      console.log(res);
+      if (res.status === "success") {
+        setOrders(res.data.orders);
+        setTotalPages(res.data.pages);
+        setCounts(res.data.counts);
+      } else {
+        alert(res.error.message);
+      }
+    };
+    fetchOrders();
+  }, [filter]);
+  const handlePagination = (e) => {
+    setFilter({ ...filter, page: parseInt(e.target.textContent) });
+  };
   return (
     <Grid className="admin-content-table">
       <TableContainer component={Paper}>
@@ -48,7 +73,7 @@ const OrderContentTable = () => {
               <TableCell align="left">DETAIL</TableCell>
               <TableCell align="left">TOTAL($)</TableCell>
               <TableCell align="left">
-                Status{" "}
+                STATUS{" "}
                 <img
                   src={dropdownIcon}
                   alt="dropdown-icon"
@@ -59,42 +84,31 @@ const OrderContentTable = () => {
             </TableRow>
           </TableHead>
           <TableBody className="table-body">
-            {rows.map((row) => (
-              <TableRow key={row.name}>
+            {orders.map((order) => (
+              <TableRow key={order.orderID}>
                 <TableCell
                   align="left"
                   className="th-product"
                   component="th"
                   scope="row"
                 >
-                  <Grid container direction="row">
-                    <Grid item xs={1}>
-                      <img
-                        src="https://cdn.cliqueinc.com/posts/229384/fashion-by-the-decade-229384-1499966720451-square.700x0c.jpg"
-                        alt="product-img"
-                      />
-                    </Grid>
-                    <Grid item xs>
-                      <Grid
-                        className="th-product-name"
-                        container
-                        direction="column"
-                      >
-                        <Grid item>{row.name}</Grid>
-                        <Grid item>Women, Casual dresses</Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                  {order.orderID}
                 </TableCell>
                 <TableCell align="left">
-                  <span>{row.calories}</span>
+                  <span>{order.orderDate}</span>
                 </TableCell>
-                <TableCell align="left">{row.fat}</TableCell>
-                <TableCell align="left">{row.carbs}</TableCell>
-                <TableCell align="left">Completed</TableCell>
-                <TableCell className="td-action" align="left">
-                  <span>{row.protein}</span>
-                  <img src={dropdownIcon} alt="dropdown-icon"></img>
+                <TableCell align="left">
+                  {"(" +
+                    order.products[0].size +
+                    ")x " +
+                    order.products[0].quantity}
+                </TableCell>
+                <TableCell align="left">{order.subtotal}</TableCell>
+                <TableCell align="left">
+                  <StatusButton status={order.status} />
+                </TableCell>
+                <TableCell className="td-action" align="right">
+                  <ActionMenu />
                 </TableCell>
               </TableRow>
             ))}
@@ -102,13 +116,14 @@ const OrderContentTable = () => {
         </Table>
       </TableContainer>
       <div className="table-footer">
-        <span>Show 1 to 10 of 123 entries</span>
+        <span>Show 1 to 10 of {counts} entries</span>
         <Pagination
           className="table-pagination"
           variant="outlined"
           shape="rounded"
-          count={10}
-          page={1}
+          count={totalPages}
+          page={filter.page}
+          onChange={handlePagination}
         />
       </div>
     </Grid>
@@ -116,11 +131,16 @@ const OrderContentTable = () => {
 };
 
 export default function OrdersContainer() {
+  const [orderFilter, setOrderFilter] = useState({
+    search: "",
+    page: 1,
+    limit: 10,
+  });
   return (
     <Grid className="admin-container" item md>
       <Header />
-      <OrdersFeatureBar />
-      <OrderContentTable />
+      <OrdersFeatureBar filter={orderFilter} setFilter={setOrderFilter} />
+      <OrderContentTable filter={orderFilter} setFilter={setOrderFilter} />
     </Grid>
   );
 }

@@ -116,7 +116,7 @@ const FilterList = ({ filter, setFilter }) => {
         </ListItem>
         <Collapse in={open.Price} timeout="auto" unmountOnExit>
           <Grid container>
-            <InputRange onChange={handlePriceFilterChange} min={0} max={500} />
+            <InputRange onCommit={handlePriceFilterChange} min={0} max={500} />
           </Grid>
         </Collapse>
         <ListItem disableGutters button onClick={handleClick}>

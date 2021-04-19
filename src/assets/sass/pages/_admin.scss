@@ -12,19 +12,22 @@ body {
   box-sizing: border-box;
 }
 .MuiButton-root.export-button {
+  text-transform: unset;
   background-color: #ffffff;
   @include text-style("Montserrat-SemiBold", 14px, 24px, #ffa15f);
   @include set-width-height(112px, 48px);
 }
 .MuiButton-root.add-button {
+  text-transform: unset;
   border-radius: unset;
-  height: 48;
-  width: 156;
   background-color: #ffa15f;
   color: #ffffff;
   @include set-width-height(156px, 48px);
   &:hover {
     background-color: lighten($color: #ffa15f, $amount: 10);
+  }
+  span {
+    @include text-style("Montserrat-SemiBold", 14px, 24px, #ffffff);
   }
 }
 .admin-feature-bar {

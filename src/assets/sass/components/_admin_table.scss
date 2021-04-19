@@ -21,7 +21,7 @@
         vertical-align: middle;
       }
       span {
-        @include text-style(Montserrat-Bold, 14px, 20px, #3d3d3f);
+        @include text-style(Montserrat-SemiBold, 14px, 14px, #3d3d3f);
       }
     }
     .th-product {

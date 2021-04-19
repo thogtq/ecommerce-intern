@@ -89,12 +89,14 @@ const ProductContentTable = ({ filter, setFilter }) => {
           onClick={handleToggle}
         >
           Actions
+          <img src={dropdownIcon} alt="dropdown-icon"></img>
         </span>
         <DropdownMenu
           open={openMenu}
           setOpen={setOpenMenu}
           anchorRef={anchorRef}
           handleClose={handleClose}
+          
         >
           <Link
             to={"/admin/products/edit-product/?productID=" + props.productID}
@@ -124,7 +126,6 @@ const ProductContentTable = ({ filter, setFilter }) => {
             content={"Do you want to remove `" + props.name + "` ?"}
           />
         </DropdownMenu>
-        <img src={dropdownIcon} alt="dropdown-icon"></img>
       </React.Fragment>
     );
   };

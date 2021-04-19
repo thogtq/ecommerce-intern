@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 const styles = makeStyles({
   paper: {
-    marginTop: "10px",
+    marginTop: "28px",
+    boxShadow: "0 10px 10px 0 rgba(0, 0, 0, 0.08)",
   },
 });
 export default function DropdownMenu(props) {
@@ -38,10 +39,7 @@ export default function DropdownMenu(props) {
         >
           <Paper>
             <ClickAwayListener onClickAway={handleClose}>
-              <MenuList
-                classes={{ root: classes.paper }}
-                id="menu-list-grow"
-              >
+              <MenuList classes={{ root: classes.paper }} id="menu-list-grow">
                 {props.children}
               </MenuList>
             </ClickAwayListener>
