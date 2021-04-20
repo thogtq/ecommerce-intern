@@ -45,6 +45,10 @@ export default function CartPage() {
       history.push("?login_modal=1");
       return;
     }
+    if (cart.length === 0) {
+      alert("Your cart is empty");
+      return;
+    }
     let res = await OrderService.addOrder(cart);
     if (res.status === "success") {
       setCart([]);

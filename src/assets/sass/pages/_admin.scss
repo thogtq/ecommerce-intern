@@ -4,6 +4,9 @@ body {
 .admin-container {
   padding: 26px 20px;
 }
+.admin-menu-group{
+  cursor: pointer;
+}
 .admin-name {
   @include text-style("Montserrat-Bold", 14px, 24px, #202124);
   margin-left: 16px;

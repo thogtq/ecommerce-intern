@@ -4,6 +4,7 @@ import * as api from "constants/api";
 const OrderService = {
   addOrder,
   getOrders,
+  updateStatus,
 };
 
 export default OrderService;
@@ -44,6 +45,25 @@ function getOrders(filter) {
   return fetch(api.SERVER + api.ORDERS + queries, {
     method: "GET",
     headers: header,
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
+}
+function updateStatus(orderID, status) {
+  let header = {
+    "Content-Type": "application/json",
+    token: AuthService.getAccessToken(true),
+  };
+  let query = "?orderID=" + orderID;
+  return fetch(api.SERVER + api.ORDERS_STATUS + query, {
+    method: "PUT",
+    headers: header,
+    body: JSON.stringify({ status: status }),
   }).then(
     (res) => {
       return res.json();

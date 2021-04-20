@@ -10,6 +10,7 @@ import {
   TableBody,
   Paper,
   Menu,
+  makeStyles,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import OrdersFeatureBar from "./OrdersFeatureBar";
@@ -18,37 +19,20 @@ import OrderService from "services/OrderService";
 import StatusButton from "../../components/StatusButton";
 import ActionMenu from "./ActionMenu";
 
-const Header = () => {
-  return (
-    <Grid className="admin-header" container justify="space-between">
-      <Grid className="admin-header-title" item>
-        Orders
-      </Grid>
-      <AdminMenu />
-    </Grid>
-  );
-};
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Froze", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Ice", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Eclair", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Cupcake", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Gingerbread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-  createData("Bread", "4/100", "Today, 8/11/2020", "400.00", "Actions"),
-];
-
+const useStyles = makeStyles({
+  tableCell: {
+    font: "14px/20px Montserrat-Medium",
+    color: "#3d3d3f",
+  },
+});
 const OrderContentTable = ({ filter, setFilter }) => {
+  const classes = useStyles();
   const [orders, setOrders] = useState([]);
   const [counts, setCounts] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     const fetchOrders = async () => {
       let res = await OrderService.getOrders(filter);
-      console.log(res);
       if (res.status === "success") {
         setOrders(res.data.orders);
         setTotalPages(res.data.pages);
@@ -84,34 +68,44 @@ const OrderContentTable = ({ filter, setFilter }) => {
             </TableRow>
           </TableHead>
           <TableBody className="table-body">
-            {orders.map((order) => (
-              <TableRow key={order.orderID}>
-                <TableCell
-                  align="left"
-                  className="th-product"
-                  component="th"
-                  scope="row"
-                >
-                  {order.orderID}
-                </TableCell>
-                <TableCell align="left">
-                  <span>{order.orderDate}</span>
-                </TableCell>
-                <TableCell align="left">
-                  {"(" +
-                    order.products[0].size +
-                    ")x " +
-                    order.products[0].quantity}
-                </TableCell>
-                <TableCell align="left">{order.subtotal}</TableCell>
-                <TableCell align="left">
-                  <StatusButton status={order.status} />
-                </TableCell>
-                <TableCell className="td-action" align="right">
-                  <ActionMenu />
-                </TableCell>
-              </TableRow>
-            ))}
+            {orders.map((order) => {
+              return (
+                <TableRow key={order.orderID}>
+                  <TableCell
+                    align="left"
+                    className="th-product"
+                    component="th"
+                    scope="row"
+                  >
+                    {order.orderID}
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCell }} align="left">
+                    <span>{order.orderDate}</span>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCell }} align="left">
+                    {order.products[0].name +
+                      " (" +
+                      order.products[0].size +
+                      ")x " +
+                      order.products[0].quantity}
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCell }} align="left">
+                    {order.subtotal}
+                  </TableCell>
+                  <TableCell align="left">
+                    <StatusButton status={order.status} />
+                  </TableCell>
+                  <TableCell className="td-action" align="right">
+                    <ActionMenu
+                      orderID={order.orderID}
+                      status={order.status}
+                      setFilter={setFilter}
+                      filter={filter}
+                    />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -138,7 +132,12 @@ export default function OrdersContainer() {
   });
   return (
     <Grid className="admin-container" item md>
-      <Header />
+      <Grid className="admin-header" container justify="space-between">
+        <Grid className="admin-header-title" item>
+          Orders
+        </Grid>
+        <AdminMenu />
+      </Grid>
       <OrdersFeatureBar filter={orderFilter} setFilter={setOrderFilter} />
       <OrderContentTable filter={orderFilter} setFilter={setOrderFilter} />
     </Grid>

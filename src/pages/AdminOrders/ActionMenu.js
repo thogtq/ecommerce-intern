@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 import { MenuItem, Menu, makeStyles } from "@material-ui/core";
 import ColorDot from "components/ColorDot";
+import OrderService from "services/OrderService";
 const useStyles = makeStyles({
   root: {
     marginTop: "25px",
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ActionMenu = ({ anchorEl }) => {
+const ActionMenu = ({ orderID, status, setFilter, filter }) => {
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const handleCloseMenu = () => {
@@ -30,6 +31,22 @@ const ActionMenu = ({ anchorEl }) => {
   };
   const handleMenuClick = (e) => {
     setAnchorMenu(e.target);
+  };
+  const handleStatusChange = async (e) => {
+    let newStatus = e.currentTarget.dataset.value;
+    if (status === newStatus) {
+      handleCloseMenu();
+      return;
+    }
+    let res = await OrderService.updateStatus(orderID, newStatus);
+    if (res.status === "success") {
+      setFilter({ ...filter });
+      handleCloseMenu();
+      return;
+    } else {
+      console.log(res);
+      //alert(res.error.message);
+    }
   };
   return (
     <Fragment>
@@ -47,11 +64,19 @@ const ActionMenu = ({ anchorEl }) => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem disableGutters>
+        <MenuItem
+          data-value="Completed"
+          onClick={handleStatusChange}
+          disableGutters
+        >
           <ColorDot color="#82bf11" />
           Mark as Completed
         </MenuItem>
-        <MenuItem disableGutters>
+        <MenuItem
+          data-value="Canceled"
+          onClick={handleStatusChange}
+          disableGutters
+        >
           <ColorDot color="#f05d62" />
           Mart as Canceled
         </MenuItem>

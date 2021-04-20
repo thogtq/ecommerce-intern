@@ -45,4 +45,5 @@ export function logout(admin = false) {
     jwtName = jwtAdminName;
   }
   localStorage.removeItem(jwtName);
+  localStorage.removeItem("user");
 }

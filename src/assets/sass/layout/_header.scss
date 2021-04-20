@@ -41,7 +41,7 @@
     border: solid 1px #b7b7b7;
     padding-left: 15px;
     outline: none;
-    ::placeholder {
+    &::placeholder {
       font: "14px/22px Montserrat-Regular";
       color: #cccccc;
     }

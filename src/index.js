@@ -8,15 +8,13 @@ import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { PrivateRoute } from "cores/PrivateRoute";
 import AdminLogin from "./pages/AdminLogin";
-import UserPage from "./pages/UserPage";
+import UserPage from "./pages/UserPage/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
-import TestPage from "./pages/TestPage/TestPage";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route exact path="/test" component={TestPage}></Route>
     <Route exact path="/" component={Homepage}></Route>
     <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
     <Route exact path="/admin/login" component={AdminLogin}></Route>

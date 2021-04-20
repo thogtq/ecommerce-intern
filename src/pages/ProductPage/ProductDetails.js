@@ -27,6 +27,7 @@ export default function ProductDetails({ cart, setCart, ...props }) {
   const [productCart, setProductCart] = useState({
     id: uuid(),
     productID: product.productID,
+    name: product.name,
     quantity: 1,
   });
   const classes = useStyles();

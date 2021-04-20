@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "services/UserService";
+import UserService, { setLocalUser } from "services/UserService";
 import { submitButton } from "helpers/helpers";
 import Modal from "./Modal";
 import { authenticate } from "services/AuthService";
@@ -57,6 +57,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
       let res = await UserService.login(userObject);
       if (res.status === "success") {
         authenticate(res.data);
+        //setLocalUser(res.data.user);
         toggleModal();
         setLoggedIn(true);
       } else {
