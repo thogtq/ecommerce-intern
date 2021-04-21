@@ -2,8 +2,9 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isAuthenticated } from "services/AuthService";
 
-export function PrivateRoute({ component: Component, ...rest }){
+export function PrivateRoute({ component: Component, ...rest }) {
   const auth = isAuthenticated();
+  console.log(Component);
   return (
     <Route
       {...rest}
@@ -16,16 +17,19 @@ export function PrivateRoute({ component: Component, ...rest }){
       }
     />
   );
-};
+}
 export const AdminRoute = ({ component: Component, ...rest }) => {
-    const auth = isAuthenticated(true);
-    return (
-      <Route
-        {...rest}
-        render={(props) =>
-          auth === true ? <Component {...props} /> : <Redirect to="/admin/login" />
-        }
-      />
-    );
-  };
-  
+  const auth = isAuthenticated(true);
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        auth === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/admin/login" />
+        )
+      }
+    />
+  );
+};

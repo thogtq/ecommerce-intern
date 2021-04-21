@@ -12,15 +12,16 @@ import UserPage from "./pages/UserPage/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
+import UserRoutes from "routes/UserRoutes";
 
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Homepage}></Route>
-    <PrivateRoute path="/user" component={UserPage}></PrivateRoute>
     <Route exact path="/admin/login" component={AdminLogin}></Route>
     <AdminRoutes />
     <ProductRoutes />
     <OrderRoutes />
+    <UserRoutes/>
   </BrowserRouter>,
   document.getElementById("root")
 );
