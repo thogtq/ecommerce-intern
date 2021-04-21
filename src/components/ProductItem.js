@@ -1,4 +1,4 @@
-import {  GridListTile, makeStyles } from "@material-ui/core";
+import { GridListTile, makeStyles } from "@material-ui/core";
 import SiteButton from "components/SiteButton";
 import { Link } from "react-router-dom";
 
@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     position: "relative",
     height: "auto",
     paddingTop: "150%",
+    marginBottom: "10px",
   },
   shopButton: {
     display: "none",
@@ -36,7 +37,7 @@ const useStyles = makeStyles({
     fontFamily: "Montserrat-Medium",
     fontSize: "14px",
     color: "#202124",
-    lineHeight: "22px",
+    lineHeight: "20px",
   },
   productPrice: {
     fontFamily: "Montserrat-Regular",

@@ -8,6 +8,8 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   pageNumber: {
+    margin: "0 8px",
+    padding: "3px",
     fontFamily: "Montserrat-Medium",
     fontSize: "14px",
     color: "#202124",

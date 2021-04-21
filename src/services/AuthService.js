@@ -21,7 +21,7 @@ export function isAuthenticated(admin = false) {
     jwtName = jwtAdminName;
   }
   let jwt = localStorage.getItem(jwtName);
-  if (typeof window == undefined || jwt == null) {
+  if (typeof window == undefined || jwt === null) {
     return false;
   }
   return true;

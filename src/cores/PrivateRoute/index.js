@@ -3,7 +3,6 @@ import { Route, Redirect } from "react-router-dom";
 import { isAuthenticated } from "services/AuthService";
 
 export function PrivateRoute({ component: Component, ...rest }){
-  //Bug, need refresh to access /user
   const auth = isAuthenticated();
   return (
     <Route

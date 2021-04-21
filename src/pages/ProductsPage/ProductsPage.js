@@ -8,19 +8,23 @@ import SidebarNav from "./SidebarNav";
 import { useLocation } from "react-router";
 import { loadCart } from "helpers/helpers";
 
+const initFilter = {
+  page: 1,
+  limit: 20,
+  sortBy: "sold",
+  sortOrder: -1,
+};
 export default function ProductsPage() {
   const [cart, setCart] = useState(loadCart());
   const useQuery = new URLSearchParams(useLocation().search);
   let category = useQuery.get("category");
   const [productFilter, setProductFilter] = useState({
-    page: 1,
-    limit: 20,
-    sortBy: "sold",
+    ...initFilter,
     category: category,
   });
   useEffect(() => {
     if (category !== productFilter.category) {
-      setProductFilter({ ...productFilter, category: category });
+      setProductFilter({ ...initFilter, category: category });
     }
     window.scrollTo(0, 0);
   }, [category]);

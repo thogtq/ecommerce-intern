@@ -9,6 +9,7 @@ import SimplePagination from "components/SimplePagination";
 import ProductItem from "../../components/ProductItem";
 import { useState, useEffect } from "react";
 import ProductService from "services/ProductService";
+import SortDropdown from "./SortDropdown";
 
 const useStyles = makeStyles({
   sortBar: {
@@ -60,10 +61,7 @@ export default function ProductsContainer({
     <Grid item xs>
       <Grid className={classes.sortBar} item container justify="space-between">
         <Grid item xs container alignItems="center">
-          Sort by:
-          <Select defaultValue="Popularity">
-            <MenuItem value="Popularity">Popularity</MenuItem>
-          </Select>
+          <SortDropdown filter={filter} setFilter={setFilter}></SortDropdown>
         </Grid>
         <Grid item xs container alignItems="flex-end" justify="flex-end">
           <SimplePagination
