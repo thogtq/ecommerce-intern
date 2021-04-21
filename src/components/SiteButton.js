@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 export default function SiteButton({ disabled, className, ...props }) {
   if (disabled === true) {
-    disabled = { disabled: "true" };
+    disabled = { disabled: "disabled" };
   }
   const { root } = useStyles(props);
   return (

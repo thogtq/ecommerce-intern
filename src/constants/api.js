@@ -6,9 +6,9 @@ export const USER = "/api/users/";
 export const USERS = "/api/users";
 export const USER_PASSWORD = "/api/users/password";
 
-export const PRODUCT = "/api/product";
+export const PRODUCT = "/api/products/";
 export const PRODUCTS = "/api/products";
-export const PRODUCT_IMAGE = "/api/product/image";
+export const PRODUCT_IMAGE = "/api/products/image";
 
 export const ORDERS = "/api/orders";
 export const ORDERS_STATUS = "/api/orders/status";

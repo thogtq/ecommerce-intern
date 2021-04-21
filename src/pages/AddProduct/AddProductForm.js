@@ -25,7 +25,6 @@ export default function AddProductForm() {
   const CategorySelect = () => {
     const categories = productConst.addProductCategory;
     const handleCategory = (e) => {
-      console.log(formData);
       setFormData({ ...formData, categories: e.target.value });
     };
     return (

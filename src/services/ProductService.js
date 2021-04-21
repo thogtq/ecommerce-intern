@@ -68,7 +68,7 @@ function getProducts(filter) {
   let header = {
     "Content-Type": "application/json",
   };
-  let queries = "/?";
+  let queries = "?";
   for (var key in filter) {
     if (!filter[key]) {
       continue;
@@ -91,7 +91,7 @@ function getProduct(productID) {
   let header = {
     "Content-Type": "application/json",
   };
-  return fetch(api.SERVER + api.PRODUCT + "/?productID=" + productID, {
+  return fetch(api.SERVER + api.PRODUCT + "?productID=" + productID, {
     method: "GET",
     headers: header,
   }).then(
@@ -108,7 +108,7 @@ function deleteProduct(productID) {
     "Content-Type": "application/json",
     token: AuthService.getAccessToken(true),
   };
-  return fetch(api.SERVER + api.PRODUCT + "/?productID=" + productID, {
+  return fetch(api.SERVER + api.PRODUCT + "?productID=" + productID, {
     method: "DELETE",
     headers: header,
   }).then(
