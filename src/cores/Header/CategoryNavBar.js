@@ -3,7 +3,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import arrowIcon from "assets/images/icons/arrow.svg";
 import React, { useState } from "react";
 import * as productConst from "constants/product";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { debounce } from "../../helpers/helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,26 +24,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CategoryNavBar = () => {
-  const history = useHistory();
   const [categoryItems, setCategoryItems] = useState([]);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [currentMenu, setCurrentMenu] = useState("");
   const handleClick = (e) => {
     let parentCategory = e.currentTarget.attributes["value"].nodeValue;
     setCategoryItems(productConst.categories[parentCategory]);
     setAnchorEl(document.getElementById("category_nav"));
   };
-  const handleClose = (e) => {
-    e.preventDefault();
+  const handleClose = () => {
     setAnchorEl(null);
   };
+
   const CategoryMenu = (e) => {
-    const handleCategoryClick = (e) => {
-      handleClose(e);
-      let category = e.currentTarget.attributes["value"].nodeValue;
-      history.push("/products/?category=" + category);
-    };
     return (
       <Menu
         className={classes.root}
@@ -51,10 +45,8 @@ const CategoryNavBar = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        //Fix me
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
-        // MenuListProps={{ onMouseLeave: handleClose }}
         disableAutoFocusItem={true}
         getContentAnchorEl={null}
       >
@@ -62,9 +54,13 @@ const CategoryNavBar = () => {
           let name = category.name;
           let value = category.value;
           return (
-            <MenuItem key={value} onClick={handleCategoryClick} value={value}>
-              {name}
-            </MenuItem>
+            <Link
+              key={value}
+              to={"/products/?category=" + category.value}
+              onClick={handleClose}
+            >
+              <MenuItem>{name}</MenuItem>
+            </Link>
           );
         })}
       </Menu>
