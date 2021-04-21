@@ -34,6 +34,17 @@ export default function CartPage() {
     //Remove on backend but frontend dont
     setCart(cart.filter((cartItem) => cartItem.id !== item.id));
   };
+  const handleItemChange = (id, quantity) => {
+    setCart(
+      cart.map((cartItem) => {
+        if (cartItem.id === id) {
+          return { ...cartItem, quantity: quantity };
+        } else {
+          return { ...cartItem };
+        }
+      })
+    );
+  };
   const handleCheckout = async () => {
     if (!isAuthenticated()) {
       history.push("?login_modal=1");
@@ -78,6 +89,7 @@ export default function CartPage() {
                       total={total}
                       setTotal={setTotal}
                       onRemove={handleItemRemove}
+                      onChange={handleItemChange}
                     />
                   ))}
                 </TableBody>

@@ -4,7 +4,6 @@ import { isAuthenticated } from "services/AuthService";
 
 export function PrivateRoute({ component: Component, ...rest }) {
   const auth = isAuthenticated();
-  console.log(Component);
   return (
     <Route
       {...rest}

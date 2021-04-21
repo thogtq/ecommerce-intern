@@ -39,19 +39,18 @@ export default function CartMenu({ cart, setCart, anchorEl, setAnchorEl }) {
       disableAutoFocusItem={true}
       //MenuListProps={{ onMouseLeave: handleClose }}
     >
-      {cart.length
-        ? cart.map((cartItem) => [
-            <CartMenuItem key={cartItem.id} cartItem={cartItem} />,
-            <hr className="line"></hr>,
-          ])
-        : [
-            <MenuItem>
-              <Grid container justify="center">
-                <span>Empty</span>
-              </Grid>
-            </MenuItem>,
-            <hr className="line"></hr>,
-          ]}
+      {cart.length ? (
+        cart.map((cartItem) => [
+          <CartMenuItem key={cartItem.id} cartItem={cartItem} />,
+          <hr className="line"></hr>,
+        ])
+      ) : (
+        <MenuItem>
+          <Grid container justify="center">
+            <span>Empty</span>
+          </Grid>
+        </MenuItem>
+      )}
       <Link to="/cart">
         <MenuItem classes={{ root: classes.viewCart }}>
           <Grid container justify="center" alignItems="center">

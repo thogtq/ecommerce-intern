@@ -5,7 +5,13 @@ import QuantityPicker from "components/QuantityPicker";
 import React, { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
 
-export default function CartItem({ cartItem, onRemove, total, setTotal }) {
+export default function CartItem({
+  cartItem,
+  onRemove,
+  total,
+  setTotal,
+  onChange,
+}) {
   const [amount, setAmount] = useState(0);
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
@@ -39,6 +45,14 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
     };
     fetchProduct();
   }, [cartItem]);
+  const handleQuantity = (value) => {
+    if (onChange) {
+      onChange(cartItem.id, value);
+      let newAmount = product.price * (value - cartItem.quantity);
+      setAmount((amount) => amount + newAmount);
+      setTotal((total) => total + newAmount);
+    }
+  };
   return (
     !loading && (
       <TableRow>
@@ -84,7 +98,7 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
         </StyledTableCell>
         <StyledTableCell align="center">{cartItem.size}</StyledTableCell>
         <StyledTableCell align="center">
-          <QuantityPicker value={cartItem.quantity} />
+          <QuantityPicker value={cartItem.quantity} onChange={handleQuantity} />
         </StyledTableCell>
         <StyledTableCell align="center">${amount}.00</StyledTableCell>
       </TableRow>
