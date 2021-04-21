@@ -1,5 +1,4 @@
 import { Grid, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import CartMenuItem from "./CartMenuItem";
 
@@ -40,23 +39,19 @@ export default function CartMenu({ cart, setCart, anchorEl, setAnchorEl }) {
       disableAutoFocusItem={true}
       //MenuListProps={{ onMouseLeave: handleClose }}
     >
-      {cart.length ? (
-        cart.map((cartItem) => (
-          <Fragment>
-            <CartMenuItem key={cartItem.id} cartItem={cartItem} />
-            <hr className="line"></hr>
-          </Fragment>
-        ))
-      ) : (
-        <Fragment>
-          <MenuItem>
-            <Grid container justify="center">
-              <span>Empty</span>
-            </Grid>
-          </MenuItem>
-          <hr className="line"></hr>
-        </Fragment>
-      )}
+      {cart.length
+        ? cart.map((cartItem) => [
+            <CartMenuItem key={cartItem.id} cartItem={cartItem} />,
+            <hr className="line"></hr>,
+          ])
+        : [
+            <MenuItem>
+              <Grid container justify="center">
+                <span>Empty</span>
+              </Grid>
+            </MenuItem>,
+            <hr className="line"></hr>,
+          ]}
       <Link to="/cart">
         <MenuItem classes={{ root: classes.viewCart }}>
           <Grid container justify="center" alignItems="center">

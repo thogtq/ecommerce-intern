@@ -20,7 +20,6 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
       minWidth: "100px",
     },
   })(TableCell);
-
   useEffect(() => {
     if (!loading) {
       let _amount = product.price * cartItem.quantity;
@@ -39,7 +38,7 @@ export default function CartItem({ cartItem, onRemove, total, setTotal }) {
       }
     };
     fetchProduct();
-  }, []);
+  }, [cartItem]);
   return (
     !loading && (
       <TableRow>

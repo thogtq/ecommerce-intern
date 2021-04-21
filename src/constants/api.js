@@ -2,8 +2,9 @@ export const SERVER = "http://localhost:8080";
 
 export const ADMIN_LOGIN = "/api/admin/login";
 export const USER_LOGIN = "/api/user/login";
-export const USER = "/api/user";
+export const USER = "/api/users/";
 export const USERS = "/api/users";
+export const USER_PASSWORD = "/api/users/password";
 
 export const PRODUCT = "/api/product";
 export const PRODUCTS = "/api/products";

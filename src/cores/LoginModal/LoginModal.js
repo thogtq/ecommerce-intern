@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService, { setLocalUser } from "services/UserService";
-import { submitButton } from "helpers/helpers";
-import Modal from "./Modal";
+import UserService from "services/UserService";
+import Modal from "../../components/Modal";
 import { authenticate } from "services/AuthService";
-import ModalInput from "./ModalInput";
+import ModalInput from "../../components/ModalInput";
+import SiteButton from "components/SiteButton";
 
 function LoginModal({ setLoggedIn, show, toggleModal }) {
   const RememberPassword = () => {
@@ -37,19 +37,20 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
     );
   };
   const ModalFormBody = () => {
+    const [disabled, setDisabled] = useState(true);
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
     const handleFormChange = () => {
-      if (Email !== "" && Password !== "") {
-        submitButton(true);
+      if (Email && Password) {
+        setDisabled(false);
       } else {
-        submitButton(false);
+        setDisabled(true);
       }
     };
     const handleSubmit = async (e) => {
       e.preventDefault();
-      submitButton(false);
+      setDisabled(true);
       let userObject = {
         email: Email,
         password: Password,
@@ -57,14 +58,13 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
       let res = await UserService.login(userObject);
       if (res.status === "success") {
         authenticate(res.data);
-        //setLocalUser(res.data.user);
         toggleModal();
         setLoggedIn(true);
       } else {
         alert(res.error.message);
         console.log(res.error);
-        submitButton(true);
       }
+      setDisabled(false);
     };
     return (
       <form onChange={handleFormChange} onSubmit={handleSubmit}>
@@ -88,9 +88,16 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
           <RememberPassword />
           <ForgotPassword />
         </div>
-        <button id="submit" className="function-button btn-disabled" disabled>
-          Login
-        </button>
+        <SiteButton
+          className="login-button"
+          name="Login"
+          width="100%"
+          height="50px"
+          backgroundColor="#ffa15f"
+          weight="Bold"
+          color="#ffffff"
+          disabled={disabled}
+        />
       </form>
     );
   };

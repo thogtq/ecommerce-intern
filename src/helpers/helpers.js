@@ -1,19 +1,7 @@
-export function submitButton(state) {
-  let submit = document.getElementById("submit");
-  if (submit === null) {
-    return;
-  }
-  if (state === true) {
-    submit.classList.remove("btn-disabled");
-    submit.removeAttribute("disabled");
-  } else {
-    submit.classList.add("btn-disabled");
-    submit.setAttribute("disabled", true);
-  }
-}
+
 export function loadCart() {
   let cart = localStorage.getItem("cart");
-  if (cart == null) {
+  if (cart === null) {
     return [];
   }
   return JSON.parse(cart);
@@ -24,13 +12,13 @@ export function saveCart(cart) {
 export function isExistCartItem(cart, cartItem) {
   let result = -1;
   const omitQuantity = (key, value) => {
-    if (key == "quantity") return undefined;
-    else if (key == "id") return undefined;
+    if (key === "quantity") return undefined;
+    else if (key === "id") return undefined;
     else return value;
   };
-  cart.map((item, index) => {
+  cart.forEach((item, index) => {
     if (
-      JSON.stringify(item, omitQuantity) ==
+      JSON.stringify(item, omitQuantity) ===
       JSON.stringify(cartItem, omitQuantity)
     ) {
       result = index;
@@ -52,4 +40,10 @@ export function debounce(func, wait, immediate) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
+}
+export function setLocalUser(userObject) {
+  localStorage.setItem("user", JSON.stringify(userObject));
+}
+export function getLocalUser() {
+  return JSON.parse(localStorage.getItem("user"));
 }

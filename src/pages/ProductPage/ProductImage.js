@@ -1,9 +1,5 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import ProductService from "services/ProductService";
-import { useEffect } from "react";
-import { useLocation } from "react-router";
-//Fix me
-//sync height image
+
 const useStyles = makeStyles({
   root: {
     "& img": {

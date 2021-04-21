@@ -15,11 +15,8 @@ const styles = makeStyles({
 export default function DropdownMenu(props) {
   const classes = styles();
   const anchorRef = props.anchorRef;
-  const { open, setOpen, handleClose } = props;
-  //   const [open, setOpen] = React.useState(false);
-  //   const handleToggle = () => {
-  //     setOpen((prevOpen) => !prevOpen);
-  //   };
+  const { open, handleClose } = props;
+
 
   return (
     <Popper

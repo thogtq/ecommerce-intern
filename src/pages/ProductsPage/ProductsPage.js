@@ -5,16 +5,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
-import { useLocation, useHistory } from "react-router";
+import { useLocation } from "react-router";
 import { loadCart } from "helpers/helpers";
 
 export default function ProductsPage() {
   const [cart, setCart] = useState(loadCart());
   const useQuery = new URLSearchParams(useLocation().search);
   let category = useQuery.get("category");
-  if (!category) {
-    category = "";
-  }
   const [productFilter, setProductFilter] = useState({
     page: 1,
     limit: 20,
@@ -22,16 +19,12 @@ export default function ProductsPage() {
     category: category,
   });
   useEffect(() => {
-    setProductFilter({
-      page: 1,
-      limit: 20,
-      sortBy: "sold",
-      category: category,
-    });
-  }, [useLocation()]);
-  useEffect(() => {
+    if (category !== productFilter.category) {
+      setProductFilter({ ...productFilter, category: category });
+    }
     window.scrollTo(0, 0);
-  }, []);
+  }, [category]);
+
   return (
     <React.Fragment>
       <Header cart={cart} setCart={setCart} />

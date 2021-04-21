@@ -30,7 +30,7 @@
         @include text-style("Montserrat-Bold", 12px, 18px, #202124);
       }
     }
-    .checkbox-control{
+    .checkbox-control {
       label {
         @include text-style("Montserrat-Medium", 14px, 20px, #202124);
       }
@@ -40,15 +40,10 @@
       }
     }
   }
-  .function-button {
+  .login-button,
+  .register-button {
     position: relative;
     margin-top: 44px;
-    @include set-width-height(100%, 50px);
-    border-radius: unset;
-    border: none;
-    @include text-style("Montserrat-Bold", 14px, normal, #ffffff);
-    background-color: #ffa15f;
-    cursor: pointer;
   }
   .modal-header {
     position: relative;

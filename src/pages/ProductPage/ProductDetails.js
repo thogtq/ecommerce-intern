@@ -1,11 +1,11 @@
-import { Divider, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Divider, Grid, makeStyles } from "@material-ui/core";
 import ColorPicker from "components/ColorPicker";
 import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
 import { useState } from "react";
 import { ReviewStarts } from "../../components/ReviewStars";
-import { isExistCartItem, loadCart, submitButton } from "../../helpers/helpers";
+import { isExistCartItem, loadCart } from "../../helpers/helpers";
 import uuid from "react-uuid";
 const useStyles = makeStyles({
   root: {
@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 });
 
 export default function ProductDetails({ cart, setCart, ...props }) {
+  const [disabled, setDisabled] = useState(false);
   const { product } = props;
   const [productCart, setProductCart] = useState({
     id: uuid(),
@@ -34,13 +35,13 @@ export default function ProductDetails({ cart, setCart, ...props }) {
   const handleAddCart = (e) => {
     //Get newest cart data
     cart = loadCart();
-    submitButton(false);
+    setDisabled(true);
     if (
       (product.sizes.length !== 0 && !productCart.size) ||
       (product.colors.length !== 0 && !productCart.color)
     ) {
       alert("Please select attributes");
-      submitButton(true);
+      setDisabled(false);
       return;
     }
     let existCheck = isExistCartItem(cart, productCart);
@@ -54,7 +55,7 @@ export default function ProductDetails({ cart, setCart, ...props }) {
     }
     setProductCart({ ...productCart, size: "", color: "", quantity: 1 });
     alert("Product has been added to cart");
-    submitButton(true);
+    setDisabled(false);
     window.scrollTo(0, 0);
   };
   const handleQuantityChange = (value) => {
@@ -99,7 +100,7 @@ export default function ProductDetails({ cart, setCart, ...props }) {
         weight="Bold"
         backgroundColor="#5f6dff"
         onClick={handleAddCart}
-        submit
+        disabled={disabled}
       />
       <Divider />
       <pre className="description">{product.description}</pre>

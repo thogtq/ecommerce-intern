@@ -1,7 +1,14 @@
 import * as api from "../constants/api";
 import { getAccessToken } from "./AuthService";
 
-const UserService = { login, register, adminLogin, getUser };
+const UserService = {
+  login,
+  register,
+  adminLogin,
+  getUser,
+  updateUser,
+  updatePassword,
+};
 export default UserService;
 
 function adminLogin(userObject) {
@@ -60,7 +67,7 @@ function getUser(isAdmin = false) {
     "Content-Type": "application/json",
     token: getAccessToken(isAdmin),
   };
-  return fetch(api.SERVER + api.USERS + "/", {
+  return fetch(api.SERVER + api.USER, {
     method: "GET",
     headers: header,
   }).then(
@@ -72,9 +79,40 @@ function getUser(isAdmin = false) {
     }
   );
 }
-export function setLocalUser(userObject) {
-  localStorage.setItem("user", JSON.stringify(userObject));
+
+function updateUser(formData, isAdmin = false) {
+  let header = {
+    "Content-Type": "application/json",
+    token: getAccessToken(isAdmin),
+  };
+  return fetch(api.SERVER + api.USER, {
+    method: "PUT",
+    headers: header,
+    body: JSON.stringify(formData),
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
 }
-export function getLocalUser() {
-  return JSON.parse(localStorage.getItem("user"));
+function updatePassword(formData, isAdmin = false) {
+  let header = {
+    "Content-Type": "application/json",
+    token: getAccessToken(isAdmin),
+  };
+  return fetch(api.SERVER + api.USER_PASSWORD, {
+    method: "PUT",
+    headers: header,
+    body: JSON.stringify(formData),
+  }).then(
+    (res) => {
+      return res.json();
+    },
+    (error) => {
+      return api.FETCHING_ERROR(error);
+    }
+  );
 }

@@ -1,7 +1,7 @@
 import { Grid, makeStyles, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     marginLeft: 20,
@@ -47,7 +47,7 @@ export default function CartMenuItem({ cartItem }) {
       }
     };
     fetchProduct();
-  }, []);
+  }, [cartItem]);
   return loading ? (
     ""
   ) : (

@@ -33,14 +33,9 @@
         background-color: #f7f7f7;
       }
     }
-    .submit-btn {
+    .admin-login-button {
       position: relative;
       margin-top: 40px;
-      @include set-width-height(100%, 50px);
-      @include border-unset-all;
-      @include text-style("Montserrat-SemiBold", 14px, normal, #ffffff);
-      background-color: #ffa15f;
-      cursor: pointer;
     }
   }
   .login-form-footer {

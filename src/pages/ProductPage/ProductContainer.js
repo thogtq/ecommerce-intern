@@ -4,7 +4,6 @@ import ProductImage from "./ProductImage";
 import VerticalImageList from "./VertialImageList";
 import ProductItem from "../../components/ProductItem";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
 const dummyImg = "http://localhost:8080/api/product/image/dummy.jpg";
 const useStyles = makeStyles({
   root: {
@@ -28,7 +27,7 @@ export default function ProductContainer({ product, cart, setCart }) {
   const [currentImage, setCurrentImage] = useState([]);
   useEffect(() => {
     setCurrentImage(product.images[0]);
-  }, [useLocation(), product]);
+  }, [ product]);
   return (
     <Grid
       classes={{ root: classes.root }}

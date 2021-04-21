@@ -14,7 +14,7 @@ export default function PhotoInput({ formData, setFormData, imageUrl }) {
     if (res.status === "success") {
       let imageUrl = res.data.fileUrl;
       setUploaded(imageUrl);
-      setFormData({ ...formData, ["images"]: [...formData.images, imageUrl] });
+      setFormData({ ...formData, images: [...formData.images, imageUrl] });
     } else {
       console.log(res.error);
     }
@@ -28,7 +28,7 @@ export default function PhotoInput({ formData, setFormData, imageUrl }) {
   const handleRemoveImage = (e) => {
     setFormData({
       ...formData,
-      ["images"]: formData.images.filter((image) => image != uploaded),
+      images: formData.images.filter((image) => image !== uploaded),
     });
     setUploaded(null);
   };

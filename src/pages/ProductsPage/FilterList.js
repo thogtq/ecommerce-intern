@@ -83,7 +83,7 @@ const FilterList = ({ filter, setFilter }) => {
             {colors.map((color) => (
               <Grid key={color} item xs={3}>
                 <ColorPicker
-                  active={color == filter.color}
+                  active={color === filter.color}
                   color={color}
                   onClick={handleColorClick}
                 />

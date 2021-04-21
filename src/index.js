@@ -7,7 +7,7 @@ import "assets/sass/main.scss";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { PrivateRoute } from "cores/PrivateRoute";
-import AdminLogin from "./pages/AdminLogin";
+import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import UserPage from "./pages/UserPage/UserPage";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";

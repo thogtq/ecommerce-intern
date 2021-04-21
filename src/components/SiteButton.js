@@ -11,16 +11,23 @@ const useStyles = makeStyles({
     fontSize: "14px",
     lineHeight: "24px",
     color: (props) => props.color,
+    "&:disabled": {
+      backgroundColor: "#d4d3d3",
+      cursor: "not-allowed",
+    },
   },
 });
-export default function SiteButton(props) {
-  let submit = {};
-  if (props.hasOwnProperty("submit")) {
-    submit = { type: "submit", id: "submit" };
+export default function SiteButton({ disabled, className, ...props }) {
+  if (disabled === true) {
+    disabled = { disabled: "true" };
   }
   const { root } = useStyles(props);
   return (
-    <button {...submit} className={root} onClick={props.onClick}>
+    <button
+      {...disabled}
+      className={root + " " + className}
+      onClick={props.onClick}
+    >
       {props.name}
     </button>
   );

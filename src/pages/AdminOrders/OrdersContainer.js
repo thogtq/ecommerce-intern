@@ -9,7 +9,6 @@ import {
   TableCell,
   TableBody,
   Paper,
-  Menu,
   makeStyles,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";

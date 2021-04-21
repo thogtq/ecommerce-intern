@@ -1,6 +1,6 @@
 import cartIcon from "assets/images/icons/cart.svg";
-import LoginModal from "components/LoginModal";
-import RegisterModal from "components/RegisterModal";
+import LoginModal from "cores/LoginModal/LoginModal";
+import RegisterModal from "cores/RegisterModal/RegisterModal";
 import React, { useState, useEffect } from "react";
 import { isAuthenticated, logout } from "services/AuthService";
 import { makeStyles, Menu, Avatar, Badge } from "@material-ui/core";
@@ -46,6 +46,7 @@ const HeaderUserMenu = ({ cart }) => {
   const handleLogout = () => {
     setLoggedIn(false);
     logout();
+    history.go(0);
   };
   const [showLoginModal, setshowLoginModal] = useState(false);
   const toggleLoginModal = () => {
@@ -140,7 +141,6 @@ const HeaderUserMenu = ({ cart }) => {
           anchorEl={anchorMenu}
           open={Boolean(anchorMenu)}
           onClose={handleClose}
-          MenuListProps={{ onMouseLeave: handleClose }}
           getContentAnchorEl={null}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}

@@ -14,6 +14,8 @@ export default function StatusButton(props) {
     case "Canceled":
       color = canceledColor;
       break;
+    default:
+      color = "#cccccc";
   }
   const StyledButton = withStyles({
     root: {

@@ -1,7 +1,6 @@
 import {
   Avatar,
   Grid,
-  ListItemIcon,
   makeStyles,
   Menu,
   MenuItem,
@@ -12,7 +11,7 @@ import notiIcon from "assets/images/admin/icons/notification.svg";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 import LogoutIcon from "assets/images/icons/logout.svg";
 import ProfileIcon from "assets/images/icons/profile.svg";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "services/AuthService";
 const useStyles = makeStyles({
   root: {
@@ -29,7 +28,6 @@ const useStyles = makeStyles({
   },
 });
 export default function AdminMenu() {
-  const history = useHistory();
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const openAdminMenu = (e) => {

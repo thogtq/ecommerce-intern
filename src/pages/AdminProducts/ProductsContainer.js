@@ -66,7 +66,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
       let res = await ProductService.deleteProduct(props.productID);
       if (res.status === "success") {
         setProducts(
-          products.filter((product) => product.productID != props.productID)
+          products.filter((product) => product.productID !== props.productID)
         );
       } else {
         console.log(res);

@@ -1,10 +1,10 @@
 import logo from "assets/images/logo.svg";
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import HeaderUserMenu from "./HeaderUserMenu";
 import CategoryNavBar from "cores/Header/CategoryNavBar";
 import HeaderSearchBar from "./HeaderSearchBar";
 import { Link } from "react-router-dom";
-import { saveCart, loadCart } from "../../helpers/helpers";
+import { saveCart } from "../../helpers/helpers";
 
 function Header({ cart, setCart }) {
   useEffect(() => {

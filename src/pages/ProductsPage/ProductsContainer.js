@@ -7,9 +7,9 @@ import {
 } from "@material-ui/core";
 import SimplePagination from "components/SimplePagination";
 import ProductItem from "../../components/ProductItem";
-import { useState, useEffect, useHistory } from "react";
+import { useState, useEffect } from "react";
 import ProductService from "services/ProductService";
-import { useLocation } from "react-router";
+
 const useStyles = makeStyles({
   sortBar: {
     marginBottom: "14px",
@@ -41,7 +41,7 @@ export default function ProductsContainer({
       }
     };
     fetchProduct();
-  }, [filter, useLocation()]);
+  }, [filter]);
   const handlePageChange = (value) => {
     setFilter({ ...filter, page: value });
   };
@@ -66,11 +66,11 @@ export default function ProductsContainer({
           </Select>
         </Grid>
         <Grid item xs container alignItems="flex-end" justify="flex-end">
-        <SimplePagination
-          page={filter.page}
-          max={pages}
-          onChange={handlePageChange}
-        />
+          <SimplePagination
+            page={filter.page}
+            max={pages}
+            onChange={handlePageChange}
+          />
         </Grid>
       </Grid>
       <Grid item container>

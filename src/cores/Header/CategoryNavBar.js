@@ -2,7 +2,6 @@ import { makeStyles, Menu } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import arrowIcon from "assets/images/icons/arrow.svg";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import * as productConst from "constants/product";
 import { useHistory } from "react-router";
 
@@ -42,7 +41,7 @@ const CategoryNavBar = () => {
     const handleCategoryClick = (e) => {
       handleClose(e);
       let category = e.currentTarget.attributes["value"].nodeValue;
-      history.push("/products/?category="+category);
+      history.push("/products/?category=" + category);
     };
     return (
       <Menu
@@ -74,36 +73,16 @@ const CategoryNavBar = () => {
   return (
     <div id="category_nav" className="header-category-nav">
       <ul>
-        <li
-          onClick={handleClick}
-          value="Men"
-          aria-controls="category_menu"
-          aria-haspopup="true"
-        >
+        <li onClick={handleClick} value="Men">
           Men <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li
-          value="Ladies"
-          onClick={handleClick}
-          aria-controls="category_menu"
-          aria-haspopup="true"
-        >
+        <li value="Ladies" onClick={handleClick}>
           Ladies<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li
-          onClick={handleClick}
-          value="Girls"
-          aria-controls="category_menu"
-          aria-haspopup="true"
-        >
+        <li onClick={handleClick} value="Girls">
           Girls<img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
-        <li
-          onClick={handleClick}
-          value="Boys"
-          aria-controls="category_menu"
-          aria-haspopup="true"
-        >
+        <li onClick={handleClick} value="Boys">
           Boys <img className="icon" src={arrowIcon} alt="arrow-icon"></img>
         </li>
       </ul>

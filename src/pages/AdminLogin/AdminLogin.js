@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import UserService from "services/UserService";
 import { authenticate, isAuthenticated } from "services/AuthService";
 import { Redirect } from "react-router";
-import { submitButton } from 'helpers/helpers';
+import SiteButton from "components/SiteButton";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -30,11 +30,12 @@ const AdminLogin = () => {
     );
   };
   const LoginForm = () => {
+    const [disabled, setDisabled] = useState(false);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const handleFormSubmit = async (e) => {
       e.preventDefault();
-      submitButton(false);
+      setDisabled(true);
       let userObject = {
         email: email,
         password: password,
@@ -46,7 +47,7 @@ const AdminLogin = () => {
       } else {
         alert(res.error.message);
       }
-      submitButton(true);
+      setDisabled(false);
     };
     return (
       <form className="login-form" onSubmit={handleFormSubmit}>
@@ -68,9 +69,16 @@ const AdminLogin = () => {
               setPassword(e.target.value);
             }}
           />
-          <button type="submit" id="submit" className="submit-btn">
-            Login
-          </button>
+          <SiteButton
+            className="admin-login-button"
+            name="Login"
+            width="100%"
+            height="50px"
+            backgroundColor="#ffa15f"
+            weight="SemiBold"
+            color="#ffffff"
+            disabled={disabled}
+          />
         </div>
         <div className="login-form-footer">Forgot password</div>
       </form>

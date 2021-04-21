@@ -10,9 +10,9 @@ const EditProduct = () => {
   const [product, setProduct] = useState({});
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
+  let productID = useQuery.get("productID");
   useEffect(() => {
     const fetchProduct = async () => {
-      let productID = useQuery.get("productID");
       let res = await ProductService.getProduct(productID);
       if (res.status === "success") {
         setProduct(res.data.product);
@@ -22,7 +22,7 @@ const EditProduct = () => {
       }
     };
     fetchProduct();
-  }, []);
+  }, [productID]);
   return (
     !loading && (
       <Grid container direction="row">

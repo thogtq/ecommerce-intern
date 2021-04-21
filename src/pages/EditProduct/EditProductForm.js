@@ -6,23 +6,11 @@ import MultiSelect from "../../components/MultiSelect";
 import * as productConst from "../../constants/product";
 import SingleSelect from "../../components/SingleSelect";
 import SiteButton from "../../components/SiteButton";
-import { submitButton } from "helpers/helpers";
 import { useHistory } from "react-router";
 import ProductService from "../../services/ProductService";
 
 export default function EditProductForm({ product, setProduct }) {
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    images: product.images,
-    sizes: product.sizes,
-    colors: product.colors,
-    categories: product.categories,
-    name: product.name,
-    brand: product.brand,
-    quantity: product.quantity,
-    price: product.price,
-    description: product.description,
-  });
   const CategorySelect = () => {
     const categories = productConst.addProductCategory;
     const handleCategory = (e) => {
@@ -111,15 +99,16 @@ export default function EditProductForm({ product, setProduct }) {
     );
   };
   const SubmitButton = () => {
+    const [disabled, setDisabled] = useState(false);
     const handleSubmit = async () => {
-      submitButton(false);
+      setDisabled(true);
       let res = await ProductService.updateProduct(product);
       if (res.status === "success") {
         history.push("/admin/products");
       } else {
         alert(res.error.message);
-        submitButton(true);
       }
+      setDisabled(false);
     };
     return (
       <SiteButton
@@ -129,7 +118,7 @@ export default function EditProductForm({ product, setProduct }) {
         color="white"
         weight="SemiBold"
         backgroundColor="#ffa15f"
-        submit
+        disabled={disabled}
         onClick={handleSubmit}
       ></SiteButton>
     );

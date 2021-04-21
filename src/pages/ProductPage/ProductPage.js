@@ -21,9 +21,9 @@ export default function ProductPage() {
   if (!category) {
     category = "";
   }
+  let productID = useQuery.get("productID");
   useEffect(() => {
     const fetchProduct = async () => {
-      let productID = useQuery.get("productID");
       let res = await ProductService.getProduct(productID);
       if (res.status === "success") {
         setProduct(res.data.product);
@@ -33,7 +33,7 @@ export default function ProductPage() {
       }
     };
     fetchProduct();
-  }, [useLocation()]);
+  }, [productID]);
   return loading ? (
     ""
   ) : (

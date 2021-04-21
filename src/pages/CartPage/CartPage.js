@@ -4,16 +4,11 @@ import {
   TableCell,
   TableRow,
   TableContainer,
-  Paper,
   TableHead,
   TableBody,
   withStyles,
   Divider,
-  Link,
 } from "@material-ui/core";
-import ColorPicker from "components/ColorPicker";
-import ConfirmBox from "components/ConfirmBox";
-import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
@@ -25,7 +20,6 @@ import { isAuthenticated } from "services/AuthService";
 import OrderService from "services/OrderService";
 
 export default function CartPage() {
-  const [order, setOrder] = useState({});
   const history = useHistory();
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useState(loadCart());

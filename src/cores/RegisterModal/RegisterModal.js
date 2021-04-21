@@ -1,48 +1,43 @@
-import ModalInput from "./ModalInput";
+import ModalInput from "../../components/ModalInput";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import UserService from "services/UserService";
-import {submitButton} from "helpers/helpers";
-import Modal from "./Modal";
-import { Link } from 'react-router-dom';
+import Modal from "../../components/Modal";
+import { Link } from "react-router-dom";
+import SiteButton from "components/SiteButton";
 
 const RegisterModal = ({ show, toggleModal }) => {
   const PolicyAgree = () => {
     return (
       <div className="policy-agree">
         By creating an account you agree to the&nbsp;
-        <Link to="/terms"className="orange-underline" href="#">
+        <Link to="/terms" className="orange-underline" href="#">
           Terms of Service
         </Link>
         &nbsp; and&nbsp;
-        <Link to="/policy"className="orange-underline" href="#">
+        <Link to="/policy" className="orange-underline" href="#">
           Privacy Policy
         </Link>
       </div>
     );
   };
-  const SubmitButton = () => {
-    return (
-      <button id="submit" className="function-button btn-disabled" disabled>
-        Register
-      </button>
-    );
-  };
+
   const ModalFormBody = () => {
+    const [disabled, setDisabled] = useState(true);
     const [Fullname, setFullname] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
     const handleFormChange = () => {
-      if (Fullname !== "" && Email !== "" && Password !== "") {
-        submitButton(true);
+      if (Fullname && Email && Password) {
+        setDisabled(false);
       } else {
-        submitButton(false);
+        setDisabled(true);
       }
     };
     const handleSubmit = async (e) => {
-      e.preventDefault()
-      submitButton(false);
+      e.preventDefault();
+      setDisabled(true);
       let userObject = {
         fullname: Fullname,
         email: Email,
@@ -54,8 +49,8 @@ const RegisterModal = ({ show, toggleModal }) => {
         toggleModal();
       } else {
         alert(res.message);
-        submitButton(true);
       }
+      setDisabled(false);
     };
     return (
       <form onChange={handleFormChange} onSubmit={handleSubmit}>
@@ -84,7 +79,16 @@ const RegisterModal = ({ show, toggleModal }) => {
           }}
         />
         <PolicyAgree />
-        <SubmitButton />
+        <SiteButton
+          className="register-button"
+          name="Register"
+          width="100%"
+          height="50px"
+          backgroundColor="#ffa15f"
+          weight="Bold"
+          color="#ffffff"
+          disabled={disabled}
+        />
       </form>
     );
   };
@@ -92,7 +96,7 @@ const RegisterModal = ({ show, toggleModal }) => {
     return (
       <div className="login-modal-register">
         Do you have an account?{" "}
-        <Link to="/?login_modal=1"className="orange-underline" href="#">
+        <Link to="/?login_modal=1" className="orange-underline" href="#">
           Login
         </Link>
       </div>
