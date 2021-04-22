@@ -17,7 +17,7 @@ export default function CartItem({
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleRemove = () => {
-    setTotal(total - amount);
+    setTotal((total) => total - amount);
     onRemove(cartItem);
   };
   const StyledTableCell = withStyles({

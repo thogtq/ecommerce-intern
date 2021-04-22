@@ -84,7 +84,7 @@ export default function CartPage() {
                 <TableBody className="table-body">
                   {cart.map((cartItem, index) => (
                     <CartItem
-                      key={index}
+                      key={cartItem.id}
                       cartItem={cartItem}
                       total={total}
                       setTotal={setTotal}
