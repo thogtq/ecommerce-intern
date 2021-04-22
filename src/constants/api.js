@@ -5,6 +5,7 @@ export const USER_LOGIN = "/api/user/login";
 export const USER = "/api/users/";
 export const USERS = "/api/users";
 export const USER_PASSWORD = "/api/users/password";
+export const USER_TOKEN = "/api/users/token";
 
 export const PRODUCT = "/api/products/";
 export const PRODUCTS = "/api/products";
