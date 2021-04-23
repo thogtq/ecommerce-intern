@@ -28,7 +28,6 @@ export default function SameBrandProducts({ brand }) {
     };
     fetchProducts();
   }, []);
-  console.log(products);
   return (
     <Grid classes={{ root: classes.sameBrand }} container>
       <div className="product-same-brand">

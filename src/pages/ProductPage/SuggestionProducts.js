@@ -44,7 +44,6 @@ export default function SuggestionProducts({ category }) {
     };
     fetchProducts();
   }, []);
-  console.log(products);
   return (
     <Grid classes={{ root: classes.root }} container>
       <GridList classes={{ root: classes.gridList }}>

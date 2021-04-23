@@ -22,7 +22,9 @@ export default function AdminSideBar(props) {
     <React.Fragment>
       <Grid className="sidebar">
         <Grid container justify="center">
-          <img className="sidebar-logo" src={logo} alt="logo"></img>
+          <Link to="/">
+            <img className="sidebar-logo" src={logo} alt="logo"></img>
+          </Link>
         </Grid>
         <Grid container>
           <MenuList className="sidebar-menu">

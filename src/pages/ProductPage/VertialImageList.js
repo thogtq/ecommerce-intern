@@ -23,7 +23,6 @@ export default function VerticalImageList({ setCurrentImage, images }) {
             <img
               className={classes.img}
               src={image}
-              alt="product"
               alt="small-thumbnail"
               onClick={handleClick}
             ></img>
@@ -32,18 +31,4 @@ export default function VerticalImageList({ setCurrentImage, images }) {
       </GridList>
     </Grid>
   );
-}
-{
-  /* <Grid container direction="column" classes={{ root: classes.root }}>
-      {images.map((image, index) => {
-        return (
-          <img
-            key={index}
-            onClick={handleClick}
-            src={image}
-            alt="small-thumbnail"
-          ></img>
-        );
-      })}
-    </Grid> */
 }
