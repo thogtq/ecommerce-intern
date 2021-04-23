@@ -96,7 +96,6 @@ const ProductContentTable = ({ filter, setFilter }) => {
           setOpen={setOpenMenu}
           anchorRef={anchorRef}
           handleClose={handleClose}
-          
         >
           <Link
             to={"/admin/products/edit-product/?productID=" + props.productID}
@@ -144,7 +143,6 @@ const ProductContentTable = ({ filter, setFilter }) => {
           </TableHead>
           <TableBody className="table-body">
             {products.map((product) => {
-              let profit = product.price * product.sold;
               let da = new Date(product.createdAt);
               let dateAdded =
                 da.toLocaleTimeString() + ", " + da.toLocaleDateString();
@@ -167,7 +165,14 @@ const ProductContentTable = ({ filter, setFilter }) => {
                           container
                           direction="column"
                         >
-                          <Grid item>{product.name}</Grid>
+                          <Grid item>
+                            <Link
+                              to={"/product/?productID=" + product.productID}
+                              target="_blank"
+                            >
+                              {product.name}
+                            </Link>
+                          </Grid>
                           <Grid item>{product.categories.join(", ")}</Grid>
                         </Grid>
                       </Grid>
@@ -180,7 +185,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
                     {dateAdded}
                   </TableCell>
                   <TableCell className="table-cell-text" align="left">
-                    {profit}
+                    {product.profit}
                   </TableCell>
                   <TableCell className="td-action" align="right">
                     <ActionMenu
