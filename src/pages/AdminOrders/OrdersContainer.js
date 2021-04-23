@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import OrderService from "services/OrderService";
 import StatusButton from "../../components/StatusButton";
 import ActionMenu from "./ActionMenu";
+import { getFormatedDateString } from "../../helpers/date";
 
 const useStyles = makeStyles({
   tableCell: {
@@ -68,6 +69,7 @@ const OrderContentTable = ({ filter, setFilter }) => {
           </TableHead>
           <TableBody className="table-body">
             {orders.map((order) => {
+              let orderDate = new Date(order.orderDate);
               return (
                 <TableRow key={order.orderID}>
                   <TableCell
@@ -79,7 +81,7 @@ const OrderContentTable = ({ filter, setFilter }) => {
                     {order.orderID}
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCell }} align="left">
-                    <span>{order.orderDate}</span>
+                    <span>{getFormatedDateString(orderDate)}</span>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCell }} align="left">
                     {order.products[0].name +

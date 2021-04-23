@@ -21,6 +21,7 @@ import ProductService from "../../services/ProductService";
 import DropdownMenu from "components/DropdownMenu";
 import { Link } from "react-router-dom";
 import ConfirmBox from "components/ConfirmBox";
+import { getFormatedDateString } from "../../helpers/date";
 
 const Header = () => {
   return (
@@ -143,9 +144,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
           </TableHead>
           <TableBody className="table-body">
             {products.map((product) => {
-              let da = new Date(product.createdAt);
-              let dateAdded =
-                da.toLocaleTimeString() + ", " + da.toLocaleDateString();
+              let createDate = new Date(product.createdAt);
               let productImage = product.images[0];
               return (
                 <TableRow key={product.productID}>
@@ -154,6 +153,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
                     className="th-product"
                     component="th"
                     scope="row"
+                    width="440px"
                   >
                     <Grid container direction="row">
                       <Grid item xs={1}>
@@ -178,16 +178,20 @@ const ProductContentTable = ({ filter, setFilter }) => {
                       </Grid>
                     </Grid>
                   </TableCell>
-                  <TableCell className="table-cell-text" align="left">
+                  <TableCell
+                    className="table-cell-text"
+                    align="left"
+                    width="130px"
+                  >
                     {product.sold + "/" + product.quantity}
                   </TableCell>
                   <TableCell className="table-cell-text" align="left">
-                    {dateAdded}
+                    {getFormatedDateString(createDate)}
                   </TableCell>
                   <TableCell className="table-cell-text" align="left">
                     {product.profit}
                   </TableCell>
-                  <TableCell className="td-action" align="right">
+                  <TableCell className="td-action" align="right" width="120px">
                     <ActionMenu
                       productID={product.productID}
                       name={product.name}
