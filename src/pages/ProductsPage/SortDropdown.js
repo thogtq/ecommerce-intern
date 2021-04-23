@@ -7,8 +7,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import React, { useState } from "react";
 const ExpandLessIcon = withStyles({
   root: { color: "#202124" },
 })(ExpandLess);
@@ -84,7 +83,11 @@ export default function SortDropdown({ filter, setFilter }) {
       <Grid classes={{ root: classes.root }} container onClick={handleOpenMenu}>
         <span className={classes.title}>Sort By:</span>
         <span className={classes.sortValue}>{sortName}</span>
-        <ExpandLessIcon className={classes.icon} />
+        {anchorMenu ? (
+          <ExpandLessIcon className={classes.icon} />
+        ) : (
+          <ExpandMoreIcon className={classes.icon} />
+        )}
       </Grid>
       <StyledMenu
         anchorEl={anchorMenu}

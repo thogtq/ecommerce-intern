@@ -26,7 +26,8 @@
   }
 }
 .product-same-brand {
-  margin-bottom: 20px;
+  width: 80px;
+  margin-bottom: 19px;
   span {
     @include text-style(Montserrat-Medium, 14px, 22px, #202124);
   }

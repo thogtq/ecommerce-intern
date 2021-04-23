@@ -1,26 +1,40 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, GridListTile, GridList } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    gap: (props) => props.gap,
-    "& img": {
-      cursor: "pointer",
-      width: "100%",
-    },
+    width: "80px",
+    height: "116px",
+  },
+  img: {
+    cursor: "pointer",
   },
 });
-export default function VerticalImageList({
-  setCurrentImage,
-  images,
-  ...props
-}) {
+export default function VerticalImageList({ setCurrentImage, images }) {
   const handleClick = (e) => {
     setCurrentImage(e.currentTarget.src);
   };
- 
-  const classes = useStyles(props);
+
+  const classes = useStyles();
   return (
-    <Grid container direction="column" classes={{ root: classes.root }}>
+    <Grid container classes={{ root: classes.root }}>
+      <GridList cellHeight={116} cols={1} spacing={25}>
+        {images.map((image) => (
+          <GridListTile key={image}>
+            <img
+              className={classes.img}
+              src={image}
+              alt="product"
+              alt="small-thumbnail"
+              onClick={handleClick}
+            ></img>
+          </GridListTile>
+        ))}
+      </GridList>
+    </Grid>
+  );
+}
+{
+  /* <Grid container direction="column" classes={{ root: classes.root }}>
       {images.map((image, index) => {
         return (
           <img
@@ -31,6 +45,5 @@ export default function VerticalImageList({
           ></img>
         );
       })}
-    </Grid>
-  );
+    </Grid> */
 }

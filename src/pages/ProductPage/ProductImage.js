@@ -1,21 +1,16 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
-  root: {
-    "& img": {
-      width: "100%",
-      objectFit: "cover",
-      maxHeight: "755px",
-    },
+  image: {
+    width: "379px",
+    objectFit: "cover",
+    height: "537px",
   },
 });
-
 export default function ProductImage({ currentImage }) {
   const classes = useStyles();
   return currentImage ? (
-    <Grid container classes={{ root: classes.root }}>
-      <img src={currentImage} alt="product-img"></img>
-    </Grid>
+    <img className={classes.image} src={currentImage} alt="product-img"></img>
   ) : (
     ""
   );

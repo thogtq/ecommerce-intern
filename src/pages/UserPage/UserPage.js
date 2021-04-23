@@ -1,7 +1,6 @@
 import {
   Grid,
   Tab,
-  makeStyles,
   withStyles,
   Tabs,
 } from "@material-ui/core";
@@ -13,14 +12,6 @@ import TabPanel from "../../components/TabPannel";
 import AccountTab from "./AccountTab";
 import EditPasswordTab from "./EditPasswordTab";
 
-const useStyles = makeStyles({
-  listItem: {
-    padding: "0",
-    marginBottom: "18px",
-    font: "14px/22px Montserrat-Regular",
-    color: "#4d4d4d",
-  },
-});
 const UserPage = () => {
   const [value, setValue] = React.useState(0);
   const [cart, setCart] = useState(loadCart());

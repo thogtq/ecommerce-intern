@@ -4,7 +4,6 @@ import arrowIcon from "assets/images/icons/arrow.svg";
 import React, { useState } from "react";
 import * as productConst from "constants/product";
 import { Link } from "react-router-dom";
-import { debounce } from "../../helpers/helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {

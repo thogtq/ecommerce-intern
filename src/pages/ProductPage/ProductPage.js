@@ -23,6 +23,9 @@ export default function ProductPage() {
   }
   let productID = useQuery.get("productID");
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productID]);
+  useEffect(() => {
     const fetchProduct = async () => {
       let res = await ProductService.getProduct(productID);
       if (res.status === "success") {
@@ -73,7 +76,7 @@ export default function ProductPage() {
         <TextDivider text="Reviews" />
         <ReviewsContainer />
         <TextDivider text="You may also like" />
-        <SuggestionProducts />
+        <SuggestionProducts category={product.parentCategories[0]} />
       </Grid>
       <Footer />
     </React.Fragment>

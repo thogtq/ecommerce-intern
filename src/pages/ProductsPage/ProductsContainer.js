@@ -2,8 +2,6 @@ import {
   Grid,
   GridList,
   makeStyles,
-  MenuItem,
-  Select,
 } from "@material-ui/core";
 import SimplePagination from "components/SimplePagination";
 import ProductItem from "../../components/ProductItem";

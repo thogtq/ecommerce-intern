@@ -10,6 +10,8 @@ import uuid from "react-uuid";
 const useStyles = makeStyles({
   root: {
     gap: "28px",
+    marginLeft: "70px",
+    marginRight: "121px",
   },
   reviewDivider: {
     margin: "0px 10px",
