@@ -1,18 +1,10 @@
-import AuthService, { getAccessToken } from "./AuthService";
+import { getAccessToken } from "./AuthService";
 import * as api from "constants/api";
 
-const OrderService = {
-  addOrder,
-  getOrders,
-  updateStatus,
-};
-
-export default OrderService;
-
-function addOrder(cart) {
+export function addOrder(cart) {
   let header = {
     "Content-Type": "application/json",
-    token: AuthService.getAccessToken(),
+    token: getAccessToken(),
   };
   return fetch(api.SERVER + api.ORDERS, {
     method: "POST",
@@ -30,7 +22,7 @@ function addOrder(cart) {
     }
   );
 }
-function getOrders(filter) {
+export function getOrders(filter) {
   let header = {
     "Content-Type": "application/json",
     token: getAccessToken(true),
@@ -54,10 +46,10 @@ function getOrders(filter) {
     }
   );
 }
-function updateStatus(orderID, status) {
+export function updateStatus(orderID, status) {
   let header = {
     "Content-Type": "application/json",
-    token: AuthService.getAccessToken(true),
+    token: getAccessToken(true),
   };
   let query = "?orderID=" + orderID;
   return fetch(api.SERVER + api.ORDERS_STATUS + query, {

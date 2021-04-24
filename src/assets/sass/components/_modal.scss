@@ -90,3 +90,7 @@
   background-color: #000;
   opacity: 0.5;
 }
+.modal-error {
+  @include text-style(Montserrat-Medium, 12px, 22px, #f63f45);
+  text-align: center;
+}

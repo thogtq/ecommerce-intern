@@ -6,20 +6,25 @@ import Homepage from "./pages/Homepage/Homepage";
 import "assets/sass/main.scss";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
 import UserRoutes from "routes/UserRoutes";
+import { AuthAdminProvider, AuthProvider, CartProvider } from "contexts/store";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route exact path="/" component={Homepage}></Route>
-    <Route exact path="/admin/login" component={AdminLogin}></Route>
-    <AdminRoutes />
-    <ProductRoutes />
-    <OrderRoutes />
-    <UserRoutes/>
+    <AuthProvider>
+      <CartProvider>
+        <Route exact path="/" component={Homepage}></Route>
+        <ProductRoutes />
+        <OrderRoutes />
+        <UserRoutes />
+      </CartProvider>
+    </AuthProvider>
+    <AuthAdminProvider>
+      <AdminRoutes />
+    </AuthAdminProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

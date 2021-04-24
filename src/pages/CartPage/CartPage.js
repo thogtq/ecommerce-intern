@@ -12,17 +12,18 @@ import {
 import SiteButton from "components/SiteButton";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
-import { loadCart } from "helpers/helpers";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import CartItem from "./CartItem";
-import { isAuthenticated } from "services/AuthService";
-import OrderService from "services/OrderService";
+import { addOrder } from "services/OrderService";
+import { AuthContext, CartContext } from "contexts/store";
+import { saveCart } from "services/CartService";
 
 export default function CartPage() {
+  const [cart, cartDispatch] = useContext(CartContext);
+  const [authState] = useContext(AuthContext);
   const history = useHistory();
   const [total, setTotal] = useState(0);
-  const [cart, setCart] = useState(loadCart());
   const StyledTableCell = withStyles({
     root: {
       padding: "16px 0",
@@ -30,23 +31,19 @@ export default function CartPage() {
     },
   })(TableCell);
   const handleItemRemove = (item) => {
-    //Fix me
-    //Remove on backend but frontend dont
-    setCart(cart.filter((cartItem) => cartItem.id !== item.id));
+    cartDispatch({ type: "REMOVE_CART_ITEM", payload: { id: item.id } });
   };
   const handleItemChange = (id, quantity) => {
-    setCart(
-      cart.map((cartItem) => {
-        if (cartItem.id === id) {
-          return { ...cartItem, quantity: quantity };
-        } else {
-          return { ...cartItem };
-        }
-      })
-    );
+    const update = {
+      quantity: quantity,
+    };
+    cartDispatch({
+      type: "UPDATE_CART_ITEM",
+      payload: { id: id, update: update },
+    });
   };
   const handleCheckout = async () => {
-    if (!isAuthenticated()) {
+    if (!authState.token) {
       history.push("?login_modal=1");
       return;
     }
@@ -54,9 +51,9 @@ export default function CartPage() {
       alert("Your cart is empty");
       return;
     }
-    let res = await OrderService.addOrder(cart);
+    let res = await addOrder(cart);
     if (res.status === "success") {
-      setCart([]);
+      cartDispatch({ type: "EMPTY_CART" });
       history.push("/checkout?orderID=" + res.data.orderID);
       return;
     } else {
@@ -65,7 +62,7 @@ export default function CartPage() {
   };
   return (
     <React.Fragment>
-      <Header cart={cart} setCart={setCart} />
+      <Header />
       <div className="container cart-page">
         <Grid className="header-title">My bag</Grid>
         <Grid container spacing={8}>

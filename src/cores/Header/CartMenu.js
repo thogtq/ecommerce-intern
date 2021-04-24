@@ -1,4 +1,6 @@
 import { Grid, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import { CartContext } from "contexts/store";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartMenuItem from "./CartMenuItem";
 
@@ -21,12 +23,12 @@ const styles = makeStyles({
     lineHeight: "22px",
   },
 });
-export default function CartMenu({ cart, setCart, anchorEl, setAnchorEl }) {
+export default function CartMenu({anchorEl, setAnchorEl }) {
+  const [cart] = useContext(CartContext);
   const classes = styles();
   const handleClose = (e) => {
     setAnchorEl(null);
   };
-
   return (
     <Menu
       classes={{ paper: classes.root, list: classes.list }}

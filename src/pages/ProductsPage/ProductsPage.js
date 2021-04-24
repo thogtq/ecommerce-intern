@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import ProductsContainer from "./ProductsContainer";
 import SidebarNav from "./SidebarNav";
 import { useLocation } from "react-router";
-import { loadCart } from "helpers/helpers";
 
 const initFilter = {
   page: 1,
@@ -15,7 +14,6 @@ const initFilter = {
   sortOrder: -1,
 };
 export default function ProductsPage() {
-  const [cart, setCart] = useState(loadCart());
   const useQuery = new URLSearchParams(useLocation().search);
   let category = useQuery.get("category");
   const [productFilter, setProductFilter] = useState({
@@ -31,7 +29,7 @@ export default function ProductsPage() {
 
   return (
     <React.Fragment>
-      <Header cart={cart} setCart={setCart} />
+      <Header />
       <div className="container">
         <Breadcrumbs
           classes={{ root: "products-breadcrumb" }}

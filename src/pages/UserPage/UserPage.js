@@ -1,21 +1,14 @@
-import {
-  Grid,
-  Tab,
-  withStyles,
-  Tabs,
-} from "@material-ui/core";
+import { Grid, Tab, withStyles, Tabs } from "@material-ui/core";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
-import React, {  useState } from "react";
-import { loadCart } from "helpers/helpers";
+import React, { useState } from "react";
 import TabPanel from "../../components/TabPannel";
 import AccountTab from "./AccountTab";
 import EditPasswordTab from "./EditPasswordTab";
 
 const UserPage = () => {
   const [value, setValue] = React.useState(0);
-  const [cart, setCart] = useState(loadCart());
-  
+
   const StyledTab = withStyles({
     root: {
       font: "14px/22px Montserrat-Regular",
@@ -41,7 +34,7 @@ const UserPage = () => {
   };
   return (
     <React.Fragment>
-      <Header cart={cart} setCart={setCart} />
+      <Header />
       <div className="container user-page-container">
         <Grid container direction="row" style={{ gap: "100px" }} spacing={0}>
           <Grid className="user-page-navbar" item xs>

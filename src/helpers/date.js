@@ -1,4 +1,5 @@
 import { weekday, shortMonth } from "constants/date";
+
 export function getFormatedDateString(date) {
   let dayOfWeek = date.getDay();
   let day = date.getDate();

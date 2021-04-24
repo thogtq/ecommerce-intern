@@ -1,10 +1,10 @@
 import logo from "assets/images/logo_white.svg";
 import { makeStyles } from "@material-ui/core";
-import { useState, useEffect } from "react";
-import UserService from "services/UserService";
-import { authenticate, isAuthenticated } from "services/AuthService";
+import { useState, useEffect, useContext } from "react";
+import { loginAdmin } from "services/UserService";
 import { Redirect } from "react-router";
 import SiteButton from "components/SiteButton";
+import { AuthAdminContext } from "contexts/store";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const AdminLogin = () => {
+  const [authState, authDispatch] = useContext(AuthAdminContext);
   require("assets/sass/admin.scss");
-  const [loggedIn, setLoggedIn] = useState(isAuthenticated(true));
   const classes = useStyles();
   const Input = (props) => {
     return (
@@ -40,18 +40,17 @@ const AdminLogin = () => {
         email: email,
         password: password,
       };
-      let res = await UserService.adminLogin(userObject);
-      if (res.status === "success") {
-        authenticate(res.data, true);
-        setLoggedIn(true);
-      } else {
-        alert(res.error.message);
-      }
+      await loginAdmin(authDispatch, userObject);
       setDisabled(false);
     };
     return (
       <form className="login-form" onSubmit={handleFormSubmit}>
-        <div className="login-form-header">Log In</div>
+        <div className="login-form-header">
+          <div>Log In</div>
+          <div className="modal-error">
+            {authState.error ? authState.error : ""}
+          </div>
+        </div>
         <div className="login-form-body">
           <Input
             name="EMAIL"
@@ -85,13 +84,13 @@ const AdminLogin = () => {
     );
   };
   useEffect(() => {
-    if (loggedIn) {
+    if (authState.token) {
       document.body.classList.remove("login-body");
     } else {
       document.body.classList.add("login-body");
     }
-  }, [loggedIn]);
-  return !loggedIn ? (
+  }, [authState]);
+  return !authState.token ? (
     <div className={classes.root}>
       <img className={classes.logo} src={logo} alt="logo"></img>
       <LoginForm />

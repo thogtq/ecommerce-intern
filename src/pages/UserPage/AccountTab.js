@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import EditAccountTab from "./EditAccountTab";
-import UserService from 'services/UserService';
+import { getUser } from "services/UserService";
 
 export default function AccountTab() {
   const [user, setUser] = useState({});
@@ -11,7 +11,7 @@ export default function AccountTab() {
   };
   useEffect(() => {
     const fetchUser = async () => {
-      let res = await UserService.getUser();
+      let res = await getUser();
       if (res.status === "success") {
         setUser(res.data.user);
       } else {

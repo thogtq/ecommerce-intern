@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "services/UserService";
 import Modal from "../../components/Modal";
-import { authenticate } from "services/AuthService";
 import ModalInput from "../../components/ModalInput";
 import SiteButton from "components/SiteButton";
+import { loginUser } from "services/UserService";
+import { AuthContext } from "contexts/store";
 
-function LoginModal({ setLoggedIn, show, toggleModal }) {
+function LoginModal({ show, toggleModal }) {
+  const [authState, authDispatch] = useContext(AuthContext);
   const RememberPassword = () => {
     return (
       <div className="checkbox-control">
@@ -24,7 +25,14 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
     );
   };
   const ModalHeader = () => {
-    return "Log In";
+    return (
+      <div>
+        <div>Login</div>
+        <div className="modal-error">
+          {authState.error ? authState.error : ""}
+        </div>
+      </div>
+    );
   };
   const ModalFooter = () => {
     return (
@@ -55,15 +63,7 @@ function LoginModal({ setLoggedIn, show, toggleModal }) {
         email: Email,
         password: Password,
       };
-      let res = await UserService.login(userObject);
-      if (res.status === "success") {
-        authenticate(res.data);
-        toggleModal();
-        setLoggedIn(true);
-      } else {
-        alert(res.error.message);
-        console.log(res.error);
-      }
+      await loginUser(authDispatch, userObject);
       setDisabled(false);
     };
     return (

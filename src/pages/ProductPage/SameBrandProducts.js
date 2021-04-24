@@ -1,7 +1,7 @@
 import { Grid, GridList, GridListTile, makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useState } from "react";
-import ProductService from "../../services/ProductService";
+import {getProducts} from "../../services/ProductService";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   sameBrand: {
@@ -19,7 +19,7 @@ export default function SameBrandProducts({ brand }) {
         brand: brand,
         limit: 4,
       };
-      let res = await ProductService.getProducts(filter);
+      let res = await getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
       } else {

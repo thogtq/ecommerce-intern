@@ -8,13 +8,11 @@ import Footer from "cores/Footer/Footer";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { parentCategory } from "constants/product";
-import { loadCart } from "helpers/helpers";
 
 function Homepage() {
-  const [cart, setCart] = useState(loadCart());
   return (
     <React.Fragment>
-      <Header cart={cart} setCart={setCart} />
+      <Header />
       <div className="container">
         <BigBanner />
         <CategoryBanners />

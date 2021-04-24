@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import SiteButton from "components/SiteButton";
-import UserService from "services/UserService";
+import {updatePassword} from "services/UserService";
 
 export default function EditPasswordTab() {
   const [disabled, setDisabled] = useState(true);
@@ -24,7 +24,7 @@ export default function EditPasswordTab() {
       return;
     }
     setDisabled(true);
-    let res = await UserService.updatePassword(formData);
+    let res = await updatePassword(formData);
     if (res.status === "success") {
       alert("Password updated");
       setFormData({ oldPassword: "", newPassword: "" });

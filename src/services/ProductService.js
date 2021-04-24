@@ -1,19 +1,9 @@
-import AuthService from "./AuthService";
+import {getAccessToken} from "./AuthService";
 import * as api from "constants/api";
 
-const ProductService = {
-  uploadImage,
-  addProduct,
-  getProducts,
-  getProduct,
-  deleteProduct,
-  updateProduct,
-};
-export default ProductService;
-
-function uploadImage(image) {
+export function uploadImage(image) {
   let header = {
-    token: AuthService.getAccessToken(true),
+    token: getAccessToken(true),
   };
   return fetch(api.SERVER + api.PRODUCT_IMAGE, {
     method: "POST",
@@ -28,10 +18,10 @@ function uploadImage(image) {
     }
   );
 }
-function updateProduct(productData) {
+export function updateProduct(productData) {
   let header = {
     "Content-Type": "application/json",
-    token: AuthService.getAccessToken(true),
+    token: getAccessToken(true),
   };
   return fetch(api.SERVER + api.PRODUCT, {
     method: "PUT",
@@ -46,10 +36,10 @@ function updateProduct(productData) {
     }
   );
 }
-function addProduct(productData) {
+export function addProduct(productData) {
   let header = {
     "Content-Type": "application/json",
-    token: AuthService.getAccessToken(true),
+    token: getAccessToken(true),
   };
   return fetch(api.SERVER + api.PRODUCT, {
     method: "POST",
@@ -64,7 +54,7 @@ function addProduct(productData) {
     }
   );
 }
-function getProducts(filter) {
+export function getProducts(filter) {
   let header = {
     "Content-Type": "application/json",
   };
@@ -87,7 +77,7 @@ function getProducts(filter) {
     }
   );
 }
-function getProduct(productID) {
+export function getProduct(productID) {
   let header = {
     "Content-Type": "application/json",
   };
@@ -103,10 +93,10 @@ function getProduct(productID) {
     }
   );
 }
-function deleteProduct(productID) {
+export function deleteProduct(productID) {
   let header = {
     "Content-Type": "application/json",
-    token: AuthService.getAccessToken(true),
+    token: getAccessToken(true),
   };
   return fetch(api.SERVER + api.PRODUCT + "?productID=" + productID, {
     method: "DELETE",

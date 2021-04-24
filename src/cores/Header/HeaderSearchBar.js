@@ -1,7 +1,7 @@
 import searchIcon from "assets/images/icons/search.svg";
 import { useEffect, useState, useRef } from "react";
 import { debounce } from "helpers/helpers";
-import ProductService from "../../services/ProductService";
+import {getProducts} from "../../services/ProductService";
 import {
   ClickAwayListener,
   Divider,
@@ -24,7 +24,7 @@ const HeaderSearchBar = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
-      let res = await ProductService.getProducts(filter);
+      let res = await getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
       } else {

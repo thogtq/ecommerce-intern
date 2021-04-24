@@ -1,7 +1,7 @@
 import { Grid, GridList, makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useState } from "react";
-import ProductService from "../../services/ProductService";
+import {getProducts} from "../../services/ProductService";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: { padding: "20px 0", height: "324px" },
@@ -35,7 +35,7 @@ export default function SuggestionProducts({ category }) {
         category: category,
         limit: 8,
       };
-      let res = await ProductService.getProducts(filter);
+      let res = await getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
       } else {

@@ -9,14 +9,12 @@ import ReviewsContainer from "./ReviewsContainer";
 import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import ProductService from "services/ProductService";
-import { loadCart } from "helpers/helpers";
+import {getProduct} from "services/ProductService";
 
 export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState();
-  const [cart, setCart] = useState(loadCart());
   let category = useQuery.get("category");
   if (!category) {
     category = "";
@@ -27,7 +25,7 @@ export default function ProductPage() {
   }, [productID]);
   useEffect(() => {
     const fetchProduct = async () => {
-      let res = await ProductService.getProduct(productID);
+      let res = await getProduct(productID);
       if (res.status === "success") {
         setProduct(res.data.product);
         setLoading(false);
@@ -41,7 +39,7 @@ export default function ProductPage() {
     ""
   ) : (
     <React.Fragment>
-      <Header cart={cart} setCart={setCart} />
+      <Header />
       <Grid className="container">
         <Grid container justify="center">
           <Breadcrumbs
@@ -70,8 +68,6 @@ export default function ProductPage() {
         <ProductContainer
           product={product}
           loading={loading}
-          cart={cart}
-          setCart={setCart}
         />
         <TextDivider text="Reviews" />
         <ReviewsContainer />

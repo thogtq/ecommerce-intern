@@ -7,7 +7,7 @@ import * as productConst from "../../constants/product";
 import SingleSelect from "../../components/SingleSelect";
 import SiteButton from "../../components/SiteButton";
 import { useHistory } from "react-router";
-import ProductService from "../../services/ProductService";
+import {updateProduct} from "../../services/ProductService";
 
 export default function EditProductForm({ product, setProduct }) {
   const history = useHistory();
@@ -102,7 +102,7 @@ export default function EditProductForm({ product, setProduct }) {
     const [disabled, setDisabled] = useState(false);
     const handleSubmit = async () => {
       setDisabled(true);
-      let res = await ProductService.updateProduct(product);
+      let res = await updateProduct(product);
       if (res.status === "success") {
         history.push("/admin/products");
       } else {

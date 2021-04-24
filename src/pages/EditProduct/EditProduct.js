@@ -3,7 +3,7 @@ import AdminSideBar from "pages/AdminPage/AdminSideBar";
 import EditProductContainer from "./EditProductContainer";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import ProductService from "services/ProductService";
+import {getProduct} from "services/ProductService";
 
 const EditProduct = () => {
   require("assets/sass/admin.scss");
@@ -13,7 +13,7 @@ const EditProduct = () => {
   let productID = useQuery.get("productID");
   useEffect(() => {
     const fetchProduct = async () => {
-      let res = await ProductService.getProduct(productID);
+      let res = await getProduct(productID);
       if (res.status === "success") {
         setProduct(res.data.product);
         setLoading(false);

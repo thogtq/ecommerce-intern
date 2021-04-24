@@ -1,13 +1,14 @@
 import cartIcon from "assets/images/icons/cart.svg";
 import LoginModal from "cores/LoginModal/LoginModal";
 import RegisterModal from "cores/RegisterModal/RegisterModal";
-import React, { useState, useEffect } from "react";
-import { isAuthenticated, logout } from "services/AuthService";
+import React, { useState, useEffect, useContext } from "react";
+import { logout } from "services/AuthService";
 import { makeStyles, Menu, Avatar, Badge } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import { useLocation, useHistory } from "react-router";
 import CartMenu from "./CartMenu";
+import { AuthContext, CartContext } from "contexts/store";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -38,18 +39,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderUserMenu = ({ cart }) => {
+const HeaderUserMenu = () => {
+  const [authState, authDispatch] = useContext(AuthContext);
   const history = useHistory();
   const useQuery = new URLSearchParams(useLocation().search);
   const classes = useStyles();
-  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated());
   const handleLogout = () => {
-    setLoggedIn(false);
     logout();
-    history.go(0);
+    authDispatch({ type: "LOGOUT" });
+    //history.go(0);
   };
   const [showLoginModal, setshowLoginModal] = useState(false);
   const toggleLoginModal = () => {
+    if (showLoginModal) {
+      authDispatch({ type: "DEFAULT" });
+    }
     setshowLoginModal(!showLoginModal);
   };
   const [showRegisterModal, setshowRegisterModal] = useState(false);
@@ -65,7 +69,8 @@ const HeaderUserMenu = ({ cart }) => {
       history.replace({ search: useQuery.toString() });
     }
   }, [useQuery, history]);
-  const CartButton = ({ onClick, cart }) => {
+  const CartButton = ({ onClick }) => {
+    const [cart] = useContext(CartContext);
     return (
       <Badge badgeContent={cart.length} classes={{ badge: classes.cartBadge }}>
         <img
@@ -94,32 +99,21 @@ const HeaderUserMenu = ({ cart }) => {
         <button className="login-btn" onClick={toggleLoginModal}>
           Login
         </button>
-        <LoginModal
-          setLoggedIn={setLoggedIn}
-          show={showLoginModal}
-          toggleModal={toggleLoginModal}
-        />
-        <CartButton cart={cart} onClick={handleCartClick} />
-        <CartMenu
-          cart={cart}
-          anchorEl={anchorCart}
-          setAnchorEl={setAnchorCart}
-        />
+        <LoginModal show={showLoginModal} toggleModal={toggleLoginModal} />
+        <CartButton onClick={handleCartClick} />
+        <CartMenu anchorEl={anchorCart} setAnchorEl={setAnchorCart} />
       </React.Fragment>
     );
   };
   const LoggedIn = () => {
-    //Avatar
     const [anchorMenu, setAnchorMenu] = useState(null);
     const handleAvatarClick = (e) => {
-      //Fix me
       setAnchorMenu(e.target);
     };
     const handleClose = (e) => {
       e.preventDefault();
       setAnchorMenu(null);
     };
-    //Cart
     const [anchorCart, setAnchorCart] = useState(null);
     const handleCartClick = (e) => {
       setAnchorCart(e.target);
@@ -130,7 +124,6 @@ const HeaderUserMenu = ({ cart }) => {
         <Avatar
           aria-controls="user_menu"
           onClick={handleAvatarClick}
-          //onMouseOver={handleAvatarClick}
           className={classes.avatar}
           alt="avatar"
           src="http://localhost:8080/api/user/image/avatar.jpg"
@@ -152,10 +145,9 @@ const HeaderUserMenu = ({ cart }) => {
           <hr className="line"></hr>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-        <CartButton cart={cart} onClick={handleCartClick} />
+        <CartButton onClick={handleCartClick} />
 
         <CartMenu
-          cart={cart}
           anchorEl={anchorCart}
           setAnchorEl={setAnchorCart}
         />
@@ -164,7 +156,7 @@ const HeaderUserMenu = ({ cart }) => {
   };
   return (
     <div className="header-menu">
-      {isLoggedIn ? <LoggedIn /> : <NotLoggedIn />}
+      {authState.token ? <LoggedIn /> : <NotLoggedIn />}
     </div>
   );
 };

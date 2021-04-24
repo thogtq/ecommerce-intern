@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import React, { useState, useEffect, useRef } from "react";
-import ProductService from "../../services/ProductService";
+import { getProducts, deleteProduct } from "../../services/ProductService";
 import DropdownMenu from "components/DropdownMenu";
 import { Link } from "react-router-dom";
 import ConfirmBox from "components/ConfirmBox";
@@ -41,7 +41,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
     //Fix me
     //Unounted
     const fetchProduct = async () => {
-      let res = await ProductService.getProducts(filter);
+      let res = await getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
         setTotalPages(res.data.pages);
@@ -64,7 +64,7 @@ const ProductContentTable = ({ filter, setFilter }) => {
     };
     //Handle remove product
     const handleRemove = async () => {
-      let res = await ProductService.deleteProduct(props.productID);
+      let res = await deleteProduct(props.productID);
       if (res.status === "success") {
         setProducts(
           products.filter((product) => product.productID !== props.productID)

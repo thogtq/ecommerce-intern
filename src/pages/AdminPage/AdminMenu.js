@@ -1,11 +1,5 @@
-import {
-  Avatar,
-  Grid,
-  makeStyles,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
-import React, { useState } from "react";
+import { Avatar, Grid, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import React, { useContext, useState } from "react";
 import mailIcon from "assets/images/admin/icons/mail.svg";
 import notiIcon from "assets/images/admin/icons/notification.svg";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
@@ -13,6 +7,7 @@ import LogoutIcon from "assets/images/icons/logout.svg";
 import ProfileIcon from "assets/images/icons/profile.svg";
 import { Link } from "react-router-dom";
 import { logout } from "services/AuthService";
+import { AuthAdminContext } from "contexts/store";
 const useStyles = makeStyles({
   root: {
     width: "153px",
@@ -28,6 +23,7 @@ const useStyles = makeStyles({
   },
 });
 export default function AdminMenu() {
+  const [authState, authDispatch] = useContext(AuthAdminContext);
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const openAdminMenu = (e) => {
@@ -38,6 +34,7 @@ export default function AdminMenu() {
   };
   const handleAdminLogout = () => {
     logout(true);
+    authDispatch({ type: "LOGOUT" });
   };
   return (
     <Grid item md>
@@ -52,7 +49,7 @@ export default function AdminMenu() {
           <Grid className="admin-menu-group" container alignItems="center">
             <Avatar src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"></Avatar>
             <span onClick={openAdminMenu} className="admin-name">
-              admin@gmail.com
+              {authState.user.email}
             </span>
             <img src={dropdownIcon} alt="dropdown-icon"></img>
             <Menu

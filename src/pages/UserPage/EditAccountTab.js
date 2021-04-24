@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import SiteButton from "components/SiteButton";
-import UserService from "services/UserService";
+import {updateUser} from "services/UserService";
 export default function EditAccountTab({ edit, setEdit, user }) {
   const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ export default function EditAccountTab({ edit, setEdit, user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisabled(true);
-    let res = await UserService.updateUser(formData);
+    let res = await updateUser(formData);
     if (res.status === "success") {
       setEdit(false);
     } else {

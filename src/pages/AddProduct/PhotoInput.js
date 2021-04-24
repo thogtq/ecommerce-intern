@@ -1,6 +1,6 @@
 import addIcon from "assets/images/admin/icons/add.svg";
 import closeIcon from "assets/images/icons/cross.svg";
-import ProductService from "../../services/ProductService";
+import {uploadImage} from "../../services/ProductService";
 import { useState, useRef, useEffect } from "react";
 
 export default function PhotoInput({ formData, setFormData }) {
@@ -10,7 +10,7 @@ export default function PhotoInput({ formData, setFormData }) {
     let data = new FormData();
     let file = e.currentTarget.files[0];
     data.append("productImage", file);
-    let res = await ProductService.uploadImage(data);
+    let res = await uploadImage(data);
     if (res.status === "success") {
       let imageUrl = res.data.fileUrl;
       setUploaded(imageUrl);

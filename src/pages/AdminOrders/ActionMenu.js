@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import dropdownIcon from "assets/images/admin/icons/dropdown.svg";
 import { MenuItem, Menu, makeStyles } from "@material-ui/core";
 import ColorDot from "components/ColorDot";
-import OrderService from "services/OrderService";
+import {updateStatus} from "services/OrderService";
 const useStyles = makeStyles({
   root: {
     marginTop: "25px",
@@ -38,7 +38,7 @@ const ActionMenu = ({ orderID, status, setFilter, filter }) => {
       handleCloseMenu();
       return;
     }
-    let res = await OrderService.updateStatus(orderID, newStatus);
+    let res = await updateStatus(orderID, newStatus);
     if (res.status === "success") {
       setFilter({ ...filter });
       handleCloseMenu();

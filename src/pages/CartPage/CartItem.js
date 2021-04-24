@@ -3,7 +3,7 @@ import ColorPicker from "components/ColorPicker";
 import ConfirmBox from "components/ConfirmBox";
 import QuantityPicker from "components/QuantityPicker";
 import React, { useState, useEffect } from "react";
-import ProductService from "../../services/ProductService";
+import {getProduct} from "../../services/ProductService";
 
 export default function CartItem({
   cartItem,
@@ -35,7 +35,7 @@ export default function CartItem({
   }, [loading]);
   useEffect(() => {
     const fetchProduct = async () => {
-      let res = await ProductService.getProduct(cartItem.productID);
+      let res = await getProduct(cartItem.productID);
       if (res.status === "success") {
         setProduct(res.data.product);
         setLoading(false);

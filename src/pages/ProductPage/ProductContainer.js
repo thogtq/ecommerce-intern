@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     gap: "21px",
   },
 });
-export default function ProductContainer({ product, cart, setCart }) {
+export default function ProductContainer({ product }) {
   const classes = useStyles();
   const [currentImage, setCurrentImage] = useState([]);
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function ProductContainer({ product, cart, setCart }) {
         />
         <ProductImage currentImage={currentImage} />
       </div>
-      <ProductDetails product={product} cart={cart} setCart={setCart} />
+      <ProductDetails product={product}/>
       <SameBrandProducts brand={product.brand} />
     </div>
   );

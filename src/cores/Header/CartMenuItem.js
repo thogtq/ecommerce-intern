@@ -1,6 +1,6 @@
 import { Grid, makeStyles, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import ProductService from "../../services/ProductService";
+import {getProduct} from "../../services/ProductService";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
@@ -38,7 +38,7 @@ export default function CartMenuItem({ cartItem }) {
   const classes = useStyles();
   useEffect(() => {
     const fetchProduct = async () => {
-      let res = await ProductService.getProduct(cartItem.productID);
+      let res = await getProduct(cartItem.productID);
       if (res.status === "success") {
         setProduct(res.data.product);
         setLoading(false);

@@ -3,10 +3,11 @@ import ColorPicker from "components/ColorPicker";
 import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ReviewStarts } from "../../components/ReviewStars";
-import { isExistCartItem, loadCart } from "../../helpers/helpers";
+import { addToCart, isExistCartItem, loadCart } from "services/CartService";
 import uuid from "react-uuid";
+import { CartContext } from "contexts/store";
 const useStyles = makeStyles({
   root: {
     gap: "28px",
@@ -24,7 +25,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProductDetails({ cart, setCart, ...props }) {
+export default function ProductDetails({ ...props }) {
+  const [cart, cartDispatch] = useContext(CartContext);
   const [disabled, setDisabled] = useState(false);
   const { product } = props;
   const [productCart, setProductCart] = useState({
@@ -35,8 +37,6 @@ export default function ProductDetails({ cart, setCart, ...props }) {
   });
   const classes = useStyles();
   const handleAddCart = (e) => {
-    //Get newest cart data
-    cart = loadCart();
     setDisabled(true);
     if (
       (product.sizes.length !== 0 && !productCart.size) ||
@@ -46,15 +46,7 @@ export default function ProductDetails({ cart, setCart, ...props }) {
       setDisabled(false);
       return;
     }
-    let existCheck = isExistCartItem(cart, productCart);
-    if (existCheck !== -1) {
-      let _cart = [...cart];
-      _cart[existCheck].quantity += productCart.quantity;
-      setCart(_cart);
-    } else {
-      productCart.id = uuid();
-      setCart([...cart, productCart]);
-    }
+    addToCart(cartDispatch, cart, productCart);
     setProductCart({ ...productCart, size: "", color: "", quantity: 1 });
     alert("Product has been added to cart");
     setDisabled(false);

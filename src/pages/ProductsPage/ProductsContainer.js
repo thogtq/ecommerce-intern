@@ -6,7 +6,7 @@ import {
 import SimplePagination from "components/SimplePagination";
 import ProductItem from "../../components/ProductItem";
 import { useState, useEffect } from "react";
-import ProductService from "services/ProductService";
+import {getProducts} from "services/ProductService";
 import SortDropdown from "./SortDropdown";
 
 const useStyles = makeStyles({
@@ -31,7 +31,7 @@ export default function ProductsContainer({
   const classes = useStyles();
   useEffect(() => {
     const fetchProduct = async () => {
-      let res = await ProductService.getProducts(filter);
+      let res = await getProducts(filter);
       if (res.status === "success") {
         setProducts(res.data.products);
         setPages(res.data.pages);

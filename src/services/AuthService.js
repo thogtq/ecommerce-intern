@@ -1,77 +1,36 @@
 import * as api from "../constants/api";
 const jwtDefaultName = "jwt";
 const jwtAdminName = "jwt_admin";
-const AuthService = { authenticate, isAuthenticated, getAccessToken, logout };
-export default AuthService;
-export function isAuthenticated(admin = false) {
-  let jwtName = jwtDefaultName;
-  if (admin) {
-    jwtName = jwtAdminName;
-  }
-  let jwt = getJwtObject(jwtName);
-  if (typeof window == undefined || jwt === false) {
-    return false;
-  }
-  if (jwt.expiredAt < new Date().getTime() / 1000) {
-    if (admin === true) {
-      return false;
-    }
-    getNewToken();
-  }
-  return true;
-}
+
 export function authenticate(data, admin = false) {
   if (typeof window != undefined) {
     let jwtName = jwtDefaultName;
     if (admin) {
       jwtName = jwtAdminName;
     }
-    let jwtResponse = {
+    let jwt = {
       token: data.token,
       refreshToken: data.refreshToken,
       expiredAt: data.expiredAt,
     };
-    localStorage.setItem(jwtName, JSON.stringify(jwtResponse));
+    localStorage.setItem(jwtName, JSON.stringify(jwt));
+    localStorage.setItem("user", JSON.stringify(data.user));
   }
-}
-async function fetchUserToken() {
-  let header = {
-    "Content-Type": "application/json",
-    token: getAccessToken(),
-    refreshToken: getRefreshToken(),
-  };
-  return await fetch(api.SERVER + api.USER_TOKEN, {
-    method: "GET",
-    headers: header,
-  }).then(
-    (res) => {
-      return res.json();
-    },
-    (error) => {
-      return error;
-    }
-  );
 }
 function getJwtObject(jwtName) {
   let jwtText = localStorage.getItem(jwtName);
   if (!jwtText) return false;
   return JSON.parse(jwtText);
 }
-const getNewToken = async () => {
-  let res = await fetchUserToken();
-  if (res.status === "success") {
-    res.data.refreshToken = getRefreshToken();
-    authenticate(res.data);
-  } else {
-    logout();
-  }
-};
+
 export function getAccessToken(admin = false) {
   let jwtName = jwtDefaultName;
   if (admin) {
     jwtName = jwtAdminName;
   }
-  return JSON.parse(localStorage.getItem(jwtName)).token;
+  return localStorage.getItem(jwtName)
+    ? JSON.parse(localStorage.getItem(jwtName)).token
+    : "";
 }
 export function getRefreshToken() {
   let jwt = localStorage.getItem("jwt");
@@ -84,4 +43,56 @@ export function logout(admin = false) {
     jwtName = jwtAdminName;
   }
   localStorage.removeItem(jwtName);
+  localStorage.removeItem("user");
+}
+
+export function isAuthenticated(admin = false) {
+  let jwtName = jwtDefaultName;
+  if (admin) {
+    jwtName = jwtAdminName;
+  }
+  let jwt = getJwtObject(jwtName);
+  if (typeof window == undefined || jwt === false) {
+    return false;
+  }
+  if (jwt.expiredAt < new Date().getTime() / 1000) {
+    if (admin === true) {
+      logout();
+      return false;
+    }
+    const fetch = async () => {
+      await renewAccessToken();
+    };
+    return fetch();
+  }
+  return true;
+}
+
+async function renewAccessToken() {
+  let header = {
+    "Content-Type": "application/json",
+    token: getAccessToken(),
+    refreshToken: getRefreshToken(),
+  };
+  return await fetch(api.SERVER + api.USER_TOKEN, {
+    method: "GET",
+    headers: header,
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((resData) => {
+      if (resData.status === "success") {
+        authenticate(resData.data);
+        return true;
+      } else {
+        logout();
+        return false;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      logout();
+      return false;
+    });
 }

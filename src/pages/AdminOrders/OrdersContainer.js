@@ -14,7 +14,7 @@ import {
 import Pagination from "@material-ui/lab/Pagination";
 import OrdersFeatureBar from "./OrdersFeatureBar";
 import { useEffect, useState } from "react";
-import OrderService from "services/OrderService";
+import {getOrders} from "services/OrderService";
 import StatusButton from "../../components/StatusButton";
 import ActionMenu from "./ActionMenu";
 import { getFormatedDateString } from "../../helpers/date";
@@ -32,7 +32,7 @@ const OrderContentTable = ({ filter, setFilter }) => {
   const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     const fetchOrders = async () => {
-      let res = await OrderService.getOrders(filter);
+      let res = await getOrders(filter);
       if (res.status === "success") {
         setOrders(res.data.orders);
         setTotalPages(res.data.pages);

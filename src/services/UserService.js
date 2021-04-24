@@ -1,17 +1,7 @@
 import * as api from "../constants/api";
-import { getAccessToken } from "./AuthService";
+import { authenticate, getAccessToken } from "./AuthService";
 
-const UserService = {
-  login,
-  register,
-  adminLogin,
-  getUser,
-  updateUser,
-  updatePassword,
-};
-export default UserService;
-
-function adminLogin(userObject) {
+export function loginAdmin(dispatch, userObject) {
   let header = {
     "Content-Type": "application/json",
   };
@@ -19,16 +9,24 @@ function adminLogin(userObject) {
     method: "POST",
     headers: header,
     body: JSON.stringify(userObject),
-  }).then(
-    (res) => {
+  })
+    .then((res) => {
       return res.json();
-    },
-    (error) => {
-      return api.FETCHING_ERROR(error);
-    }
-  );
+    })
+    .then((resData) => {
+      if (resData.status === "success") {
+        authenticate(resData.data, true);
+        dispatch({ type: "LOGIN", payload: resData.data });
+      } else {
+        dispatch({ type: "LOGIN_ERROR", error: resData.error.message });
+      }
+      return resData;
+    })
+    .catch((error) => {
+      dispatch({ type: "LOGIN_ERROR", error: error });
+    });
 }
-function login(userObject) {
+export async function loginUser(dispatch, userObject) {
   let header = {
     "Content-Type": "application/json",
   };
@@ -36,16 +34,24 @@ function login(userObject) {
     method: "POST",
     headers: header,
     body: JSON.stringify(userObject),
-  }).then(
-    (res) => {
+  })
+    .then((res) => {
       return res.json();
-    },
-    (error) => {
-      return api.FETCHING_ERROR(error);
-    }
-  );
+    })
+    .then((resData) => {
+      if (resData.status === "success") {
+        authenticate(resData.data);
+        dispatch({ type: "LOGIN", payload: resData.data });
+      } else {
+        dispatch({ type: "LOGIN_ERROR", error: resData.error.message });
+      }
+      return resData;
+    })
+    .catch((error) => {
+      dispatch({ type: "LOGIN_ERROR", error: error });
+    });
 }
-function register(userObject) {
+export function registerUser(userObject) {
   let header = {
     "Content-Type": "application/json",
   };
@@ -62,7 +68,7 @@ function register(userObject) {
     }
   );
 }
-function getUser(isAdmin = false) {
+export function getUser(isAdmin = false) {
   let header = {
     "Content-Type": "application/json",
     token: getAccessToken(isAdmin),
@@ -80,7 +86,7 @@ function getUser(isAdmin = false) {
   );
 }
 
-function updateUser(formData, isAdmin = false) {
+export function updateUser(formData, isAdmin = false) {
   let header = {
     "Content-Type": "application/json",
     token: getAccessToken(isAdmin),
@@ -98,7 +104,7 @@ function updateUser(formData, isAdmin = false) {
     }
   );
 }
-function updatePassword(formData, isAdmin = false) {
+export function updatePassword(formData, isAdmin = false) {
   let header = {
     "Content-Type": "application/json",
     token: getAccessToken(isAdmin),
@@ -115,4 +121,10 @@ function updatePassword(formData, isAdmin = false) {
       return api.FETCHING_ERROR(error);
     }
   );
+}
+export function setLocalUser(userObject) {
+  localStorage.setItem("user", JSON.stringify(userObject));
+}
+export function getLocalUser() {
+  return JSON.parse(localStorage.getItem("user"));
 }

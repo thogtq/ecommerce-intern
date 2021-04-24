@@ -1,7 +1,7 @@
 import ModalInput from "../../components/ModalInput";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import UserService from "services/UserService";
+import {registerUser} from "services/UserService";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import SiteButton from "components/SiteButton";
@@ -43,7 +43,7 @@ const RegisterModal = ({ show, toggleModal }) => {
         email: Email,
         password: Password,
       };
-      let res = await UserService.register(userObject);
+      let res = await registerUser(userObject);
       if (res.status === "success") {
         alert("Registration successful!");
         toggleModal();
