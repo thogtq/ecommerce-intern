@@ -1,4 +1,4 @@
-import { loadCart, saveCart } from "services/CartService";
+import { saveCart } from "services/CartService";
 
 const authInitialState = {
   token: "",

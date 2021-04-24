@@ -1,3 +1,5 @@
+import uuid from "react-uuid";
+
 export function loadCart() {
   let cart = localStorage.getItem("cart");
   if (cart === null) {
@@ -34,6 +36,7 @@ export function addToCart(cartDispatch, cart, cartItem) {
     _cart[existCheck].quantity += cartItem.quantity;
     cartDispatch({ type: "REPLACE_CART", payload: _cart });
   } else {
+    cartItem.id = uuid();
     cartDispatch({ type: "ADD_TO_CART", payload: cartItem });
   }
 }

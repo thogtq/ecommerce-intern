@@ -3,7 +3,7 @@ import ColorPicker from "components/ColorPicker";
 import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ReviewStarts } from "../../components/ReviewStars";
 import { addToCart, isExistCartItem, loadCart } from "services/CartService";
 import uuid from "react-uuid";
@@ -30,11 +30,17 @@ export default function ProductDetails({ ...props }) {
   const [disabled, setDisabled] = useState(false);
   const { product } = props;
   const [productCart, setProductCart] = useState({
-    id: uuid(),
     productID: product.productID,
     name: product.name,
     quantity: 1,
   });
+  useEffect(() => {
+    setProductCart({
+      productID: product.productID,
+      name: product.name,
+      quantity: 1,
+    });
+  }, [product]);
   const classes = useStyles();
   const handleAddCart = (e) => {
     setDisabled(true);
@@ -46,6 +52,7 @@ export default function ProductDetails({ ...props }) {
       setDisabled(false);
       return;
     }
+    setProductCart({ ...productCart, id: uuid() });
     addToCart(cartDispatch, cart, productCart);
     setProductCart({ ...productCart, size: "", color: "", quantity: 1 });
     alert("Product has been added to cart");
