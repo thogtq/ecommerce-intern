@@ -13,8 +13,8 @@ export default function AdminRoutes() {
     <Switch>
       <Route path="/admin/login" component={AdminLogin}></Route>
       <AdminRoute exact path="/admin" component={AdminPage}></AdminRoute>
-      <AdminRoute path="/admin/products" component={AdminProducts}></AdminRoute>
-      <AdminRoute path="/admin/orders" component={AdminOrders}></AdminRoute>
+      <AdminRoute exact path="/admin/products" component={AdminProducts}></AdminRoute>
+      <AdminRoute exact path="/admin/orders" component={AdminOrders}></AdminRoute>
       <AdminRoute
         path="/admin/products/add-product"
         component={AddProduct}

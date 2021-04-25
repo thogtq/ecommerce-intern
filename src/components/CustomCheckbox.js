@@ -1,5 +1,7 @@
 import { Checkbox, withStyles } from "@material-ui/core";
+import { useState } from "react";
 const CustomCheckbox = (props) => {
+  const [checked, setChecked] = useState(props.checked);
   const StyledCheckbox = withStyles({
     root: {
       "&$checked": {
@@ -8,12 +10,18 @@ const CustomCheckbox = (props) => {
     },
     checked: {},
   })(Checkbox);
+  const handleClick = () => {
+    if (props.onClick) {
+      props.onClick();
+    }
+    setChecked((prev) => !prev);
+  };
   return (
     <StyledCheckbox
       edge="end"
       color="default"
-      onClick={props.onClick}
-      checked={Boolean(props.checked)}
+      onClick={handleClick}
+      checked={checked}
     />
   );
 };

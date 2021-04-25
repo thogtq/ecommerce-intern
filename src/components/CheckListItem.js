@@ -5,8 +5,6 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import CustomCheckbox from "./CustomCheckbox";
-//Fix me
-//Xu ly active ngay trong file
 const CheckListItem = (props) => {
   const checked = props.checked;
   const handleClick = () => {

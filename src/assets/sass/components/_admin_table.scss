@@ -4,7 +4,6 @@
   box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
   width: 100%;
-  min-height: 640px; //Fix me
   div:first-child {
     box-shadow: none;
   }
@@ -60,8 +59,7 @@
 .table-footer {
   @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
   @include flex-space-between-center;
-  margin-top: 90px;
-  margin-bottom: 36px;
+  padding: 35px 0;
 }
 .table-pagination {
   button.Mui-selected {
