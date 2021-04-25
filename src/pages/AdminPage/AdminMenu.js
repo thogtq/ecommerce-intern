@@ -11,6 +11,7 @@ import { AuthAdminContext } from "contexts/store";
 const useStyles = makeStyles({
   root: {
     width: "153px",
+    marginTop: "12px",
   },
   menuIcon: {
     marginRight: "12px",

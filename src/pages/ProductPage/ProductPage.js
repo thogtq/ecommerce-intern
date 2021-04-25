@@ -5,7 +5,7 @@ import Header from "cores/Header/Header";
 import React from "react";
 import { Link } from "react-router-dom";
 import ProductContainer from "./ProductContainer";
-import ReviewsContainer from "./ReviewsContainer";
+import ReviewsContainer from "./Reviews/ReviewsContainer";
 import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";

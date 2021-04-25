@@ -14,7 +14,7 @@ const styles = makeStyles({
     fontSize: "16px",
     lineHeight: "24px",
   },
-  left: { width: "130px" },
+  left: { width: "80px" },
   right: { width: "auto", overflow: "hidden" },
 });
 export default function TextDivider({ ...props }) {

@@ -31,6 +31,9 @@
         padding: 12px 24px;
         @include border-unset-all;
         background-color: #f7f7f7;
+        &:focus-visible {
+          outline: none;
+        }
       }
     }
     .admin-login-button {

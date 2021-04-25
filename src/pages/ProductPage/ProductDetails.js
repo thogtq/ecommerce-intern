@@ -4,7 +4,7 @@ import QuantityPicker from "components/QuantityPicker";
 import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
 import { useState, useContext, useEffect } from "react";
-import { ReviewStarts } from "../../components/ReviewStars";
+import { ReviewStars } from "../../components/ReviewStars";
 import { addToCart, isExistCartItem, loadCart } from "services/CartService";
 import uuid from "react-uuid";
 import { CartContext } from "contexts/store";
@@ -115,7 +115,7 @@ const TitleGroup = (props) => {
       <div className="product-name">{props.name}</div>
       <div className="price">${props.price}.00</div>
       <Grid className="review" container>
-        <ReviewStarts />
+        <ReviewStars />
         <Divider
           orientation="vertical"
           flexItem

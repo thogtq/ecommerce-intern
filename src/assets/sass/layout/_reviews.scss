@@ -1,0 +1,84 @@
+.reviews-container {
+  padding: 0 100px;
+  .no-reviews {
+    margin: 80px 0;
+  }
+  .reviews-wrapper {
+    position: relative;
+    margin-bottom: 80px;
+    margin-top: 30px;
+    > *:nth-last-child(2) {
+      border: none;
+    }
+  }
+  .reviews-item-wrapper {
+    padding: 15px 0;
+    border-bottom: 0.5px solid #cccccc;
+    border-bottom-style: dashed;
+    .content-box {
+      padding: 15px 51px 21px 30px;
+      background-color: #f9f9f9;
+      .review-title {
+        @include text-style(Montserrat-Bold, 16px, 24px, #202124);
+      }
+      .review-content {
+        margin-top: 21px;
+        @include text-style(Montserrat-Regular, 14px, 22px, #4d4d4d);
+        letter-spacing: -0.1px;
+      }
+    }
+    .header-box {
+      padding-top: 15px;
+      .fullname {
+        @include text-style(Montserrat-Bold, 14px, 22px, #202124);
+      }
+      .review-date {
+        @include text-style(Montserrat-Regular, 14px, 22px, #808080);
+      }
+    }
+  }
+  .review-form {
+    border-bottom-style: solid;
+    .content-box {
+      padding: 21px 30px 15px 30px;
+    }
+    .title-input {
+      padding: 10px 20px;
+      width: 100%;
+      height: 45px;
+      box-shadow: inset 1px 1px 3px 0 rgba(159, 159, 159, 0.26);
+      border: none;
+      &::placeholder {
+        @include text-style(Montserrat-Medium, 16px, 24px, #b7b7b7);
+      }
+      &:focus-visible{
+          outline: none;
+      }
+    }
+    .content-input {
+      margin-top: 10px;
+      resize: none;
+      border: none;
+      padding: 10px 20px;
+      width: 100%;
+      box-shadow: inset 1px 1px 3px 0 rgba(159, 159, 159, 0.26);
+      &::placeholder {
+        @include text-style(Montserrat-Medium, 16px, 24px, #b7b7b7);
+      }
+      &:focus-visible{
+        outline: none;
+    }
+    }
+    .review-form-footer {
+      margin-top: 16px;
+      .rating-for-us {
+        @include text-style(Montserrat-Regular, 14px, 22px, #808080);
+      }
+    }
+  }
+  .reviews-pagination {
+    position: absolute;
+    bottom: -5%;
+    right: 0;
+  }
+}

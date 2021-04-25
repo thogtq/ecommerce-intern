@@ -23,6 +23,9 @@
         &::placeholder {
           @include text-style("Montserrat-Medium", 14px, 22px, #4d4d4d);
         }
+        &:focus-visible {
+          outline: none;
+        }
       }
       label {
         position: relative;
