@@ -5,7 +5,7 @@ import girlsCategoryImg from "assets/images/homepage/girls_category.jpg";
 import boysCategoryImg from "assets/images/homepage/boys_category.jpg";
 import Header from "cores/Header/Header";
 import Footer from "cores/Footer/Footer";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { parentCategory } from "constants/product";
 

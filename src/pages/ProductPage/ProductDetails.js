@@ -5,7 +5,7 @@ import SiteButton from "components/SiteButton";
 import SizePicker from "components/SizePicker";
 import { useState, useContext, useEffect } from "react";
 import { ReviewStars } from "../../components/ReviewStars";
-import { addToCart, isExistCartItem, loadCart } from "services/CartService";
+import { addToCart } from "services/CartService";
 import uuid from "react-uuid";
 import { CartContext } from "contexts/store";
 const useStyles = makeStyles({
@@ -69,7 +69,7 @@ export default function ProductDetails({ ...props }) {
       container
       direction="column"
     >
-      <TitleGroup name={product.name} price={product.price} />
+      <TitleGroup product={product} />
       <SizeInput
         sizes={product.sizes}
         productCart={productCart}
@@ -108,20 +108,20 @@ export default function ProductDetails({ ...props }) {
     </Grid>
   );
 }
-const TitleGroup = (props) => {
+const TitleGroup = ({ product }) => {
   const classes = useStyles();
   return (
     <Grid className="title-group">
-      <div className="product-name">{props.name}</div>
-      <div className="price">${props.price}.00</div>
+      <div className="product-name">{product.name}</div>
+      <div className="price">${product.price}.00</div>
       <Grid className="review" container>
-        <ReviewStars />
+        <ReviewStars star={product.star} disabled />
         <Divider
           orientation="vertical"
           flexItem
           classes={{ root: classes.reviewDivider }}
         />
-        0 Review
+        {product.reviews + " Reviews"}
       </Grid>
     </Grid>
   );

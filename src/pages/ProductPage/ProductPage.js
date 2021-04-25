@@ -9,7 +9,7 @@ import ReviewsContainer from "./Reviews/ReviewsContainer";
 import SuggestionProducts from "./SuggestionProducts";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import {getProduct} from "services/ProductService";
+import { getProduct } from "services/ProductService";
 
 export default function ProductPage() {
   const useQuery = new URLSearchParams(useLocation().search);
@@ -65,12 +65,9 @@ export default function ProductPage() {
             </Link>
           </Breadcrumbs>
         </Grid>
-        <ProductContainer
-          product={product}
-          loading={loading}
-        />
+        <ProductContainer product={product} />
         <TextDivider text="Reviews" />
-        <ReviewsContainer />
+        <ReviewsContainer product={product} />
         <TextDivider text="You may also like" />
         <SuggestionProducts category={product.parentCategories[0]} />
       </Grid>

@@ -1,4 +1,4 @@
-import { IconButton, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 const useStyles = makeStyles({
   root: {
@@ -10,14 +10,16 @@ const useStyles = makeStyles({
     height: "18px",
   },
 });
-export function ReviewStars({ star, disabled }) {
+export function ReviewStars({ star, disabled, onChange }) {
   const colorDisabled = "#d3d3d3";
   const colorStar = "#ffe234";
   const classes = useStyles();
   const handleStarClick = (ele) => {
     if (disabled) return;
     let value = ele.currentTarget.getAttribute("value");
-    console.log(value);
+    if (onChange) {
+      onChange(value);
+    }
   };
   return (
     <div className={classes.root}>

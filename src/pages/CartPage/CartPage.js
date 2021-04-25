@@ -17,7 +17,6 @@ import { useHistory } from "react-router";
 import CartItem from "./CartItem";
 import { addOrder } from "services/OrderService";
 import { AuthContext, CartContext } from "contexts/store";
-import { saveCart } from "services/CartService";
 
 export default function CartPage() {
   const [cart, cartDispatch] = useContext(CartContext);

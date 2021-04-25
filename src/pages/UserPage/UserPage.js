@@ -1,7 +1,7 @@
 import { Grid, Tab, withStyles, Tabs } from "@material-ui/core";
 import Footer from "cores/Footer/Footer";
 import Header from "cores/Header/Header";
-import React, { useState } from "react";
+import React  from "react";
 import TabPanel from "../../components/TabPannel";
 import AccountTab from "./AccountTab";
 import EditPasswordTab from "./EditPasswordTab";

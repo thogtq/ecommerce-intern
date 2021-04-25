@@ -1,4 +1,3 @@
-
 export function debounce(func, wait, immediate) {
   var timeout;
   return function executedFunction() {
@@ -13,4 +12,14 @@ export function debounce(func, wait, immediate) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
+}
+export function parseQuery(object) {
+  let query = "?";
+  for (var key in object) {
+    if (!object[key]) {
+      continue;
+    }
+    query += key + "=" + object[key] + "&";
+  }
+  return query;
 }

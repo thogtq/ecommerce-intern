@@ -14,6 +14,9 @@ export const PRODUCT_IMAGE = "/api/products/image";
 export const ORDERS = "/api/orders";
 export const ORDERS_STATUS = "/api/orders/status";
 
+export const REVIEWS = "/api/reviews";
+export const REVIEW = "/api/reviews/";
+
 export const FETCHING_ERROR = (error) => {
   return {
     status: "error",

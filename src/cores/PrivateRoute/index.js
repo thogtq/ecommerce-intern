@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isAuthenticated, logout } from "services/AuthService";
+import { isAuthenticated } from "services/AuthService";
 
 export function PrivateRoute({ component: Component, ...rest }) {
   const auth = isAuthenticated();

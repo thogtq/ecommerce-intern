@@ -35,6 +35,12 @@
       .review-date {
         @include text-style(Montserrat-Regular, 14px, 22px, #808080);
       }
+      .header-box-action{
+        span{
+          cursor: pointer;
+        }
+        @include text-style(Montserrat-Regular, 12px, 22px, #202124);
+      }
     }
   }
   .review-form {
@@ -78,7 +84,7 @@
   }
   .reviews-pagination {
     position: absolute;
-    bottom: -5%;
+    bottom: -10%;
     right: 0;
   }
 }
