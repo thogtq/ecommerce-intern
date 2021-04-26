@@ -11,17 +11,8 @@ import {
   Button,
 } from "@material-ui/core";
 import { debounce } from "helpers/helpers";
-const useStyles = makeStyles((theme) => ({
-  sortSelect: {
-    minWidth: 172,
-    maxHeight: 48,
-    borderRadius: "unset!important",
-    border: "1px solid #ededed",
-    backgroundColor: "#ffffff",
-  },
-}));
+import { OrderDateFilter } from "./OrderDateFilter";
 export default function OrdersFeatureBar({ filter, setFilter }) {
-  const classes = useStyles();
   const handleSearch = (e) => {
     //Debounce
     setFilter({ ...filter, search: e.target.value });
@@ -38,18 +29,9 @@ export default function OrdersFeatureBar({ filter, setFilter }) {
         <Grid item>
           <Grid container direction="row" alignItems="center">
             <span className="text-sort-by">ORDERED DATE</span>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <Select
-                className={classes.sortSelect}
-                labelId="sort_by_label"
-                id="select_sort_by"
-                defaultValue="date"
-              >
-                <MenuItem value="date">Date Added</MenuItem>
-                <MenuItem value="sold">Sold</MenuItem>
-                <MenuItem value="quatity">Quatity</MenuItem>
-              </Select>
-            </FormControl>
+            <OrderDateFilter />
+            <button className="date-filter-button">Today</button>
+            <button className="date-filter-button">Yesterday</button>
           </Grid>
         </Grid>
         <Grid item>

@@ -57,7 +57,7 @@ export function isAuthenticated(admin = false) {
   }
   if (jwt.expiredAt < new Date().getTime() / 1000) {
     if (admin === true) {
-      logout();
+      logout(true);
       return false;
     }
     const fetch = async () => {
