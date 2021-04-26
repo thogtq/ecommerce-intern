@@ -1,5 +1,5 @@
 import { Grid, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import { CartContext } from "contexts/store";
+import { CartContext } from "contexts/context";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartMenuItem from "./CartMenuItem";

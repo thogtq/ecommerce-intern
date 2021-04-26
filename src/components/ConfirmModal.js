@@ -5,7 +5,6 @@ const useStyles = makeStyles({
     position: "absolute",
     width: 380,
     backgroundColor: "#ffffff",
-    border: "2px solid #000",
     top: "50%",
     left: "50%",
     transform: "translate(-50%,-100%)",

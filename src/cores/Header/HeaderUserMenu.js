@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import { useLocation, useHistory } from "react-router";
 import CartMenu from "./CartMenu";
-import { AuthContext, CartContext } from "contexts/store";
+import { AuthContext, CartContext } from "contexts/context";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {

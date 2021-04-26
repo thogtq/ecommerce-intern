@@ -5,7 +5,7 @@ import Modal from "../../components/Modal";
 import ModalInput from "../../components/ModalInput";
 import SiteButton from "components/SiteButton";
 import { loginUser } from "services/UserService";
-import { AuthContext } from "contexts/store";
+import { AuthContext } from "contexts/context";
 
 function LoginModal({ show, toggleModal }) {
   const [authState, authDispatch] = useContext(AuthContext);

@@ -7,7 +7,7 @@ import LogoutIcon from "assets/images/icons/logout.svg";
 import ProfileIcon from "assets/images/icons/profile.svg";
 import { Link } from "react-router-dom";
 import { logout } from "services/AuthService";
-import { AuthAdminContext } from "contexts/store";
+import { AuthAdminContext } from "contexts/context";
 const useStyles = makeStyles({
   root: {
     width: "153px",

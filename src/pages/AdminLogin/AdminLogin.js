@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { loginAdmin } from "services/UserService";
 import { Redirect } from "react-router";
 import SiteButton from "components/SiteButton";
-import { AuthAdminContext } from "contexts/store";
+import { AuthAdminContext } from "contexts/context";
 
 const useStyles = makeStyles((theme) => ({
   logo: {

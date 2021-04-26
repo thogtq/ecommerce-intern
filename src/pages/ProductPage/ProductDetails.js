@@ -7,7 +7,7 @@ import { useState, useContext, useEffect } from "react";
 import { ReviewStars } from "../../components/ReviewStars";
 import { addToCart } from "services/CartService";
 import uuid from "react-uuid";
-import { CartContext } from "contexts/store";
+import { CartContext } from "contexts/context";
 const useStyles = makeStyles({
   root: {
     gap: "28px",

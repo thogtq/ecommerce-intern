@@ -10,7 +10,7 @@ import AdminRoutes from "routes/AdminRoutes";
 import ProductRoutes from "routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
 import UserRoutes from "routes/UserRoutes";
-import { AuthAdminProvider, AuthProvider, CartProvider } from "contexts/store";
+import { AuthAdminProvider, AuthProvider, CartProvider } from "contexts/context";
 
 ReactDOM.render(
   <BrowserRouter>

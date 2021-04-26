@@ -1,14 +1,13 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { ReviewStars } from "components/ReviewStars";
 import SimplePagination from "components/SimplePagination";
-import { AuthContext } from "contexts/store";
+import { AuthContext } from "contexts/context";
 import { useContext, useEffect, useState } from "react";
 import { getReviews } from "services/ReviewService";
 import ReviewForm from "./ReviewForm";
 import { shortMonth } from "constants/date";
 import { deleteReview } from "../../../services/ReviewService";
 
-const useStyles = makeStyles({});
 export default function ReviewsContainer({ product }) {
   const [pages, setPages] = useState(1);
   const [filter, setFilter] = useState({
@@ -190,7 +189,6 @@ const ReviewItem = ({ review }) => {
   );
 };
 const NoReviews = () => {
-  const classes = useStyles();
   return (
     <Grid
       classes={{ root: "no-reviews" }}

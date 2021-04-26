@@ -18,7 +18,6 @@ import { getOrders } from "services/OrderService";
 import StatusButton from "../../components/StatusButton";
 import ActionMenu from "./ActionMenu";
 import { getFormatedDateString } from "../../helpers/date";
-import { moment } from "moment";
 
 const useStyles = makeStyles({
   tableCell: {
