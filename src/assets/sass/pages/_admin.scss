@@ -5,6 +5,7 @@
   border-radius: 2px;
   background-color: #ffffff;
   @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
+  cursor: pointer;
 }
 .admin-container {
   background-color: #f6f6f6;

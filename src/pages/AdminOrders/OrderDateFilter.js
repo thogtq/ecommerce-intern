@@ -1,6 +1,5 @@
 import DateRangePicker from "react-bootstrap-daterangepicker";
-import { useState } from "react";
-import moment from "moment";
+import { useRef, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -15,26 +14,23 @@ const useStyles = makeStyles({
     color: "#3d3d3f",
   },
 });
-export function OrderDateFilter() {
-  require("bootstrap-daterangepicker/daterangepicker.css");
+export function OrderDateFilter({ state, setState }) {
+  const pickerRef = useRef();
   const classes = useStyles();
-  const [state, setState] = useState({
-    start: moment(),
-    end: moment(),
-  });
-  const { start, end } = state;
   const handleCallback = (start, end) => {
-    setState({ start, end });
+    setState({ ...state, startDate: start, endDate: end });
   };
-  const handleEvent = (event, picker) => {
-    console.log(picker.startDate);
-  };
+  const handleEvent = (event, picker) => {};
+  useEffect(() => {
+    pickerRef.current.setStartDate(state.startDate);
+    pickerRef.current.setEndDate(state.endDate);
+  }, [state]);
   return (
     <DateRangePicker
-      className="use-bootstrap"
+      ref={pickerRef}
       initialSettings={{
-        startDate: start.toDate(),
-        endDate: end.toDate(),
+        startDate: state.startDate.toDate(),
+        endDate: state.endDate.toDate(),
       }}
       onEvent={handleEvent}
       onCallback={handleCallback}

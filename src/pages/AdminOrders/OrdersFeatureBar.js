@@ -12,9 +12,14 @@ import {
 } from "@material-ui/core";
 import { debounce } from "helpers/helpers";
 import { OrderDateFilter } from "./OrderDateFilter";
+import moment from "moment";
+import { useRef, useState } from "react";
 export default function OrdersFeatureBar({ filter, setFilter }) {
+  const [state, setState] = useState({
+    startDate: moment(),
+    endDate: moment(),
+  });
   const handleSearch = (e) => {
-    //Debounce
     setFilter({ ...filter, search: e.target.value });
   };
   return (
@@ -29,9 +34,29 @@ export default function OrdersFeatureBar({ filter, setFilter }) {
         <Grid item>
           <Grid container direction="row" alignItems="center">
             <span className="text-sort-by">ORDERED DATE</span>
-            <OrderDateFilter />
-            <button className="date-filter-button">Today</button>
-            <button className="date-filter-button">Yesterday</button>
+            <OrderDateFilter state={state} setState={setState} />
+            <button
+              className="date-filter-button"
+              onClick={(e) => {
+                setState({
+                  startDate: moment(),
+                  endDate: moment(),
+                });
+              }}
+            >
+              Today
+            </button>
+            <button
+              className="date-filter-button"
+              onClick={(e) => {
+                setState({
+                  startDate: moment().subtract(1, "days"),
+                  endDate: moment().subtract(1, "days"),
+                });
+              }}
+            >
+              Yesterday
+            </button>
           </Grid>
         </Grid>
         <Grid item>

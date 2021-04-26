@@ -3,7 +3,11 @@
 @import "abstracts/mixins";
 @import "base/global";
 
+@import "bootstrap-daterangepicker/daterangepicker.css";
 @import "components/admin_table";
+@import "components/modal";
+@import "components/date_range_picker";
+
 @import "./pages/admin";
 @import "./layout/admin_sidebar";
 @import "./layout/admin_header.scss";

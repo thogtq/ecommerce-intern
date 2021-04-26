@@ -14,10 +14,11 @@ import {
 import Pagination from "@material-ui/lab/Pagination";
 import OrdersFeatureBar from "./OrdersFeatureBar";
 import { useEffect, useState } from "react";
-import {getOrders} from "services/OrderService";
+import { getOrders } from "services/OrderService";
 import StatusButton from "../../components/StatusButton";
 import ActionMenu from "./ActionMenu";
 import { getFormatedDateString } from "../../helpers/date";
+import { moment } from "moment";
 
 const useStyles = makeStyles({
   tableCell: {
@@ -93,7 +94,7 @@ const OrderContentTable = ({ filter, setFilter }) => {
                   <TableCell classes={{ root: classes.tableCell }} align="left">
                     {order.subtotal}
                   </TableCell>
-                  <TableCell align="left">
+                  <TableCell width="120px" align="left">
                     <StatusButton status={order.status} />
                   </TableCell>
                   <TableCell className="td-action" align="right">

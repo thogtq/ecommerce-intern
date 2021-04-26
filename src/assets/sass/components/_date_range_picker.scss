@@ -1,0 +1,15 @@
+.daterangepicker td.start-date,
+.daterangepicker td.start-date.active,
+.daterangepicker td.end-date,
+.daterangepicker td.end-date.active {
+  background-color: #ffa15f;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
+.daterangepicker td.today.active {
+  background-color: #ffa15f;
+}
+.daterangepicker td.in-range {
+  background-color: rgba(255, 161, 95, 0.2);
+}

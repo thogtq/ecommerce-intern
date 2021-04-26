@@ -68,6 +68,16 @@ export default function ReviewsContainer({ product }) {
   }, [filter]);
   useEffect(() => {
     setFilter({ ...filter, productID: product.productID });
+    setReviews([]);
+    setReview({
+      productID: product.productID,
+      fullname: "You",
+      title: "",
+      content: "",
+      star: 0,
+      valid: false,
+    });
+    setPages(1);
   }, [product]);
   const handleUserReviewEdit = () => {
     setReview({ ...review, valid: false, edit: true });

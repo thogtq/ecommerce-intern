@@ -67,3 +67,10 @@ input[type="number"] {
 .text-bold-dark {
   @include text-style(Montserrat-Bold, 14px, 22px, #202124);
 }
+input,
+button {
+  &:focus-visible,
+  &:focus {
+    outline: none;
+  }
+}

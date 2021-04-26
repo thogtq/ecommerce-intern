@@ -15,6 +15,7 @@
       @include text-style(Montserrat-Medium, 14px, 20px, #3d3d3f);
     }
     .td-action {
+      width: 120px;
       cursor: pointer;
       img {
         vertical-align: middle;
