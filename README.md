@@ -5,7 +5,7 @@ npm install
 npm start
 ```
 ## Demo
-[![VIDEO](https://github.com/thogtq/image-storage/blob/5dc8df9410df77877fa0bd02902e5f6b729feb21/Screenshot_101.png)](https://youtu.be/xkxKZXQxfEw)
+<a href="https://youtu.be/xkxKZXQxfEw" target="_blank"><img src="https://github.com/thogtq/image-storage/blob/5dc8df9410df77877fa0bd02902e5f6b729feb21/Screenshot_101.png" width="400"/></a>
 ### Frameworks and libraries
 - [x] material-ui v4.11.3
 - [x] react v17.0.2
